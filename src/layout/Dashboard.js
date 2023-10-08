@@ -1,7 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button, Form, InputGroup } from 'react-bootstrap';
 import AddBabyForm from './AddBabyForm';
-// import './../App.css';
+import AddNewHospital from './AddNewHosital';
 
 export default function Dashboard() {
     
@@ -13,8 +12,23 @@ export default function Dashboard() {
             <span className="big-logo">NBS Thalassemia</span>
           </div>
           <div id="left-menu">
-            
-            <ul>
+            <div className='m-2'>
+              <div className='left-menu-item active'>
+                <span >Dashboard</span>
+              </div>
+              <div className='left-menu-item'>
+                <span>Add New Baby Info</span>
+              </div>
+              
+              <div className='left-menu-item'>
+                <span>Add New Hospital</span>
+              </div>
+              
+              <div className='left-menu-item'>
+                <span>Add New Nurs Info</span>
+              </div>
+            </div>
+            {/* <ul>
               <li className="active"><a href="#">
                   <i className="ion-ios-person-outline" />
                   <span>Dashboard</span>
@@ -26,7 +40,7 @@ export default function Dashboard() {
                 </a>
               </li>
               
-            </ul>
+            </ul> */}
             {/* <Button 
                 variant="secondary" 
                 onClick={}
@@ -34,13 +48,14 @@ export default function Dashboard() {
           </div>
           <div id="main-content">
             <div id="header">
-              <div className="header-right float-end">
-                <div className="logout">Logout</div>
-              </div>
+              {/* <div className="float-end logout">
+                <span>Logout</span>
+              </div> */}
             </div>
             <div id="page-container">
               <div className="card">
-                <AddBabyForm />
+                {/* <AddBabyForm /> */}
+                <AddNewHospital />
               </div>
             </div>
           </div>

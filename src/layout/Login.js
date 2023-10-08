@@ -1,6 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useEffect, useState } from 'react';
-// import './../App.css';
+import { useState } from 'react';
 import * as AllService from './../AllService'
 import { useNavigate } from 'react-router-dom';
 
@@ -14,7 +13,7 @@ export default function Login() {
 
     const handleValidation = (event) => {
         let formIsValid = true;
-        const reg = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@\w+([\.-]?\w+)*(\.\w{2,10})+$/;
+        const reg = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@\w+([.-]?\w+)*(\.\w{2,10})+$/;
         if (!email.match(reg)) {
             formIsValid = false;
             setError("Email Not Valid");
@@ -51,7 +50,7 @@ export default function Login() {
             <h1 className="login_title">LOGIN PANAL</h1>
             <div className="login_card">
                 <form id="loginform" onSubmit={loginSubmit} className="login_form">
-                    <input 
+                    <input
                         className='login_input'
                         type="email"
                         placeholder="Username"
@@ -59,7 +58,7 @@ export default function Login() {
                         value={email}
                         onChange={(event) => setEmail(event.target.value)}
                     />
-                    <input 
+                    <input
                         className='login_input'
                         type="password" 
                         placeholder="Password"

@@ -1,5 +1,4 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useState } from 'react';
 
 export default function AddBabyForm(){
     
@@ -14,7 +13,7 @@ export default function AddBabyForm(){
                 <div className="row mt-3">
                     <div className="col-sm-6">
                         <div className="form-group">
-                            <label >১. হাসপাতালের নামঃ</label>
+                            <label className="addform-label">১. হাসপাতালের নামঃ</label>
                             <input 
                                 className="form-control" required 
                                 type='text'
@@ -28,7 +27,7 @@ export default function AddBabyForm(){
                     </div>
                     <div className="col-sm-6">
                         <div className="form-group">
-                            <label >২. নমুনা সংগ্রহের তারিখঃ</label>
+                            <label className="addform-label">২. নমুনা সংগ্রহের তারিখঃ</label>
                             <input 
                                 className="form-control" 
                                 required 
@@ -43,7 +42,7 @@ export default function AddBabyForm(){
                 <div className="row mt-5">
                     <div className="col-sm-6">
                         <div className="form-group">
-                            <label >৩. আইডি নংঃ</label>
+                            <label className="addform-label">৩. আইডি নংঃ</label>
                             <input 
                                 className="form-control" 
                                 required 
@@ -54,7 +53,7 @@ export default function AddBabyForm(){
                     </div>
                     <div className="col-sm-6">
                         <div className="form-group">
-                            <label >৪. মোবাইল নংঃ</label>
+                            <label className="addform-label">৪. মোবাইল নংঃ</label>
                             <input 
                                 className="form-control" 
                                 required 
@@ -68,7 +67,7 @@ export default function AddBabyForm(){
                 <div className="row mt-5">
                     <div className="col-sm-6">
                         <div className="form-group">
-                            <label >৫. সাক্ষাতকার গ্রহনকারীর নামঃ</label>
+                            <label className="addform-label">৫. সাক্ষাতকার গ্রহনকারীর নামঃ</label>
                             <input 
                                 className="form-control" 
                                 required 
@@ -79,7 +78,7 @@ export default function AddBabyForm(){
                     </div>
                     <div className="col-sm-6">
                         <div className="form-group">
-                            <label >৬. ঠিকানাঃ</label>
+                            <label className="addform-label">৬. ঠিকানাঃ</label>
                             <input 
                                 className="form-control" 
                                 required 
@@ -93,7 +92,7 @@ export default function AddBabyForm(){
                 <div className="row mt-5">
                     <div className="col-sm-6">
                         <div className="form-group">
-                            <label >৭. শিশুর নামঃ</label>
+                            <label className="addform-label">৭. শিশুর নামঃ</label>
                             <input 
                                 className="form-control" 
                                 required 
@@ -104,7 +103,7 @@ export default function AddBabyForm(){
                     </div>
                     <div className="col-sm-6">
                         <div className="form-group">
-                            <label >৮. শিশুর জন্ম তারিখঃ (দিন/মাস/তারিখ)</label>
+                            <label className="addform-label">৮. শিশুর জন্ম তারিখঃ (দিন/মাস/তারিখ)</label>
                             <input 
                                 className="form-control" 
                                 required 
@@ -118,7 +117,7 @@ export default function AddBabyForm(){
                 <div className="row mt-5">
                     <div className="col-sm-6">
                         <div className="form-group">
-                            <label >৯. শিশু ছেলে/মেয়ে?</label>
+                            <label className="addform-label">৯. শিশু ছেলে/মেয়ে?</label>
                             <select className="form-control" required 
                                 onChange={(event) => console.log("fff ", event.target.value)}
                             >
@@ -130,7 +129,7 @@ export default function AddBabyForm(){
                     </div>
                     <div className="col-sm-6">
                         <div className="form-group">
-                            <label >১০. শিশুর মায়ের নামঃ</label>
+                            <label className="addform-label">১০. শিশুর মায়ের নামঃ</label>
                             <input 
                                 className="form-control" 
                                 required 
@@ -144,7 +143,7 @@ export default function AddBabyForm(){
                 <div className="row mt-5">
                     <div className="col-sm-6">
                         <div className="form-group">
-                            <label >১১. শিশুর মায়ের বয়স?</label>
+                            <label className="addform-label">১১. শিশুর মায়ের বয়স?</label>
                             <input 
                                 className="form-control" 
                                 required 
@@ -155,7 +154,7 @@ export default function AddBabyForm(){
                     </div>
                     <div className="col-sm-6">
                         <div className="form-group">
-                            <label >১২. বিবাহের সময় মায়ের বয়স?</label>
+                            <label className="addform-label">১২. বিবাহের সময় মায়ের বয়স?</label>
                             <input 
                                 className="form-control" 
                                 required 
@@ -169,7 +168,7 @@ export default function AddBabyForm(){
                 <div className="row mt-5">
                     <div className="col-sm-6">
                         <div className="form-group">
-                            <label >১৩. শিশুর বাবা/অভিভাবকের নামঃ</label>
+                            <label className="addform-label">১৩. শিশুর বাবা/অভিভাবকের নামঃ</label>
                             <input 
                                 className="form-control" 
                                 required 
@@ -180,7 +179,7 @@ export default function AddBabyForm(){
                     </div>
                     <div className="col-sm-6">
                         <div className="form-group">
-                            <label >১৪. শিশুর বাবা বয়স?</label>
+                            <label className="addform-label">১৪. শিশুর বাবা বয়স?</label>
                             <input 
                                 className="form-control" 
                                 required 
@@ -194,7 +193,7 @@ export default function AddBabyForm(){
                 <div className="row mt-5">
                     <div className="col-sm-6">
                         <div className="form-group">
-                            <label >১৫. সাক্ষাৎকার প্রদানকারীর নামঃ</label>
+                            <label className="addform-label">১৫. সাক্ষাৎকার প্রদানকারীর নামঃ</label>
                             <select className="form-control" required 
                                 onChange={(event) => console.log("fff ", event.target.value)}
                             >
@@ -206,7 +205,7 @@ export default function AddBabyForm(){
                     </div>
                     <div className="col-sm-6">
                         <div className="form-group">
-                            <label >১৬. সাক্ষাৎকার প্রদানকারী সহিত শিশুর সম্পর্ক?</label>
+                            <label className="addform-label">১৬. সাক্ষাৎকার প্রদানকারী সহিত শিশুর সম্পর্ক?</label>
                             <input 
                                 className="form-control" 
                                 required 
@@ -220,7 +219,7 @@ export default function AddBabyForm(){
                 <div className="row mt-5">
                     <div className="col-sm-6">
                         <div className="form-group">
-                            <label >১৭. শিশুর মায়ের শিক্ষাগত যোগ্যতাঃ (নিচের ধাপগুলো শেষ হওয়ার সাপেক্ষে নির্বাচন করুন) </label>
+                            <label className="addform-label">১৭. শিশুর মায়ের শিক্ষাগত যোগ্যতাঃ (নিচের ধাপগুলো শেষ হওয়ার সাপেক্ষে নির্বাচন করুন) </label>
                             <select className="form-control" required 
                                 onChange={(event) => console.log("fff ", event.target.value)}
                             >
@@ -238,7 +237,7 @@ export default function AddBabyForm(){
                     </div>
                     <div className="col-sm-6">
                         <div className="form-group">
-                            <label >১৮. শিশুর বাবার শিক্ষাগত যোগ্যতাঃ (নিচের ধাপগুলো শেষ হওয়ার সাপেক্ষে নির্বাচন করুন)</label>
+                            <label className="addform-label">১৮. শিশুর বাবার শিক্ষাগত যোগ্যতাঃ (নিচের ধাপগুলো শেষ হওয়ার সাপেক্ষে নির্বাচন করুন)</label>
                             <select className="form-control" required 
                                 onChange={(event) => console.log("fff ", event.target.value)}
                             >
@@ -259,7 +258,7 @@ export default function AddBabyForm(){
                 <div className="row mt-5">
                     <div className="col-sm-6">
                         <div className="form-group">
-                            <label >১৯. শিশুর মায়ের পেশা?</label>
+                            <label className="addform-label">১৯. শিশুর মায়ের পেশা?</label>
                             <select className="form-control" required 
                                 onChange={(event) => console.log("fff ", event.target.value)}
                             >
@@ -277,7 +276,7 @@ export default function AddBabyForm(){
                     </div>
                     <div className="col-sm-6">
                         <div className="form-group">
-                            <label >২০. শিশুর বাবার পেশা?</label>
+                            <label className="addform-label">২০. শিশুর বাবার পেশা?</label>
                             <select className="form-control" required 
                                 onChange={(event) => console.log("fff ", event.target.value)}
                             >
@@ -298,7 +297,7 @@ export default function AddBabyForm(){
                 <div className="row mt-5">
                     <div className="col-sm-6">
                         <div className="form-group">
-                            <label >২১. পরিবারের সম্ভাব্য মাসিক খরচ কত টাকা?</label>
+                            <label className="addform-label">২১. পরিবারের সম্ভাব্য মাসিক খরচ কত টাকা?</label>
                             <input 
                                 className="form-control" 
                                 required 
@@ -309,7 +308,7 @@ export default function AddBabyForm(){
                     </div>
                     <div className="col-sm-6">
                         <div className="form-group">
-                            <label >২২. পরিবারের সদস্য সংখ্যা কতজন?</label>
+                            <label className="addform-label">২২. পরিবারের সদস্য সংখ্যা কতজন?</label>
                             <input 
                                 className="form-control" 
                                 required 
@@ -323,7 +322,7 @@ export default function AddBabyForm(){
                 <div className="row mt-5">
                     <div className="col-sm-6">
                         <div className="form-group">
-                            <label >২৩. শিশুর পূর্ববর্তী কোন সন্তান আছে কি?</label>
+                            <label className="addform-label">২৩. শিশুর পূর্ববর্তী কোন সন্তান আছে কি?</label>
                             <select className="form-control" required 
                                 onChange={(event) => console.log("fff ", event.target.value)}
                             >
@@ -335,7 +334,7 @@ export default function AddBabyForm(){
                     </div>
                     <div className="col-sm-6">
                         <div className="form-group">
-                            <label >২৪. আপনার এই শিশুর বড় ভাই অবলিক বোনের রক্তশূন্যতা জনিত সমস্যা অথবা বারবার রক্ত নিতে হয় এই ধরনের সমস্যা আছে কি?</label>
+                            <label className="addform-label">২৪. আপনার এই শিশুর বড় ভাই অবলিক বোনের রক্তশূন্যতা জনিত সমস্যা অথবা বারবার রক্ত নিতে হয় এই ধরনের সমস্যা আছে কি?</label>
                             <select className="form-control" required 
                                 onChange={(event) => console.log("fff ", event.target.value)}
                             >
@@ -351,7 +350,7 @@ export default function AddBabyForm(){
                 <div className="row mt-5">
                     <div className="col-sm-6">
                         <div className="form-group">
-                            <label >২৫. আপনার এই শিশুর বড় ভাই/বোনের সাথে বয়সের পার্থক্য কত?(বছর)</label>
+                            <label className="addform-label">২৫. আপনার এই শিশুর বড় ভাই/বোনের সাথে বয়সের পার্থক্য কত?(বছর)</label>
                             <input 
                                 className="form-control" 
                                 required 
@@ -362,7 +361,7 @@ export default function AddBabyForm(){
                     </div>
                     <div className="col-sm-6">
                         <div className="form-group">
-                            <label >২৬. শিশুর মা শিশু গর্ভ অবস্থায় থাকাকালে কি গর্ভকালীন স্বাস্থ্য সেবা নিয়েছিলেন?</label>
+                            <label className="addform-label">২৬. শিশুর মা শিশু গর্ভ অবস্থায় থাকাকালে কি গর্ভকালীন স্বাস্থ্য সেবা নিয়েছিলেন?</label>
                             <select className="form-control" required 
                                 onChange={(event) => console.log("fff ", event.target.value)}
                             >
@@ -377,7 +376,7 @@ export default function AddBabyForm(){
                 <div className="row mt-5">
                     <div className="col-sm-6">
                         <div className="form-group">
-                            <label >২৭. শিশুর মা কি টিটি টিকা নিয়েছিলেন?</label>
+                            <label className="addform-label">২৭. শিশুর মা কি টিটি টিকা নিয়েছিলেন?</label>
                             <select className="form-control" required 
                                 onChange={(event) => console.log("fff ", event.target.value)}
                             >
@@ -389,7 +388,7 @@ export default function AddBabyForm(){
                     </div>
                     <div className="col-sm-6">
                         <div className="form-group">
-                            <label >২৮. শিশির কি ধরনের প্রসব হয়েছে?</label>
+                            <label className="addform-label">২৮. শিশির কি ধরনের প্রসব হয়েছে?</label>
                             <select className="form-control" required 
                                 onChange={(event) => console.log("fff ", event.target.value)}
                             >
@@ -404,7 +403,7 @@ export default function AddBabyForm(){
                 <div className="row mt-5">
                     <div className="col-sm-6">
                         <div className="form-group">
-                            <label >২৯. আপনি কি কখনো থালাসেমিয়া রোগের নাম শুনেছঠা?</label>
+                            <label className="addform-label">২৯. আপনি কি কখনো থালাসেমিয়া রোগের নাম শুনেছঠা?</label>
                             <select className="form-control" required 
                                 onChange={(event) => console.log("fff ", event.target.value)}
                             >
@@ -416,7 +415,7 @@ export default function AddBabyForm(){
                     </div>
                     <div className="col-sm-6">
                         <div className="form-group">
-                            <label >৩০. শিশুর মায়ের এদিকে আত্মীয়দের মধ্যে কারো রক্তশূন্যতা জনিত সমস্যা অথবা বারবার রক্ত নিতে হয় এই ধরনের সমস্যা আছে কি?</label>
+                            <label className="addform-label">৩০. শিশুর মায়ের এদিকে আত্মীয়দের মধ্যে কারো রক্তশূন্যতা জনিত সমস্যা অথবা বারবার রক্ত নিতে হয় এই ধরনের সমস্যা আছে কি?</label>
                             <select className="form-control" required 
                                 onChange={(event) => console.log("fff ", event.target.value)}
                             >
@@ -433,7 +432,7 @@ export default function AddBabyForm(){
                 <div className="row mt-5">
                     <div className="col-sm-6">
                         <div className="form-group">
-                            <label >৩১। কিশোর বাবা অথবা বাবার দিকে আত্মীয়র মধ্যে কারো রক্তশূন্যতা জনিত সমস্যা অথবা বারবার রক্ত নিতে হয় এ ধরনের সমস্যা আছে কি?</label>
+                            <label className="addform-label">৩১। কিশোর বাবা অথবা বাবার দিকে আত্মীয়র মধ্যে কারো রক্তশূন্যতা জনিত সমস্যা অথবা বারবার রক্ত নিতে হয় এ ধরনের সমস্যা আছে কি?</label>
                             <select className="form-control" required 
                                 onChange={(event) => console.log("fff ", event.target.value)}
                             >
@@ -446,7 +445,7 @@ export default function AddBabyForm(){
                     </div>
                     <div className="col-sm-6">
                         <div className="form-group">
-                            <label >৩২। প্রশ্ন ৩০/৩১ এই উত্তর হা হলে কার ছিল?</label>
+                            <label className="addform-label">৩২। প্রশ্ন ৩০/৩১ এই উত্তর হা হলে কার ছিল?</label>
                             <input 
                                 className="form-control" 
                                 required 
@@ -462,7 +461,7 @@ export default function AddBabyForm(){
                 <div className="row mt-5">
                     <div className="col-sm-6">
                         <div className="form-group">
-                            <label >৩৩. শিশুর বাবা ও মা এর কি বিবাহের পূর্বে আত্মীয়তা ছিল?</label>
+                            <label className="addform-label">৩৩. শিশুর বাবা ও মা এর কি বিবাহের পূর্বে আত্মীয়তা ছিল?</label>
                             <select className="form-control" required 
                                 onChange={(event) => console.log("fff ", event.target.value)}
                             >
@@ -474,7 +473,7 @@ export default function AddBabyForm(){
                     </div>
                     <div className="col-sm-6">
                         <div className="form-group">
-                            <label >৩৪. কি ধরনের আত্মীয়তা ছিল?</label>
+                            <label className="addform-label">৩৪. কি ধরনের আত্মীয়তা ছিল?</label>
                             <input 
                                 className="form-control" 
                                 required 
@@ -490,7 +489,7 @@ export default function AddBabyForm(){
                 <div className="row mt-5">
                     <div className="col-sm-6">
                         <div className="form-group">
-                            <label >৩৫. হবে না শিশুর বাবা ও মা এর কি বিবাহের পূর্বে কোন ধরনের রক্তের পরীক্ষা করা হয়েছিল?</label>
+                            <label className="addform-label">৩৫. হবে না শিশুর বাবা ও মা এর কি বিবাহের পূর্বে কোন ধরনের রক্তের পরীক্ষা করা হয়েছিল?</label>
                             <select className="form-control" required 
                                 onChange={(event) => console.log("fff ", event.target.value)}
                             >

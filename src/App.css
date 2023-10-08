@@ -1,7 +1,7 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: #0f0f1a;
+  background-color: #262f4b;
   color: #fff;
   font-family: Arial, sans-serif;
 }
@@ -80,6 +80,10 @@ input:focus {
   }
 }
 
+.button {
+  background-color: transparent;
+  color: #19d4ca;
+}
 /*DASHBOARD CSS START*/
 
 #logo {
@@ -93,7 +97,6 @@ input:focus {
   width: 280px;
   font-size: 30px;
   line-height: 2em;
-  border-right: 1px solid #e6ecf5;
   z-index: 4;
   color: #fff;
   padding-left: 15px;
@@ -109,16 +112,15 @@ input:focus {
 }
 
 #header {
-  background-color: #fff;
+  background-color: #464e62;
   height: 60px;
-  border-bottom: 1px solid #e6ecf5;
   position: fixed;
   top: 0;
   width: 100%;
   z-index: 3;
 }
 
-#header .header-left {
+/* #header .header-left {
   padding-left: 300px;
   -webkit-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
@@ -137,12 +139,7 @@ input:focus {
   line-height: 2em;
   padding: 0 5px;
   cursor: pointer;
-}
-.logout {
-  text-align: center;
-  font-size: 24px;
-  color: #000;
-}
+} */
 
 #main-content {
   min-height: calc(100vh - 60px);
@@ -174,13 +171,33 @@ input:focus {
   background-color: #313644;
   overflow-y: auto;
   height: 100vh;
-  border-right: 1px solid #e6ecf5;
+  /* border-right: 1px solid #e6ecf5; */
   margin-top: 60px;
   -webkit-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
   overflow-x: hidden;
   z-index: 2;
+}
+
+.left-menu-item{
+  padding: 15px 10px 10px 25px;
+  color: white;
+  cursor: pointer;
+}
+
+.left-menu-item:hover span{
+  color: #0e9aee;
+}
+
+.left-menu-item.active{
+  background-color: #0e9aee;
+  font-weight: 600;
+  border-radius: 30px;
+}
+
+.left-menu-item.active:hover span{
+  color: white;
 }
 
 #left-menu.small-left-menu,
@@ -266,10 +283,6 @@ input:focus {
     transition: all 0.3s ease;
 }
 
-#left-menu li ul.open {
-/*    height: 140px;*/
-}
-
 #left-menu li.has-sub ul > li {
     padding-top: 10px;
 }
@@ -337,3 +350,6 @@ a:hover {
 
 
 /* ADD BABY FORM*/
+.addform-label {
+  font-weight: 600;
+}
