@@ -12,9 +12,14 @@ async function PostRequest(urlPart, formData){
     console.log('variables', variables)
     try {
         const response = await axios(variables)
-        return response
-    } catch (error) {
+        if(response?.status === 200){
+            return response.data
+        }else{
+            console.log("PostRequest error", response?.status)
+        }
         
+    } catch (error) {
+        console.log("PostRequest tryError",error)
     }
 }
 
@@ -24,8 +29,13 @@ export async function checkLogin(email, password){
         "email": email,
         "password": password
     }
-    // const response = await PostRequest("api/v1/auth/signin", variables)
-    Storage.setInLocalStorage("loginData", variables)
-   return true
-    // console.log("checkLogin ", response)
+    const response = await PostRequest("api/v1/auth/signin", variables)
+    if(response?.code === 0){
+        Storage.setInLocalStorage("loginData", response?.data)
+        console.log("checkLogin ", response?.data)
+       return true
+    }else{
+        return false
+    }
+    
 }

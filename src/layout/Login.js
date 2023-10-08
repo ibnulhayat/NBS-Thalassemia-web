@@ -39,8 +39,8 @@ export default function Login() {
         e.preventDefault();
         const formValidation = handleValidation();
         if(formValidation){
-           await AllService.checkLogin(email, password)
-           navigate('/dashboard')
+          const response =  await AllService.checkLogin(email, password)
+          if(response) navigate('/dashboard')
         }
     };
 
@@ -70,7 +70,10 @@ export default function Login() {
                             <small className="text-danger form-text"> {error} </small>
                         : null
                     }
-                    <button type="submit" className="login-button">Submit</button>
+                    <button 
+                        type="submit" 
+                        className="login-button" 
+                        >Submit</button>
                 </form>
             </div>
         </div>
