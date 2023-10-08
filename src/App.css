@@ -1,38 +1,339 @@
-.App {
-  text-align: center;
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #0f0f1a;
+  color: #fff;
+  font-family: Arial, sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  height: 100vh;
 }
 
-.App-link {
-  color: #61dafb;
+.login_title {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+.login_card {
+  width: 450px;
+  background-color: #1e213a;
+  padding: 40px;
+  border-radius: 10px;
+  border-top: 4px solid #19d4ca;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.login_form {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.login_input {
+  padding: 10px;
+  border: none;
+  background-color: transparent;
+  border-bottom: 1px solid #ccc;
+  color: #fff;
+  transition: box-shadow 0.3s;
+}
+
+input:focus {
+  box-shadow: 0 0 10px #19d4ca;
+}
+
+.login-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, box-shadow 0.3s, color 0.3s;
+  text-decoration: none;
+}
+
+.login-button {
+  background-color: transparent;
+  color: #19d4ca;
+}
+
+.login-button:hover {
+  background-color: #19d4ca;
+  color: #fff;
+  box-shadow: none;
+}
+
+.login-button:active {
+  box-shadow: 0 0 10px #19d4ca;
+}
+
+
+@media (max-width: 480px) {
+  .card {
+    width: 100%;
+    max-width: 300px;
   }
 }
+
+/*DASHBOARD CSS START*/
+
+#logo {
+  position: fixed;
+  top: 0;
+  z-index: 2;
+  left: 0;
+  background-color: #464e62;
+  border-color: #464e62;
+  height: 60px;
+  width: 280px;
+  font-size: 30px;
+  line-height: 2em;
+  border-right: 1px solid #e6ecf5;
+  z-index: 4;
+  color: #fff;
+  padding-left: 15px;
+  -webkit-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  overflow: hidden;
+}
+
+#main-content {
+  min-height: calc(100vh - 60px);
+  clear: both;
+}
+
+#header {
+  background-color: #fff;
+  height: 60px;
+  border-bottom: 1px solid #e6ecf5;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 3;
+}
+
+#header .header-left {
+  padding-left: 300px;
+  -webkit-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+#header .header-right {
+  text-align: center;
+  justify-content: center;
+  padding-right: 40px;
+}
+
+#header .header-right i,
+#header .header-left i {
+  font-size: 30px;
+  line-height: 2em;
+  padding: 0 5px;
+  cursor: pointer;
+}
+.logout {
+  text-align: center;
+  font-size: 24px;
+  color: #000;
+}
+
+#main-content {
+  min-height: calc(100vh - 60px);
+  clear: both;
+}
+
+#page-container {
+  padding-left: 300px;
+  padding-top: 80px;
+  padding-right: 25px;
+  -webkit-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+#page-container.small-left-menu,
+#header .header-left.small-left-menu {
+  padding-left: 80px;
+}
+
+
+
+
+#left-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 280px;
+  background-color: #313644;
+  overflow-y: auto;
+  height: 100vh;
+  border-right: 1px solid #e6ecf5;
+  margin-top: 60px;
+  -webkit-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  overflow-x: hidden;
+  z-index: 2;
+}
+
+#left-menu.small-left-menu,
+#logo.small-left-menu {
+    width: 60px;
+}
+
+#left-menu ul {
+    padding: 0;
+    margin: 0;
+}
+
+#left-menu ul li {
+    padding: 0 10px;
+    display: block;
+    position: relative;
+}
+
+#left-menu > ul > li {
+    margin: 15px 0;
+}
+
+#left-menu ul li a {
+    color: #99abb4;
+    width: 100%;
+    display: inline-block;
+    width: 260px;
+    height: 37px;
+    position: relative;
+}
+
+
+#left-menu ul li a i {
+    font-size: 22px;
+    text-align: center;
+    width: 35px;
+    height: 35px;
+    display: inline-block;
+    -webkit-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+#left-menu ul li:hover a span{
+    color: #0e9aee;
+}
+#left-menu ul li:hover a i{
+    color: #0e9aee;
+}
+
+#left-menu ul li a span {
+    width: 100%;
+    height: 35px;
+    padding-left: 10px;
+    color: #99abb4;
+    font-weight: 300;
+    -webkit-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+#left-menu ul li.active a {
+    border-bottom: 2px solid #0e9aee;
+}
+
+#left-menu ul li.active a span {
+    color: #fff;
+}
+
+#left-menu ul li.active a i {
+    background-color: #0e9aee;
+    color: #fff;
+}
+
+
+#left-menu li.has-sub ul {
+    background-color: #454e62;
+    margin: 0 -10px;
+    padding-left: 45px;
+    height: 0;
+    overflow: hidden;
+    -webkit-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+#left-menu li ul.open {
+/*    height: 140px;*/
+}
+
+#left-menu li.has-sub ul > li {
+    padding-top: 10px;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+
+.card {
+  border: 1px solid #e6ecf5;
+  margin-bottom: 1em;
+  font-weight: 300;
+}
+
+.card .title {
+  padding: 15px 20px;
+  border-bottom: 1px solid #e6ecf5;
+  margin-bottom: 10px;
+  color: #000;
+  font-size: 18px;
+}
+
+
+@media only screen and (max-width: 992px) {
+  #left-menu,
+  #logo {
+      width: 60px;
+  }
+  
+  #page-container,
+  #header .header-left {
+      padding-left: 80px;
+  }
+  
+  #toggle-left-menu,.big-logo{
+      display: none;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  #left-menu li.has-sub::after {
+      font-family: "Ionicons";
+      content: "\f3d3";
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      cursor: pointer;
+      transform: rotate(0deg);
+      -webkit-transition: all 0.3s ease;
+      -o-transition: all 0.3s ease;
+      transition: all 0.3s ease;
+  }
+  #left-menu li.has-sub.rotate:after {
+      -webkit-transform: rotate(90deg);
+      -ms-transform: rotate(90deg);
+      -o-transform: rotate(90deg);
+      transform: rotate(90deg);
+  }
+  .small-logo{
+      display: none;
+  }
+  
+}    
+
+
+/* ADD BABY FORM*/
