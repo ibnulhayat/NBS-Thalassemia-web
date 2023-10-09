@@ -91,7 +91,7 @@ input:focus {
   top: 0;
   z-index: 2;
   left: 0;
-  background-color: #464e62;
+  /* background-color: #464e62; */
   border-color: #464e62;
   height: 60px;
   width: 280px;
@@ -112,7 +112,8 @@ input:focus {
 }
 
 #header {
-  background-color: #464e62;
+  /* background-color: #464e62; */
+  background-color: #071a4b;
   height: 60px;
   position: fixed;
   top: 0;
@@ -168,7 +169,7 @@ input:focus {
   top: 0;
   left: 0;
   width: 280px;
-  background-color: #313644;
+  /* background-color: #313644; */
   overflow-y: auto;
   height: 100vh;
   /* border-right: 1px solid #e6ecf5; */

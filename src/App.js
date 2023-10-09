@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Login from './layout/Login';
-import Dashboard from './layout/Dashboard';
+import MainLayout from './layout/MainLayout';
 
 
 const router = createBrowserRouter([
@@ -13,7 +13,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <Dashboard />,
+    element: <MainLayout />,
   },
   // {
   //   path: "/addnewbaby",
