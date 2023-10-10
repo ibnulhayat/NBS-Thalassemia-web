@@ -1,15 +1,30 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useState } from 'react';
 import { Button } from 'react-bootstrap';
+import * as Service from './../AllService'
 
 export default function AddNewHospital(){
+    const [dataForm, setDataForm] = useState({
+        name: '',
+        address: ''
+    })
+
+    const UpdateForm = (data) =>{
+        setDataForm({...dataForm, ...data})
+    }
     
-    const formSubmit = async(e) => {
+    const hospitaFormSubmit = async(e) => {
         e.preventDefault();
-    };
+        const response =  await Service.PostRequest(dataForm)
+        if(response){
+            UpdateForm({name: "", address: ""})
+        }
+        console.log(dataForm)
+    }
   
     return(
         <div className="col m-3">
-            <form id="addnewhospital" onSubmit={formSubmit} >
+            <form id="addnewhospital" onSubmit={hospitaFormSubmit} >
                 {/* First Row Start*/}
                 <div className="row mt-3">
                     <div className='col-sm-6'>
@@ -18,7 +33,8 @@ export default function AddNewHospital(){
                             <input 
                                 className="form-control" required 
                                 type='text'
-                                onChange={(event) => console.log("fff ", event.target.value)}
+                                value={dataForm.name}
+                                onChange={(event) => UpdateForm({name: event.target.value})}
                             />
                         </div>
                     </div>
@@ -30,7 +46,9 @@ export default function AddNewHospital(){
                                 required 
                                 type='text'
                                 rows="5"
-                                onChange={(event) => console.log("fff ", event.target.value)}
+                                multiple={true}
+                                value={dataForm.address}
+                                onChange={(event) =>  UpdateForm({address: event.target.value})}
                             />
                         </div>
                     </div>

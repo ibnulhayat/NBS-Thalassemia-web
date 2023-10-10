@@ -1,7 +1,8 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import * as AllService from './../AllService'
 import { useNavigate } from 'react-router-dom';
+import * as Store from './../Storage'
 
 
 
@@ -10,6 +11,12 @@ export default function Login() {
     const [email, setEmail] = useState("shahariar.dmc@gmail.com");
     const [password, setPassword] = useState("104403");
     const [error, setError] = useState("");
+    const [disable, setDisable] = useState(false)
+
+    useEffect(()=> {
+        const loginData = Store.getLocalStorageData('loginData')
+        if(loginData?.accessToken) navigate('/dashboard')
+    })
 
     const handleValidation = (event) => {
         let formIsValid = true;
@@ -39,8 +46,12 @@ export default function Login() {
         e.preventDefault();
         const formValidation = handleValidation();
         if(formValidation){
-          const response =  await AllService.checkLogin(email, password)
-          if(response) navigate('/dashboard')
+            setDisable(true)
+            const response =  await AllService.checkLogin(email, password)
+            if(response){
+                navigate('/dashboard')
+                setDisable(false)
+            }
         }
     };
 
@@ -72,7 +83,9 @@ export default function Login() {
                     }
                     <button 
                         type="submit" 
-                        className="login-button" 
+                        // className="login-button"
+                        className={disable? 'login-button-dis': 'login-button'}
+                        disabled={disable}
                         >Submit</button>
                 </form>
             </div>

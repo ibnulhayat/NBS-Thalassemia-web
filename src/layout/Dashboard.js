@@ -1,6 +1,4 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import AddBabyForm from './AddBabyForm';
-import AddNewHospital from './AddNewHosital';
 import CustomPaginationActionsTable from './DataTable3';
 
 export default function Dashboard() {
