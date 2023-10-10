@@ -70,7 +70,7 @@ export async function checkLogin(email, password){
 export async function PostRequest(data){
     const auth = Storage.getLocalStorageData('loginData')
     const header = { 'Authorization': auth?.accessToken}
-    const apiName = data?.hospitalId? "api/v1/vault/nurse" : "api/v1/vault/hospital"
+    const apiName = data?.hospitalId? "api/v1/vault/nurse" : data?.mobileNumber? 'api/v1/vault/baby-info':"api/v1/vault/hospital"
     const response = await POSTCall(apiName, data, header)
 
     if(response?.code === 0){
