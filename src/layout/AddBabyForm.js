@@ -15,7 +15,7 @@ export default function AddBabyForm(){
         address: '',
         hospitalName: '', // int
         sampleCollectDate: '',
-        sample_collect_date: '',
+        bloodCollectDate: '',
         nameOfInterviewer: -1, // int
         testResult: -1, // int
         babyDob: '',
@@ -76,7 +76,6 @@ export default function AddBabyForm(){
                             <label className="addform-label">১. হাসপাতালের নাম কি?</label>
                             <select 
                                 className="form-control"
-                                required
                                 value={dataForm.hospitalName}
                                 onChange={(event) => {
                                     UpdateForm({hospitalName: parseInt(event.target.value), nameOfInterviewer: -1})
@@ -100,11 +99,11 @@ export default function AddBabyForm(){
                                 required 
                                 type='date'
                                 placeholder='dd/mm/yyyy'
-                                value={dataForm.sample_collect_date}
+                                value={dataForm.bloodCollectDate}
                                 onChange={(event) => {
                                     // UpdateForm({sampleCollectDate: event.target.value})
                                     const dateTime = new Date(event.target.value).getTime()
-                                    UpdateForm({sample_collect_date: event.target.value,sampleCollectDate: Math.floor(dateTime / 1000)})
+                                    UpdateForm({bloodCollectDate: event.target.value, sampleCollectDate: Math.floor(dateTime / 1000)})
                                 }}
                             />
                             
@@ -202,8 +201,12 @@ export default function AddBabyForm(){
                                 placeholder='dd/mm/yyyy'
                                 value={dataForm.babyDOB}
                                 onChange={(event) => {
-                                    const dateTime = new Date(event.target.value).getTime()
-                                    UpdateForm({babyDOB: event.target.value, babyDob: Math.floor(dateTime / 1000)})
+                                    const dateTime = Math.floor(new Date(event.target.value).getTime() / 1000)
+                                    UpdateForm({
+                                        babyDOB: event.target.value, 
+                                        babyDob: dateTime,
+                                        bloodCollectAge: (dataForm.sampleCollectDate - dateTime) / 86400
+                                    })
                                 }}
                             />
                         </div>
@@ -577,21 +580,22 @@ export default function AddBabyForm(){
                 
                 <div className="row mt-5">
                     <div className="col-sm-6">
-                        {
-                            (dataForm.babyMotherAnemia === '0' || dataForm.babyFatherAnemia === '0')?
+                        {/* {
+                            (dataForm.babyMotherAnemia === '0' || dataForm.babyFatherAnemia === '0')? */}
                             <div className="form-group">
                                 <label className="addform-label">৩১. কার ছিল?</label>
                                 <input 
                                     className="form-control" 
-                                    required
+                                    required={(dataForm.babyMotherAnemia === 0 || dataForm.babyFatherAnemia === 0)}
+                                    disabled={!(dataForm.babyMotherAnemia === 0 || dataForm.babyFatherAnemia === 0)}
                                     type='text'
                                     placeholder='কার আত্মীয়র সমস্যা ছিল'
                                     value={dataForm.whichPerson}
                                     onChange={(event) => UpdateForm({whichPerson: event.target.value})}
                                 />
                             </div>
-                            :null
-                        }
+                            {/* :null
+                        } */}
                     </div>
                     
                     <div className="col-sm-6">
@@ -617,9 +621,10 @@ export default function AddBabyForm(){
                             <label className="addform-label">৩৩. কি ধরনের আত্মীয়তা ছিল?</label>
                             <input 
                                 className="form-control" 
-                                required 
+                                required={dataForm.parentsAreRelative === 1}
+                                disabled={dataForm.parentsAreRelative !== 1} 
                                 type='text'
-                                placeholder='কেমন আত্মীয়'
+                                placeholder='কেমন আত্মীয় ছিল'
                                 value={dataForm.parentsRelativeType}
                                 onChange={(event) => UpdateForm({parentsRelativeType: event.target.value})}
                             />

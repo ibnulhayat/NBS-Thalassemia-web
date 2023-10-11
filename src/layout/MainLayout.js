@@ -14,15 +14,16 @@ export default function MainLayout() {
     setSelectTab(type)
     console.log('eeeee', type)
   }
-  useEffect(()=>{
-    getCall()
-  },[])
   
-  const getCall = async() =>{
-    Service.getHospitalList()
-    Service.getNursList()
-  }
-
+  // useEffect(()=>{
+  //   getCall()
+  // },[])
+  
+  // const getCall = async() =>{
+  //   await Service.getHospitalList()
+  //   await Service.getNursList()
+  //   await Service.getBabyList()
+  // }
   const ClickLogout = () =>{
     Service.logOut()
     navigate('/')

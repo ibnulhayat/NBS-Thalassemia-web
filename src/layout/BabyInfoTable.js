@@ -15,6 +15,7 @@ import FirstPageIcon from '@mui/icons-material/FirstPage';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import LastPageIcon from '@mui/icons-material/LastPage';
+import TableHead from '@mui/material/TableHead';
 
 function TablePaginationActions(props) {
   const theme = useTheme();
@@ -77,27 +78,8 @@ TablePaginationActions.propTypes = {
   rowsPerPage: PropTypes.number.isRequired,
 };
 
-function createData(name, calories, fat) {
-  return { name, calories, fat };
-}
 
-const rows = [
-  createData('Cupcake', 305, 3.7),
-  createData('Donut', 452, 25.0),
-  createData('Eclair', 262, 16.0),
-  createData('Frozen yoghurt', 159, 6.0),
-  createData('Gingerbread', 356, 16.0),
-  createData('Honeycomb', 408, 3.2),
-  createData('Ice cream sandwich', 237, 9.0),
-  createData('Jelly Bean', 375, 0.0),
-  createData('KitKat', 518, 26.0),
-  createData('Lollipop', 392, 0.2),
-  createData('Marshmallow', 318, 0),
-  createData('Nougat', 360, 19.0),
-  createData('Oreo', 437, 18.0),
-].sort((a, b) => (a.calories < b.calories ? -1 : 1));
-
-export default function CustomPaginationActionsTable() {
+export default function BabyInfoTable({rows}) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
@@ -117,21 +99,30 @@ export default function CustomPaginationActionsTable() {
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
+        <TableHead>
+          <TableRow key={'0'}>
+              <TableCell component="th" scope="row" style={{fontWeight: 600}}>ID</TableCell>
+              <TableCell style={{fontWeight: 600}}>Baby Name</TableCell>
+              <TableCell style={{fontWeight: 600}}>Mobile Number</TableCell>
+              <TableCell style={{fontWeight: 600}}>Test Result</TableCell>
+              <TableCell style={{fontWeight: 600}}>Delivery</TableCell>
+              <TableCell style={{fontWeight: 600}}>Baby Type</TableCell>
+              <TableCell style={{fontWeight: 600}}>Age(Day)</TableCell>
+            </TableRow>
+        </TableHead>
         <TableBody>
-          {(rowsPerPage > 0
+          {((rowsPerPage > 0 && rows.length > 0)
             ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             : rows
           ).map((row) => (
-            <TableRow key={row.name}>
-              <TableCell component="th" scope="row">
-                {row.name}
-              </TableCell>
-              <TableCell style={{ width: 160 }} align="right">
-                {row.calories}
-              </TableCell>
-              <TableCell style={{ width: 160 }} align="right">
-                {row.fat}
-              </TableCell>
+            <TableRow key={row?.id}>
+              <TableCell component="th" scope="row"> {row.id} </TableCell>
+              <TableCell > {row.babyName} </TableCell>
+              <TableCell > {row.mobileNumber} </TableCell>
+              <TableCell > {row?.testResult === 0? 'পজেটিভ': 'নেগেটিভ'} </TableCell>
+              <TableCell > {row?.testResult === 0? 'নরমাল': 'সিজারিয়ান'} </TableCell>
+              <TableCell > {row?.babyType === 0? 'ছেলে': 'মেয়ে'} </TableCell>
+              <TableCell > {row?.bloodCollectAge} </TableCell>
             </TableRow>
           ))}
           {emptyRows > 0 && (
@@ -144,7 +135,6 @@ export default function CustomPaginationActionsTable() {
           <TableRow>
             <TablePagination
               rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
-              colSpan={3}
               count={rows.length}
               rowsPerPage={rowsPerPage}
               page={page}
@@ -162,5 +152,5 @@ export default function CustomPaginationActionsTable() {
         </TableFooter>
       </Table>
     </TableContainer>
-  );
+  )
 }

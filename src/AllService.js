@@ -90,7 +90,7 @@ export async function getHospitalList(){
     if(response?.code === 0){
         console.log("getHospitalList ", response?.data?.hospitals)
         Storage.setInLocalStorage('hospitalList', response?.data?.hospitals)
-       return true
+       return response?.data?.hospitals
     }else{
         return false
     }
@@ -105,7 +105,23 @@ export async function getNursList(){
     if(response?.code === 0){
         console.log("getNursList ", response?.data?.nurses)
         Storage.setInLocalStorage('nursesList', response?.data?.nurses)
-       return true
+       return response?.data?.nurses
+    }else{
+        return false
+    }
+}
+
+export async function getBabyList(){
+    const auth = Storage.getLocalStorageData('loginData')
+    const header = { 'Authorization': auth?.accessToken}
+
+    const response = await GETCall("api/v1/vault/baby-infos", header)
+
+    if(response?.code === 0){
+        console.log("babysList ", response?.data?.infos)
+        Storage.setInLocalStorage('babysList', response?.data?.infos)
+
+       return response?.data?.infos
     }else{
         return false
     }
@@ -115,4 +131,5 @@ export function logOut(){
     Storage.clearLocalStorage('loginData')
     Storage.clearLocalStorage('hospitalList')
     Storage.clearLocalStorage('nursesList')
+    Storage.clearLocalStorage('babysList')
 }
