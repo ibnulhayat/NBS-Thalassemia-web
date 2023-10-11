@@ -8,8 +8,8 @@ import * as Store from './../Storage'
 
 export default function Login() {
     const navigate = useNavigate()
-    const [email, setEmail] = useState("shahariar.dmc@gmail.com"); // 
-    const [password, setPassword] = useState("104403"); //
+    const [email, setEmail] = useState(""); // shahariar.dmc@gmail.com
+    const [password, setPassword] = useState(""); //104403
     const [error, setError] = useState("");
     const [disable, setDisable] = useState(false)
 
