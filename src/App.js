@@ -14,31 +14,7 @@ const router = createBrowserRouter([
   {
     path: "/dashboard",
     element: <MainLayout />,
-  },
-  // {
-  //   path: "/addnewbaby",
-  //   element: <Categories />,
-  // },
-  // {
-  //   path: "/users",
-  //   element: <Users />,
-  // },
-  // {
-  //   path: "/category-services/:catId",
-  //   element: <CategoryServices />,
-  // },
-  // {
-  //   path: "/service-packages/:serviceId",
-  //   element: <ServicePackages />,
-  // },
-  // {
-  //   path: "/service-orders",
-  //   element: <ServiceOrders />,
-  // },
-  // {
-  //   path: "/settings",
-  //   element: <Settings />,
-  // },
+  }
 ]);
 
 function App() {

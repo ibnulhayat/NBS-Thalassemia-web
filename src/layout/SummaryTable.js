@@ -79,7 +79,7 @@ TablePaginationActions.propTypes = {
 };
 
 
-export default function BabyInfoTable({rows}) {
+export default function SummaryTable({rows}) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
@@ -101,28 +101,25 @@ export default function BabyInfoTable({rows}) {
       <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
         <TableHead>
           <TableRow key={'0'}>
-              <TableCell component="th" scope="row" style={{fontWeight: 600}}>ID</TableCell>
-              <TableCell style={{fontWeight: 600}}>Baby Name</TableCell>
-              <TableCell style={{fontWeight: 600}}>Mobile Number</TableCell>
-              <TableCell style={{fontWeight: 600}}>Test Result</TableCell>
-              <TableCell style={{fontWeight: 600}}>Delivery</TableCell>
-              <TableCell style={{fontWeight: 600}}>Baby Type</TableCell>
-              <TableCell style={{fontWeight: 600}}>Age(Days)</TableCell>
+              <TableCell component="th" scope="row" style={{fontWeight: 600}}>#</TableCell>
+              <TableCell style={{fontWeight: 600}}>Hospital Name</TableCell>
+              <TableCell style={{fontWeight: 600}}>Type</TableCell>
+              <TableCell style={{fontWeight: 600}}>Total</TableCell>
             </TableRow>
         </TableHead>
         <TableBody>
           {((rowsPerPage > 0 && rows.length > 0)
             ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             : rows
-          ).map((row) => (
-            <TableRow key={row?.id}>
-              <TableCell component="th" scope="row"> {row.id} </TableCell>
-              <TableCell > {row.babyName} </TableCell>
-              <TableCell > {row.mobileNumber} </TableCell>
-              <TableCell > {row?.testResult === 0? 'Unknown':row?.testResult === 1? 'Positive': 'Negative'} </TableCell>
-              <TableCell > {row?.testResult === 0? 'Normal': 'Surgical'} </TableCell>
+          ).map((row, index) => (
+            <TableRow key={index}>
+              <TableCell component="th" scope="row"> {index+1} </TableCell>
+              <TableCell > {row.hospitalName} </TableCell>
+              <TableCell > {row?.type === 0? 'Unknown':row?.type === 1? 'Positive': 'Negative'} </TableCell>
+              <TableCell > {row?.count} </TableCell>
+              {/* <TableCell > {row?.testResult === 0? 'Normal': 'Surgical'} </TableCell>
               <TableCell > {row?.babyType === 0? 'Boy': 'Girl'} </TableCell>
-              <TableCell > {row?.bloodCollectAge} </TableCell>
+              <TableCell > {row?.bloodCollectAge} </TableCell> */}
             </TableRow>
           ))}
           {emptyRows > 0 && (

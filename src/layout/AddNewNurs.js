@@ -48,7 +48,6 @@ export default function AddNewNurs(){
                                 className="form-control" 
                                 required 
                                 type='text'
-                                rows="5"
                                 value={dataForm.designation}
                                 onChange={(event) => UpdateForm({designation: event.target.value})}
                             />

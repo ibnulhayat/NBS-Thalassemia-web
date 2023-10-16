@@ -6,38 +6,77 @@ import * as Service from './../AllService'
 
 export default function AddBabyForm(){
 
+    // const model = {
+    //     babyMotherName: '',
+    //     mobileNumber: '',
+    //     deliveryProcess: -1, // int
+    //     bloodCollectAge: -1, // int
+    //     babyType: -1, // int
+    //     address: '',
+    //     hospitalId: '', // int
+    //     sampleCollectDate: '',
+    //     bloodCollectDate: '',
+    //     nameOfInterviewer: -1, // int
+    //     testResult: 'TRT_UNKNOWN', // int
+    //     babyDob: '',
+    //     babyDOB: '',
+    //     babyMotherAge: '',
+    //     babyName: '',
+    //     motherAgeOfMarriage: -1, // int
+    //     babyFatherName: '',
+    //     babyFatherAge: -1, // int
+    //     relationWithBaby: '',
+    //     babyMotherEduQualification: -1, // int
+    //     babyFatherEduQualification: -1, // int
+    //     babyMotherOccupation: -1, // int
+    //     babyFatherOccupation: -1, // int
+    //     familyMonthlyExpenses: -1, // int
+    //     totalFamilyMember: -1, // int
+    //     previousAnyChildren: -1, // int
+    //     previousChildrenAnemia: -1, // int
+    //     ageDifference: -1, // int
+    //     antenatalHealthcare: -1, // int
+    //     ttVaccine: -1, // int
+    //     knowAboutThalassemia: -1, // int
+    //     babyMotherAnemia: -1, // int
+    //     babyFatherAnemia: -1, // int
+    //     whichPerson: '',
+    //     parentsAreRelative: -1, // int
+    //     parentsRelativeType: '',
+    //     beforeMarriageBloodTest: -1 // int
+    // }
     const model = {
-        babyMotherName: '',
-        mobileNumber: '',
+        babyMotherName: 'Abc',
+        mobileNumber: '01512321423',
         deliveryProcess: -1, // int
         bloodCollectAge: -1, // int
-        babyType: -1, // int
-        address: '',
-        hospitalName: '', // int
+        babyType: 1, // int
+        address: 'Mirpur',
+        hospitalId: '', // int
         sampleCollectDate: '',
         bloodCollectDate: '',
         nameOfInterviewer: -1, // int
-        testResult: -1, // int
+        testResult: 'TRT_UNKNOWN', // int
         babyDob: '',
         babyDOB: '',
-        babyMotherAge: '',
-        babyName: '',
-        motherAgeOfMarriage: -1, // int
-        babyFatherName: '',
-        babyFatherAge: -1, // int
-        relationWithBaby: '',
-        babyMotherEduQualification: -1, // int
-        babyFatherEduQualification: -1, // int
-        babyMotherOccupation: -1, // int
-        babyFatherOccupation: -1, // int
-        familyMonthlyExpenses: -1, // int
-        totalFamilyMember: -1, // int
+        babyMotherAge: 24,
+        babyName: 'hkhkk',
+        motherAgeOfMarriage: 23, // int
+        babyFatherName: 'lfhjhdfj',
+        babyFatherAge: 26, // int
+        relationWithBaby: 'mother',
+        babyMotherEduQualification: 2, // int
+        babyFatherEduQualification: 4, // int
+        babyMotherOccupation: 4, // int
+        babyFatherOccupation: 5, // int
+        familyMonthlyExpenses: 4, // int
+        totalFamilyMember: 3, // int
         previousAnyChildren: -1, // int
         previousChildrenAnemia: -1, // int
         ageDifference: -1, // int
         antenatalHealthcare: -1, // int
-        ttVaccine: -1, // int
-        knowAboutThalassemia: -1, // int
+        ttVaccine: 1, // int
+        knowAboutThalassemia: 1, // int
         babyMotherAnemia: -1, // int
         babyFatherAnemia: -1, // int
         whichPerson: '',
@@ -61,6 +100,9 @@ export default function AddBabyForm(){
         setDisable(true)
         const response = await Service.PostRequest(dataForm)
         if(response){
+            if(dataForm?.testResult !== "TRT_UNKNOWN"){
+                await Service.sendSMS(dataForm)
+            }
             setDataForm(model)
         }
         setDisable(false)
@@ -76,9 +118,9 @@ export default function AddBabyForm(){
                             <label className="addform-label">১. হাসপাতালের নাম কি?</label>
                             <select 
                                 className="form-control"
-                                value={dataForm.hospitalName}
+                                value={dataForm.hospitalId}
                                 onChange={(event) => {
-                                    UpdateForm({hospitalName: parseInt(event.target.value), nameOfInterviewer: -1})
+                                    UpdateForm({hospitalId: parseInt(event.target.value), nameOfInterviewer: -1})
                                     setList(nurseList?.filter((item) => item?.hospitalId === event.target.value))
                                 }}
                             >
@@ -119,11 +161,11 @@ export default function AddBabyForm(){
                                 className="form-control"
                                 required
                                 value={dataForm.testResult}
-                                onChange={(event) => UpdateForm({testResult: parseInt(event.target.value)})}
+                                onChange={(event) => UpdateForm({testResult: event.target.value})}
                             >
-                                <option value=''>নির্বাচন করুন</option>
-                                <option value='0'>পজেটিভ</option>
-                                <option value='1'>নেগেটিভ</option>
+                                <option value='TRT_UNKNOWN'>নির্বাচন করুন</option>
+                                <option value='TRT_POSITIVE'>পজেটিভ</option>
+                                <option value='TRT_NEGATIVE'>নেগেটিভ</option>
                             
                             </select>
                         </div>

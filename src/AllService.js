@@ -70,7 +70,7 @@ export async function checkLogin(email, password){
 export async function PostRequest(data){
     const auth = Storage.getLocalStorageData('loginData')
     const header = { 'Authorization': auth?.accessToken}
-    const apiName = data?.hospitalId? "api/v1/vault/nurse" : data?.mobileNumber? 'api/v1/vault/baby-info':"api/v1/vault/hospital"
+    const apiName = data?.mobileNumber?  'api/v1/vault/baby-info': data?.hospitalId? "api/v1/vault/nurse": "api/v1/vault/hospital"
     const response = await POSTCall(apiName, data, header)
 
     if(response?.code === 0){
@@ -127,9 +127,60 @@ export async function getBabyList(){
     }
 }
 
+
+export async function getDashBoardData(){
+    const auth = Storage.getLocalStorageData('loginData')
+    const header = { 'Authorization': auth?.accessToken}
+
+    const response = await GETCall("api/v1/vault/sms/send", header)
+
+    if(response?.code === 0){
+        console.log("summaries ", response?.data?.summaries)
+        Storage.setInLocalStorage('summaries', response?.data?.summaries)
+
+       return response?.data?.summaries
+    }else{
+        return false
+    }
+}
+
+export async function sendSMS(dataForm){
+    const message = Storage.getLocalStorageData('editsms')
+
+    const variables = {
+        method: 'get',
+        url: "https://www.24bulksmsbd.com/api/smsSendApi",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        params: {
+            "customer_id":"558",
+            "api_key":"177980160885496101729099480",
+            "message": dataForm?.testResult === "TRT_POSITIVE"? `${dataForm?.babyMotherName} ${message?.positiveMessage}`
+                : `${dataForm?.babyMotherName} ${message?.negativeMessage}`,
+            "mobile_no":dataForm?.mobileNumber
+        }
+    }
+    try {
+        const response = await axios(variables)
+        console.log("sendSMS response", response)
+        if(response?.status === 200){
+            return response
+        }else{
+            console.log("sendSMS error", response?.status)
+            return false
+        }
+        
+    } catch (error) {
+        console.log("sendSMS tryError",error)
+        return false
+    }
+}
+
 export function logOut(){
     Storage.clearLocalStorage('loginData')
     Storage.clearLocalStorage('hospitalList')
     Storage.clearLocalStorage('nursesList')
     Storage.clearLocalStorage('babysList')
+    Storage.clearLocalStorage('summaries')
 }

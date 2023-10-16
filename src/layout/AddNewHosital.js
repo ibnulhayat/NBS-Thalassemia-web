@@ -41,11 +41,11 @@ export default function AddNewHospital(){
                     <div className='col-sm-6'>
                         <div className="form-group">
                             <label className="addform-label">ঠিকানাঃ</label>
-                            <input 
+                            <textarea 
                                 className="form-control" 
                                 required 
                                 type='text'
-                                rows="5"
+                                rows="4"
                                 multiple={true}
                                 value={dataForm.address}
                                 onChange={(event) =>  UpdateForm({address: event.target.value})}

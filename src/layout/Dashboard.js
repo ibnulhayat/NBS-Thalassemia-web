@@ -5,544 +5,116 @@ import BabyInfoTable from './BabyInfoTable';
 import HospitalListTable from './HospitalListTable';
 import { useEffect, useState } from 'react';
 import * as Service from './../AllService'
+import SummaryTable from './SummaryTable';
 
 export default function Dashboard() {
 
+  const[sumarryList, setSumarryList] = useState([])
   const[babysList, setBabysList] = useState([])
   const[hospitalList, setHospitalList] = useState([])
+  const [totalCase, setTotalCasse] = useState(0)
 
   useEffect(()=>{
     getCall()
   },[])
   
   const getCall = async() =>{
+    const resData =  await Service.getDashBoardData()
     const resb =  await Service.getBabyList()
     const resh = await Service.getHospitalList()
     await Service.getNursList()
+    setSumarryList(resData)
     setBabysList(resb)
     setHospitalList(resh)
+    totalCount()
   }
-  // const babysList = Store.getLocalStorageData('babysList')
-  // const hospitalList = Store.getLocalStorageData('hospitalList')
-  // const nurseList = Store.getLocalStorageData('nursesList')
 
-//   const babysList = [
-//     {
-//         "id": "13",
-//         "babyMotherName": "Mango",
-//         "mobileNumber": "01912326512",
-//         "deliveryProcess": 1,
-//         "bloodCollectAge": 0,
-//         "babyType": 1,
-//         "address": "Khilkhet, Dhaka",
-//         "hospitalName": 1,
-//         "sampleCollectDate": "1696982400",
-//         "nameOfInterviewer": 5,
-//         "testResult": 1,
-//         "babyDob": "1696982400",
-//         "babyMotherAge": "23",
-//         "babyName": "Flower",
-//         "motherAgeOfMarriage": 21,
-//         "babyFatherName": "Banana",
-//         "babyFatherAge": 25,
-//         "relationWithBaby": "Father",
-//         "babyMotherEduQualification": 6,
-//         "babyFatherEduQualification": 6,
-//         "babyMotherOccupation": 1,
-//         "babyFatherOccupation": 1,
-//         "familyMonthlyExpenses": 45000,
-//         "totalFamilyMember": 2,
-//         "previousAnyChildren": 0,
-//         "previousChildrenAnemia": 2,
-//         "ageDifference": 2,
-//         "antenatalHealthcare": 0,
-//         "ttVaccine": 0,
-//         "knowAboutThalassemia": 0,
-//         "babyMotherAnemia": 0,
-//         "babyFatherAnemia": 2,
-//         "whichPerson": "Mar boner",
-//         "parentsAreRelative": 1,
-//         "parentsRelativeType": "Cousine brother sister",
-//         "beforeMarriageBloodTest": 0
-//     },
-//     {
-//         "id": "12",
-//         "babyMotherName": "sdsd",
-//         "mobileNumber": "01934231256",
-//         "deliveryProcess": 0,
-//         "bloodCollectAge": -1,
-//         "babyType": 0,
-//         "address": "mirpur",
-//         "hospitalName": 1,
-//         "sampleCollectDate": "1696982400",
-//         "nameOfInterviewer": 5,
-//         "testResult": 1,
-//         "babyDob": "1696118400",
-//         "babyMotherAge": "23",
-//         "babyName": "abul",
-//         "motherAgeOfMarriage": 21,
-//         "babyFatherName": "dfsaf",
-//         "babyFatherAge": 25,
-//         "relationWithBaby": "moyhh",
-//         "babyMotherEduQualification": 6,
-//         "babyFatherEduQualification": 6,
-//         "babyMotherOccupation": 1,
-//         "babyFatherOccupation": 1,
-//         "familyMonthlyExpenses": 33455,
-//         "totalFamilyMember": 2,
-//         "previousAnyChildren": 1,
-//         "previousChildrenAnemia": -1,
-//         "ageDifference": -1,
-//         "antenatalHealthcare": 0,
-//         "ttVaccine": 0,
-//         "knowAboutThalassemia": 0,
-//         "babyMotherAnemia": 2,
-//         "babyFatherAnemia": 2,
-//         "whichPerson": "",
-//         "parentsAreRelative": 0,
-//         "parentsRelativeType": "bv",
-//         "beforeMarriageBloodTest": 0
-//     },
-//     {
-//         "id": "11",
-//         "babyMotherName": "sdsd",
-//         "mobileNumber": "01934231256",
-//         "deliveryProcess": 0,
-//         "bloodCollectAge": -1,
-//         "babyType": 0,
-//         "address": "mirpur",
-//         "hospitalName": 1,
-//         "sampleCollectDate": "1696982400",
-//         "nameOfInterviewer": 5,
-//         "testResult": 1,
-//         "babyDob": "1696118400",
-//         "babyMotherAge": "23",
-//         "babyName": "abul",
-//         "motherAgeOfMarriage": 21,
-//         "babyFatherName": "dfsaf",
-//         "babyFatherAge": 25,
-//         "relationWithBaby": "moyhh",
-//         "babyMotherEduQualification": 6,
-//         "babyFatherEduQualification": 6,
-//         "babyMotherOccupation": 1,
-//         "babyFatherOccupation": 1,
-//         "familyMonthlyExpenses": 33455,
-//         "totalFamilyMember": 2,
-//         "previousAnyChildren": 1,
-//         "previousChildrenAnemia": -1,
-//         "ageDifference": -1,
-//         "antenatalHealthcare": 0,
-//         "ttVaccine": 0,
-//         "knowAboutThalassemia": 0,
-//         "babyMotherAnemia": 2,
-//         "babyFatherAnemia": 2,
-//         "whichPerson": "",
-//         "parentsAreRelative": 0,
-//         "parentsRelativeType": "bv",
-//         "beforeMarriageBloodTest": 0
-//     },
-//     {
-//         "id": "10",
-//         "babyMotherName": "sdsd",
-//         "mobileNumber": "01934231256",
-//         "deliveryProcess": 0,
-//         "bloodCollectAge": -1,
-//         "babyType": 0,
-//         "address": "mirpur",
-//         "hospitalName": 1,
-//         "sampleCollectDate": "1696982400",
-//         "nameOfInterviewer": 5,
-//         "testResult": 1,
-//         "babyDob": "1696118400",
-//         "babyMotherAge": "23",
-//         "babyName": "abul",
-//         "motherAgeOfMarriage": 21,
-//         "babyFatherName": "dfsaf",
-//         "babyFatherAge": 25,
-//         "relationWithBaby": "moyhh",
-//         "babyMotherEduQualification": 6,
-//         "babyFatherEduQualification": 6,
-//         "babyMotherOccupation": 1,
-//         "babyFatherOccupation": 1,
-//         "familyMonthlyExpenses": 33455,
-//         "totalFamilyMember": 2,
-//         "previousAnyChildren": 1,
-//         "previousChildrenAnemia": -1,
-//         "ageDifference": -1,
-//         "antenatalHealthcare": 0,
-//         "ttVaccine": 0,
-//         "knowAboutThalassemia": 0,
-//         "babyMotherAnemia": 2,
-//         "babyFatherAnemia": 2,
-//         "whichPerson": "",
-//         "parentsAreRelative": 0,
-//         "parentsRelativeType": "bv",
-//         "beforeMarriageBloodTest": 0
-//     },
-//     {
-//         "id": "9",
-//         "babyMotherName": "sdsd",
-//         "mobileNumber": "01934231256",
-//         "deliveryProcess": 0,
-//         "bloodCollectAge": -1,
-//         "babyType": 0,
-//         "address": "mirpur",
-//         "hospitalName": 1,
-//         "sampleCollectDate": "1696982400",
-//         "nameOfInterviewer": 5,
-//         "testResult": 1,
-//         "babyDob": "1696118400",
-//         "babyMotherAge": "23",
-//         "babyName": "abul",
-//         "motherAgeOfMarriage": 21,
-//         "babyFatherName": "dfsaf",
-//         "babyFatherAge": 25,
-//         "relationWithBaby": "moyhh",
-//         "babyMotherEduQualification": 6,
-//         "babyFatherEduQualification": 6,
-//         "babyMotherOccupation": 1,
-//         "babyFatherOccupation": 1,
-//         "familyMonthlyExpenses": 33455,
-//         "totalFamilyMember": 2,
-//         "previousAnyChildren": 1,
-//         "previousChildrenAnemia": -1,
-//         "ageDifference": -1,
-//         "antenatalHealthcare": 0,
-//         "ttVaccine": 0,
-//         "knowAboutThalassemia": 0,
-//         "babyMotherAnemia": 2,
-//         "babyFatherAnemia": 2,
-//         "whichPerson": "",
-//         "parentsAreRelative": 0,
-//         "parentsRelativeType": "bv",
-//         "beforeMarriageBloodTest": 0
-//     },
-//     {
-//         "id": "8",
-//         "babyMotherName": "sdsd",
-//         "mobileNumber": "01934231256",
-//         "deliveryProcess": 0,
-//         "bloodCollectAge": -1,
-//         "babyType": 0,
-//         "address": "mirpur",
-//         "hospitalName": 1,
-//         "sampleCollectDate": "1696982400",
-//         "nameOfInterviewer": 5,
-//         "testResult": 1,
-//         "babyDob": "1696118400",
-//         "babyMotherAge": "23",
-//         "babyName": "abul",
-//         "motherAgeOfMarriage": 21,
-//         "babyFatherName": "dfsaf",
-//         "babyFatherAge": 25,
-//         "relationWithBaby": "moyhh",
-//         "babyMotherEduQualification": 6,
-//         "babyFatherEduQualification": 6,
-//         "babyMotherOccupation": 1,
-//         "babyFatherOccupation": 1,
-//         "familyMonthlyExpenses": 33455,
-//         "totalFamilyMember": 2,
-//         "previousAnyChildren": 1,
-//         "previousChildrenAnemia": -1,
-//         "ageDifference": -1,
-//         "antenatalHealthcare": 0,
-//         "ttVaccine": 0,
-//         "knowAboutThalassemia": 0,
-//         "babyMotherAnemia": 2,
-//         "babyFatherAnemia": 2,
-//         "whichPerson": "",
-//         "parentsAreRelative": 0,
-//         "parentsRelativeType": "bv",
-//         "beforeMarriageBloodTest": 0
-//     },
-//     {
-//         "id": "7",
-//         "babyMotherName": "sdsd",
-//         "mobileNumber": "01934231256",
-//         "deliveryProcess": 0,
-//         "bloodCollectAge": -1,
-//         "babyType": 0,
-//         "address": "mirpur",
-//         "hospitalName": 1,
-//         "sampleCollectDate": "1696982400",
-//         "nameOfInterviewer": 5,
-//         "testResult": 1,
-//         "babyDob": "1696118400",
-//         "babyMotherAge": "23",
-//         "babyName": "abul",
-//         "motherAgeOfMarriage": 21,
-//         "babyFatherName": "dfsaf",
-//         "babyFatherAge": 25,
-//         "relationWithBaby": "moyhh",
-//         "babyMotherEduQualification": 6,
-//         "babyFatherEduQualification": 6,
-//         "babyMotherOccupation": 1,
-//         "babyFatherOccupation": 1,
-//         "familyMonthlyExpenses": 33455,
-//         "totalFamilyMember": 2,
-//         "previousAnyChildren": 1,
-//         "previousChildrenAnemia": -1,
-//         "ageDifference": -1,
-//         "antenatalHealthcare": 0,
-//         "ttVaccine": 0,
-//         "knowAboutThalassemia": 0,
-//         "babyMotherAnemia": 2,
-//         "babyFatherAnemia": 2,
-//         "whichPerson": "",
-//         "parentsAreRelative": 0,
-//         "parentsRelativeType": "bv",
-//         "beforeMarriageBloodTest": 0
-//     },
-//     {
-//         "id": "6",
-//         "babyMotherName": "sdsd",
-//         "mobileNumber": "01934231256",
-//         "deliveryProcess": 0,
-//         "bloodCollectAge": -1,
-//         "babyType": 0,
-//         "address": "mirpur",
-//         "hospitalName": 1,
-//         "sampleCollectDate": "1696982400",
-//         "nameOfInterviewer": 5,
-//         "testResult": 1,
-//         "babyDob": "1696118400",
-//         "babyMotherAge": "23",
-//         "babyName": "abul",
-//         "motherAgeOfMarriage": 21,
-//         "babyFatherName": "dfsaf",
-//         "babyFatherAge": 25,
-//         "relationWithBaby": "moyhh",
-//         "babyMotherEduQualification": 6,
-//         "babyFatherEduQualification": 6,
-//         "babyMotherOccupation": 1,
-//         "babyFatherOccupation": 1,
-//         "familyMonthlyExpenses": 33455,
-//         "totalFamilyMember": 2,
-//         "previousAnyChildren": 1,
-//         "previousChildrenAnemia": -1,
-//         "ageDifference": -1,
-//         "antenatalHealthcare": 0,
-//         "ttVaccine": 0,
-//         "knowAboutThalassemia": 0,
-//         "babyMotherAnemia": 2,
-//         "babyFatherAnemia": 2,
-//         "whichPerson": "",
-//         "parentsAreRelative": 0,
-//         "parentsRelativeType": "bv",
-//         "beforeMarriageBloodTest": 0
-//     },
-//     {
-//         "id": "5",
-//         "babyMotherName": "sdsd",
-//         "mobileNumber": "01934231256",
-//         "deliveryProcess": 0,
-//         "bloodCollectAge": -1,
-//         "babyType": 0,
-//         "address": "mirpur",
-//         "hospitalName": 1,
-//         "sampleCollectDate": "1696982400",
-//         "nameOfInterviewer": 5,
-//         "testResult": 1,
-//         "babyDob": "1696118400",
-//         "babyMotherAge": "23",
-//         "babyName": "abul",
-//         "motherAgeOfMarriage": 21,
-//         "babyFatherName": "dfsaf",
-//         "babyFatherAge": 25,
-//         "relationWithBaby": "moyhh",
-//         "babyMotherEduQualification": 6,
-//         "babyFatherEduQualification": 6,
-//         "babyMotherOccupation": 1,
-//         "babyFatherOccupation": 1,
-//         "familyMonthlyExpenses": 33455,
-//         "totalFamilyMember": 2,
-//         "previousAnyChildren": 1,
-//         "previousChildrenAnemia": -1,
-//         "ageDifference": -1,
-//         "antenatalHealthcare": 0,
-//         "ttVaccine": 0,
-//         "knowAboutThalassemia": 0,
-//         "babyMotherAnemia": 2,
-//         "babyFatherAnemia": 2,
-//         "whichPerson": "",
-//         "parentsAreRelative": 0,
-//         "parentsRelativeType": "bv",
-//         "beforeMarriageBloodTest": 0
-//     },
-//     {
-//         "id": "4",
-//         "babyMotherName": "sdsd",
-//         "mobileNumber": "01934231256",
-//         "deliveryProcess": 0,
-//         "bloodCollectAge": -1,
-//         "babyType": 0,
-//         "address": "mirpur",
-//         "hospitalName": 1,
-//         "sampleCollectDate": "1696982400",
-//         "nameOfInterviewer": 5,
-//         "testResult": 1,
-//         "babyDob": "1696118400",
-//         "babyMotherAge": "23",
-//         "babyName": "abul",
-//         "motherAgeOfMarriage": 21,
-//         "babyFatherName": "dfsaf",
-//         "babyFatherAge": 25,
-//         "relationWithBaby": "moyhh",
-//         "babyMotherEduQualification": 6,
-//         "babyFatherEduQualification": 6,
-//         "babyMotherOccupation": 1,
-//         "babyFatherOccupation": 1,
-//         "familyMonthlyExpenses": 33455,
-//         "totalFamilyMember": 2,
-//         "previousAnyChildren": 1,
-//         "previousChildrenAnemia": -1,
-//         "ageDifference": -1,
-//         "antenatalHealthcare": 0,
-//         "ttVaccine": 0,
-//         "knowAboutThalassemia": 0,
-//         "babyMotherAnemia": 2,
-//         "babyFatherAnemia": 2,
-//         "whichPerson": "",
-//         "parentsAreRelative": 0,
-//         "parentsRelativeType": "bv",
-//         "beforeMarriageBloodTest": 0
-//     },
-//     {
-//         "id": "3",
-//         "babyMotherName": "sdsd",
-//         "mobileNumber": "01934231256",
-//         "deliveryProcess": 0,
-//         "bloodCollectAge": -1,
-//         "babyType": 0,
-//         "address": "mirpur",
-//         "hospitalName": 1,
-//         "sampleCollectDate": "1696982400",
-//         "nameOfInterviewer": 5,
-//         "testResult": 1,
-//         "babyDob": "1696118400",
-//         "babyMotherAge": "23",
-//         "babyName": "abul",
-//         "motherAgeOfMarriage": 21,
-//         "babyFatherName": "dfsaf",
-//         "babyFatherAge": 25,
-//         "relationWithBaby": "moyhh",
-//         "babyMotherEduQualification": 6,
-//         "babyFatherEduQualification": 6,
-//         "babyMotherOccupation": 1,
-//         "babyFatherOccupation": 1,
-//         "familyMonthlyExpenses": 33455,
-//         "totalFamilyMember": 2,
-//         "previousAnyChildren": 1,
-//         "previousChildrenAnemia": -1,
-//         "ageDifference": -1,
-//         "antenatalHealthcare": 0,
-//         "ttVaccine": 0,
-//         "knowAboutThalassemia": 0,
-//         "babyMotherAnemia": 2,
-//         "babyFatherAnemia": 2,
-//         "whichPerson": "",
-//         "parentsAreRelative": 0,
-//         "parentsRelativeType": "bv",
-//         "beforeMarriageBloodTest": 0
-//     },
-//     {
-//         "id": "2",
-//         "babyMotherName": "sdsd",
-//         "mobileNumber": "01934231256",
-//         "deliveryProcess": 0,
-//         "bloodCollectAge": -1,
-//         "babyType": 0,
-//         "address": "mirpur",
-//         "hospitalName": 1,
-//         "sampleCollectDate": "1696982400",
-//         "nameOfInterviewer": 5,
-//         "testResult": 1,
-//         "babyDob": "1696118400",
-//         "babyMotherAge": "23",
-//         "babyName": "abul",
-//         "motherAgeOfMarriage": 21,
-//         "babyFatherName": "dfsaf",
-//         "babyFatherAge": 25,
-//         "relationWithBaby": "moyhh",
-//         "babyMotherEduQualification": 6,
-//         "babyFatherEduQualification": 6,
-//         "babyMotherOccupation": 1,
-//         "babyFatherOccupation": 1,
-//         "familyMonthlyExpenses": 33455,
-//         "totalFamilyMember": 2,
-//         "previousAnyChildren": 1,
-//         "previousChildrenAnemia": -1,
-//         "ageDifference": -1,
-//         "antenatalHealthcare": 0,
-//         "ttVaccine": 0,
-//         "knowAboutThalassemia": 0,
-//         "babyMotherAnemia": 2,
-//         "babyFatherAnemia": 2,
-//         "whichPerson": "",
-//         "parentsAreRelative": 0,
-//         "parentsRelativeType": "bv",
-//         "beforeMarriageBloodTest": 0
-//     },
-//     {
-//         "id": "1",
-//         "babyMotherName": "sdsd",
-//         "mobileNumber": "01934231256",
-//         "deliveryProcess": 0,
-//         "bloodCollectAge": -1,
-//         "babyType": 0,
-//         "address": "mirpur",
-//         "hospitalName": 1,
-//         "sampleCollectDate": "1696982400",
-//         "nameOfInterviewer": 5,
-//         "testResult": 1,
-//         "babyDob": "1696118400",
-//         "babyMotherAge": "23",
-//         "babyName": "abul",
-//         "motherAgeOfMarriage": 21,
-//         "babyFatherName": "dfsaf",
-//         "babyFatherAge": 25,
-//         "relationWithBaby": "moyhh",
-//         "babyMotherEduQualification": 6,
-//         "babyFatherEduQualification": 6,
-//         "babyMotherOccupation": 1,
-//         "babyFatherOccupation": 1,
-//         "familyMonthlyExpenses": 33455,
-//         "totalFamilyMember": 2,
-//         "previousAnyChildren": 1,
-//         "previousChildrenAnemia": -1,
-//         "ageDifference": -1,
-//         "antenatalHealthcare": 0,
-//         "ttVaccine": 0,
-//         "knowAboutThalassemia": 0,
-//         "babyMotherAnemia": 2,
-//         "babyFatherAnemia": 2,
-//         "whichPerson": "",
-//         "parentsAreRelative": 0,
-//         "parentsRelativeType": "bv",
-//         "beforeMarriageBloodTest": 0
-//     }
-// ]
+  const inputSearch = (input) => {
+    const list = Store.getLocalStorageData('babysList')
+    if(input && list){
+      let newList = list.filter((item) => {
+        if(item?.id == input || item?.mobileNumber.indexOf(input) > -1) return item
+      })
+      setBabysList(newList)
+    }else{
+      setBabysList(list ? list: [] )
+    }
+  }
+  const selectSearch = (itemId) =>{
+    const list = Store.getLocalStorageData('summaries')
+    if( itemId ){
+      let count = 0
+      let newList = list.filter((ele) => {
+        console.log("item ", ele)
+        if(ele?.hospitalId == itemId){
+          count += parseInt(ele?.count)
+          return ele
+        }
+      })
+      setSumarryList(newList)
+      setTotalCasse(count)
+    }else{
+      setSumarryList(list ? list: [] )
+      totalCount()
+    }
+  }
 
+  const totalCount = () =>{
+    let count = 0
+    Store.getLocalStorageData('summaries').map(ele => count += parseInt(ele?.count))
+    setTotalCasse(count)
+  }
+
+
+  console.log("sumarryList ", sumarryList)
   console.log("babysList ", babysList)
 
   return (
     <div className='col m-3'>
-      <div className="row mt-3 mb-5">
+      <label className="addform-label mb-2">Summary</label>
+      <div className='mt-2 mb-2'>
+        <div className="row mt-3 mb-1">
           <div className="col-sm-6">
-            <div className="d-flex form-group ">
-                {/* <label className="addform-label">Search</label>
-                <input 
-                  className="form-control" required 
-                  type='text'
-                  placeholder='Search by name/ id/ phone number'
-                  onChange={(event) => console.log("fff ", event.target.value)}
-                /> */}
+          <select 
+            className="form-control"
+            onChange={(event) => {
+              selectSearch(event.target.value)
+                // UpdateForm({hospitalId: parseInt(event.target.value), nameOfInterviewer: -1})
+            }}
+          >
+              <option value=''>Select Hospital Name</option>
+          {
+              hospitalList?.map( (item) => 
+                  <option value={item?.id}>{item?.name}</option>
+              )
+          }
+          </select>
+          </div>
+          <div className="col-sm-6">
+            <label className="addform-label">Total Case: {totalCase}</label>
+          </div>
+        </div>
+          
+        <SummaryTable rows={sumarryList == null?[]: sumarryList }/>
+      </div>
+      <label className="addform-label mt-5 mb-1">Baby Info</label>
+        {
+          babysList?
+          <div className="row mt-3 mb-1">
+            <div className="col-sm-6">
+              <div className="form-group ">
+                  <input 
+                    className="form-control" required 
+                    type='text'
+                    placeholder='Search by ID or Mobile Number'
+                    onChange={(event) => inputSearch(event.target.value)}
+                  />
+              </div>
             </div>
           </div>
-          
-      </div>
-      {/* <DashboardTable dataList={babysList}/> */}
-      <label className="addform-label mb-2">Baby Info</label>
+          : null
+        }
+        
       <BabyInfoTable rows={babysList == null?[]: babysList }/>
       <label className="addform-label mt-5">Hospital List</label>
       <HospitalListTable rows={hospitalList == null? []: hospitalList}/>

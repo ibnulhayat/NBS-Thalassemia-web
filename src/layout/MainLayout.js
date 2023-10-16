@@ -6,6 +6,7 @@ import AddNewNurs from './AddNewNurs';
 import Dashboard from './Dashboard';
 import * as Service from './../AllService'
 import { useNavigate } from 'react-router-dom';
+import EditSMS from './EditSMS';
 
 export default function MainLayout() {
   const navigate = useNavigate()
@@ -57,6 +58,11 @@ export default function MainLayout() {
               onClick={()=> ClickOnTab('AddNurs')}>
               <span>Add New Nurs Info</span>
             </div>
+            
+            <div className={`left-menu-item ${selectTab === 'editsms'? 'active': ''}`}
+              onClick={()=> ClickOnTab('editsms')}>
+              <span>Edit SMS</span>
+            </div>
 
             <div className={`left-menu-item`}
               onClick={()=> ClickLogout()}>
@@ -81,6 +87,8 @@ export default function MainLayout() {
                   <AddNewHospital />
                 : selectTab === 'AddNurs'?
                   <AddNewNurs />
+                : selectTab === 'editsms'?
+                  <EditSMS />
                 :null 
               }
               
