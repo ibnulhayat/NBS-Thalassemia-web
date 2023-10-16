@@ -6,52 +6,13 @@ import * as Service from './../AllService'
 
 export default function AddBabyForm(){
 
-    // const model = {
-    //     babyMotherName: '',
-    //     mobileNumber: '',
-    //     deliveryProcess: -1, // int
-    //     bloodCollectAge: -1, // int
-    //     babyType: -1, // int
-    //     address: '',
-    //     hospitalId: '', // int
-    //     sampleCollectDate: '',
-    //     bloodCollectDate: '',
-    //     nameOfInterviewer: -1, // int
-    //     testResult: 'TRT_UNKNOWN', // int
-    //     babyDob: '',
-    //     babyDOB: '',
-    //     babyMotherAge: '',
-    //     babyName: '',
-    //     motherAgeOfMarriage: -1, // int
-    //     babyFatherName: '',
-    //     babyFatherAge: -1, // int
-    //     relationWithBaby: '',
-    //     babyMotherEduQualification: -1, // int
-    //     babyFatherEduQualification: -1, // int
-    //     babyMotherOccupation: -1, // int
-    //     babyFatherOccupation: -1, // int
-    //     familyMonthlyExpenses: -1, // int
-    //     totalFamilyMember: -1, // int
-    //     previousAnyChildren: -1, // int
-    //     previousChildrenAnemia: -1, // int
-    //     ageDifference: -1, // int
-    //     antenatalHealthcare: -1, // int
-    //     ttVaccine: -1, // int
-    //     knowAboutThalassemia: -1, // int
-    //     babyMotherAnemia: -1, // int
-    //     babyFatherAnemia: -1, // int
-    //     whichPerson: '',
-    //     parentsAreRelative: -1, // int
-    //     parentsRelativeType: '',
-    //     beforeMarriageBloodTest: -1 // int
-    // }
     const model = {
-        babyMotherName: 'Abc',
-        mobileNumber: '01512321423',
+        babyMotherName: '',
+        mobileNumber: '',
         deliveryProcess: -1, // int
         bloodCollectAge: -1, // int
-        babyType: 1, // int
-        address: 'Mirpur',
+        babyType: -1, // int
+        address: '',
         hospitalId: '', // int
         sampleCollectDate: '',
         bloodCollectDate: '',
@@ -59,24 +20,24 @@ export default function AddBabyForm(){
         testResult: 'TRT_UNKNOWN', // int
         babyDob: '',
         babyDOB: '',
-        babyMotherAge: 24,
-        babyName: 'hkhkk',
-        motherAgeOfMarriage: 23, // int
-        babyFatherName: 'lfhjhdfj',
-        babyFatherAge: 26, // int
-        relationWithBaby: 'mother',
-        babyMotherEduQualification: 2, // int
-        babyFatherEduQualification: 4, // int
-        babyMotherOccupation: 4, // int
-        babyFatherOccupation: 5, // int
-        familyMonthlyExpenses: 4, // int
-        totalFamilyMember: 3, // int
+        babyMotherAge: '',
+        babyName: '',
+        motherAgeOfMarriage: -1, // int
+        babyFatherName: '',
+        babyFatherAge: -1, // int
+        relationWithBaby: '',
+        babyMotherEduQualification: -1, // int
+        babyFatherEduQualification: -1, // int
+        babyMotherOccupation: -1, // int
+        babyFatherOccupation: -1, // int
+        familyMonthlyExpenses: -1, // int
+        totalFamilyMember: -1, // int
         previousAnyChildren: -1, // int
         previousChildrenAnemia: -1, // int
         ageDifference: -1, // int
         antenatalHealthcare: -1, // int
-        ttVaccine: 1, // int
-        knowAboutThalassemia: 1, // int
+        ttVaccine: -1, // int
+        knowAboutThalassemia: -1, // int
         babyMotherAnemia: -1, // int
         babyFatherAnemia: -1, // int
         whichPerson: '',
@@ -84,6 +45,45 @@ export default function AddBabyForm(){
         parentsRelativeType: '',
         beforeMarriageBloodTest: -1 // int
     }
+    // const model = {
+    //     babyMotherName: 'Abc',
+    //     mobileNumber: '01512321423',
+    //     deliveryProcess: -1, // int
+    //     bloodCollectAge: -1, // int
+    //     babyType: 1, // int
+    //     address: 'Mirpur',
+    //     hospitalId: '', // int
+    //     sampleCollectDate: '',
+    //     bloodCollectDate: '',
+    //     nameOfInterviewer: -1, // int
+    //     testResult: 'TRT_UNKNOWN', // int
+    //     babyDob: '',
+    //     babyDOB: '',
+    //     babyMotherAge: 24,
+    //     babyName: 'hkhkk',
+    //     motherAgeOfMarriage: 23, // int
+    //     babyFatherName: 'lfhjhdfj',
+    //     babyFatherAge: 26, // int
+    //     relationWithBaby: 'mother',
+    //     babyMotherEduQualification: 2, // int
+    //     babyFatherEduQualification: 4, // int
+    //     babyMotherOccupation: 4, // int
+    //     babyFatherOccupation: 5, // int
+    //     familyMonthlyExpenses: 4, // int
+    //     totalFamilyMember: 3, // int
+    //     previousAnyChildren: -1, // int
+    //     previousChildrenAnemia: -1, // int
+    //     ageDifference: -1, // int
+    //     antenatalHealthcare: -1, // int
+    //     ttVaccine: 1, // int
+    //     knowAboutThalassemia: 1, // int
+    //     babyMotherAnemia: -1, // int
+    //     babyFatherAnemia: -1, // int
+    //     whichPerson: '',
+    //     parentsAreRelative: -1, // int
+    //     parentsRelativeType: '',
+    //     beforeMarriageBloodTest: -1 // int
+    // }
 
     const [dataForm, setDataForm] = useState(model)
     const [disable, setDisable] = useState(false)
