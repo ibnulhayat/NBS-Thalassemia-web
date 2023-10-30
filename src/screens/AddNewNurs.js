@@ -1,6 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState } from 'react';
 import { Button } from 'react-bootstrap';
+import InnerLayer from '../global/InnerLayer';
 import * as Service from './../AllService'
 import * as Store from './../Storage'
 
@@ -26,6 +27,7 @@ export default function AddNewNurs(){
     }
   
     return(
+        <InnerLayer>
         <div className="col m-3">
             <form id="addnewhospital" onSubmit={formSubmit} >
                 {/* First Row Start*/}
@@ -80,5 +82,6 @@ export default function AddNewNurs(){
                 </div>
             </form>
         </div>
+        </InnerLayer>
     )
 }

@@ -1,30 +1,19 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useEffect, useState } from 'react';
-import AddBabyForm from './AddBabyForm';
-import AddNewHospital from './AddNewHosital';
-import AddNewNurs from './AddNewNurs';
-import Dashboard from './Dashboard';
-import * as Service from './../AllService'
-import { useNavigate } from 'react-router-dom';
-import EditSMS from './EditSMS';
+import * as Service from '../AllService'
+import { useLocation, useNavigate } from 'react-router-dom';
 
-export default function MainLayout() {
+export default function InnerLayer({children}) {
   const navigate = useNavigate()
-  const [selectTab, setSelectTab] = useState("Dashboard")
-  const ClickOnTab = (type) => {
-    setSelectTab(type)
-    console.log('eeeee', type)
-  }
+  const [selectTab, setSelectTab] = useState("")
+  const location = useLocation();
+ 
+  console.log("location ",location.pathname)
+
+  useEffect(()=>{
+    setSelectTab(location.pathname)
+  },[])
   
-  // useEffect(()=>{
-  //   getCall()
-  // },[])
-  
-  // const getCall = async() =>{
-  //   await Service.getHospitalList()
-  //   await Service.getNursList()
-  //   await Service.getBabyList()
-  // }
   const ClickLogout = () =>{
     Service.logOut()
     navigate('/')
@@ -38,29 +27,32 @@ export default function MainLayout() {
         <div id="left-menu">
           <div className='m-2'>
             <div 
-              className={`left-menu-item ${selectTab === 'Dashboard'? 'active': ''}`}
-              onClick={()=> ClickOnTab('Dashboard')}
+              className={`left-menu-item ${selectTab === '/dashboard'? 'active': ''}`}
+              onClick={()=> navigate('/dashboard')}
             >
               <span >Dashboard</span>
+              {/* <Link to={"/dashboard"} /> */}
             </div>
-            <div className={`left-menu-item ${selectTab === 'Addbaby'? 'active': ''}`}
-              onClick={()=> ClickOnTab('Addbaby')}
+            <div className={`left-menu-item ${selectTab === '/baby-info'? 'active': ''}`}
+              onClick={()=> navigate('/baby-info')}
             >
-              <span>Add New Baby Info</span>
+              <span>Baby Info</span>
+              {/* <Link to={"/Addbaby"} /> */}
             </div>
             
-            <div className={`left-menu-item ${selectTab === 'AddHospital'? 'active': ''}`}
-              onClick={()=> ClickOnTab('AddHospital')}>
+            <div className={`left-menu-item ${selectTab === '/addhospital'? 'active': ''}`}
+              onClick={()=> navigate('/addhospital')}>
               <span>Add New Hospital</span>
+              {/* <Link to={"/AddHospital"} /> */}
             </div>
             
-            <div className={`left-menu-item ${selectTab === 'AddNurs'? 'active': ''}`}
-              onClick={()=> ClickOnTab('AddNurs')}>
+            <div className={`left-menu-item ${selectTab === '/addnurs'? 'active': ''}`}
+              onClick={()=> navigate('/addnurs')}>
               <span>Add New Nurs Info</span>
             </div>
             
-            <div className={`left-menu-item ${selectTab === 'editsms'? 'active': ''}`}
-              onClick={()=> ClickOnTab('editsms')}>
+            <div className={`left-menu-item ${selectTab === '/editsms'? 'active': ''}`}
+              onClick={()=> navigate('/editsms')}>
               <span>Edit SMS</span>
             </div>
 
@@ -78,7 +70,8 @@ export default function MainLayout() {
           </div>
           <div id="page-container">
             <div className="card">
-              {
+              {children}
+              {/* {
                 selectTab === 'Dashboard'?
                   <Dashboard />
                 : selectTab === 'Addbaby'?
@@ -90,7 +83,7 @@ export default function MainLayout() {
                 : selectTab === 'editsms'?
                   <EditSMS />
                 :null 
-              }
+              } */}
               
             </div>
           </div>

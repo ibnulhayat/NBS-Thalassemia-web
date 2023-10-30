@@ -363,3 +363,21 @@ a:hover {
 .addform-label {
   font-weight: 600;
 }
+
+/* modal and image style*/
+.modal-main{
+  border-radius: 5px;
+  height: fit-content;
+  width: auto;
+  background-color: #1e213a;
+  display: flex;
+  justify-content: center;
+}
+.image-style{
+  border-radius: 5px;
+  height: 100vh;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: auto;
+}

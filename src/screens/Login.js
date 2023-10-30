@@ -8,15 +8,15 @@ import * as Store from './../Storage'
 
 export default function Login() {
     const navigate = useNavigate()
-    const [email, setEmail] = useState(""); // shahariar.dmc@gmail.com
-    const [password, setPassword] = useState(""); //104403
+    const [email, setEmail] = useState("shahariar.dmc@gmail.com"); // shahariar.dmc@gmail.com
+    const [password, setPassword] = useState("104403"); //104403
     const [error, setError] = useState("");
     const [disable, setDisable] = useState(false)
 
     useEffect(()=> {
         const loginData = Store.getLocalStorageData('loginData')
         if(loginData?.accessToken) navigate('/dashboard')
-    })
+    },[])
 
     const handleValidation = (event) => {
         let formIsValid = true;

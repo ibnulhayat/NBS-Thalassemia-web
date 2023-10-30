@@ -1,4 +1,5 @@
 import axios from "axios"
+import { Navigate } from "react-router-dom"
 import * as Storage from './Storage.js'
 
 const BASE_URL = "http://api-nbs-thalassemia.exhortbd.com/"
@@ -27,11 +28,12 @@ async function POSTCall(urlPart, formData, header = {}){
     }
 }
 
-async function GETCall(urlPart, header = {}){
+async function GETCall(urlPart, header = {}, params = {}){
     const variables = {
         method: 'get',
         url: BASE_URL+urlPart,
-        headers: header
+        headers: header,
+        params: params
     }
     console.log('variables', variables)
     try {
@@ -46,7 +48,7 @@ async function GETCall(urlPart, header = {}){
         
     } catch (error) {
         console.log("GETRequest tryError",error)
-        return false
+        return error?.response?.data
     }
 }
 
@@ -140,8 +142,52 @@ export async function getDashBoardData(){
 
        return response?.data?.summaries
     }else{
+        return response
+    }
+}
+
+export async function PostRequestBabyInfo(data, uploadStatus, imageFile){
+    const auth = Storage.getLocalStorageData('loginData')
+    const header = { 'Authorization': auth?.accessToken}
+
+    const dataForm = DataFormConvert(data, uploadStatus)
+   
+    const response = await POSTCall('api/v1/vault/baby-info', dataForm, header)
+
+    if(response?.code === 0){
+        console.log("PostRequest ", response)
+        const babyId = data?.id? data?.id : response?.data?.id
+        dataForm.id = babyId
+        dataForm.testResult = data?.testResult == "TRT_UNKNOWN"? 0 :data?.testResult == "TRT_POSITIVE"? 1 : 2
+        updateLocalData('babysList', dataForm)
+        if(imageFile){
+            const image64 = await getBase64(imageFile)
+            const imageExt = imageFile?.type?.split('/')[1]
+            console.log("img ext ", imageExt, ' ===> ',image64)
+            const variables = {
+                uploadType: "UT_PATIENT",
+                base64: image64,
+                extension: imageExt,
+                uploaderId: babyId
+            }
+            const imageRes = await POSTCall('api/v1/vault/image', variables, header)
+            console.log("imageres", imageRes)
+        }
+       return true
+    }else{
         return false
     }
+}
+
+async function getBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader()
+      reader.readAsDataURL(file)
+      reader.onload = () => {
+        resolve(reader.result)
+      }
+      reader.onerror = reject
+    })
 }
 
 export async function sendSMS(dataForm){
@@ -183,4 +229,90 @@ export function logOut(){
     Storage.clearLocalStorage('nursesList')
     Storage.clearLocalStorage('babysList')
     Storage.clearLocalStorage('summaries')
+}
+
+export function DataFormConvert(dataForm, uploadStatus){
+
+    let newData = JSON.parse(JSON.stringify(dataForm))
+    newData.babyType = checkValue(dataForm?.babyType)
+    newData.deliveryProcess = checkValue(dataForm?.deliveryProcess)
+    newData.babyDob = checkValue(dataForm?.babyDob)
+    newData.sampleCollectDate = checkValue(dataForm?.sampleCollectDate)
+    newData.bloodCollectAge = checkValue(dataForm?.bloodCollectAge)
+    newData.hospitalId = checkValue(dataForm?.hospitalId)
+    newData.nameOfInterviewer = checkValue(dataForm?.nameOfInterviewer)
+    newData.babyMotherAge = checkValue(dataForm?.babyMotherAge)
+    newData.motherAgeOfMarriage = checkValue(dataForm?.motherAgeOfMarriage)
+    newData.babyFatherAge = checkValue(dataForm?.babyFatherAge)
+    newData.babyMotherEduQualification = checkValue(dataForm?.babyMotherEduQualification)
+    newData.babyFatherEduQualification = checkValue(dataForm?.babyFatherEduQualification)
+    newData.babyMotherOccupation = checkValue(dataForm?.babyMotherOccupation)
+    newData.babyFatherOccupation = checkValue(dataForm?.babyFatherOccupation)
+    newData.familyMonthlyExpenses = checkValue(dataForm?.familyMonthlyExpenses)
+    newData.totalFamilyMember = checkValue(dataForm?.totalFamilyMember)
+    newData.previousAnyChildren = checkValue(dataForm?.previousAnyChildren)
+    newData.previousChildrenAnemia = checkValue(dataForm?.previousChildrenAnemia)
+    newData.ageDifference = checkValue(dataForm?.ageDifference)
+    newData.antenatalHealthcare = checkValue(dataForm?.antenatalHealthcare)
+    newData.ttVaccine = checkValue(dataForm?.ttVaccine)
+    newData.knowAboutThalassemia = checkValue(dataForm?.knowAboutThalassemia)
+    newData.babyMotherAnemia = checkValue(dataForm?.babyMotherAnemia)
+    newData.babyFatherAnemia = checkValue(dataForm?.babyFatherAnemia)
+    newData.parentsAreRelative = checkValue(dataForm?.parentsAreRelative)
+    newData.beforeMarriageBloodTest = checkValue(dataForm?.beforeMarriageBloodTest)
+    newData.UploadStatus = uploadStatus
+    console.log("DataFormConvert ", newData)
+
+    return newData
+}
+
+function checkValue(value){
+    try {
+        const val = parseInt(value)
+        if(isNaN(val)) return -111
+        else return parseInt(value)
+    } catch (error) {
+        console.log("checkValue error", error)
+        return -111
+    }
+}
+
+function updateLocalData(storeName, data){
+    const list = Storage.getLocalStorageData(storeName)
+    let newList = JSON.parse(JSON.stringify(list))
+    if(data?.id){
+        const index = list.findIndex(ele => ele?.id == data?.id)
+        console.log("updateLocalData ",index, data)
+        if(index > 0){
+            newList[index] = data
+        }else{
+            newList.unshift(data)
+        }
+        Storage.setInLocalStorage(storeName, newList)
+    }
+
+}
+
+export async function Report(){
+    const auth = Storage.getLocalStorageData('loginData')
+    const header = { 'Authorization': auth?.accessToken}
+
+    const response = await GETCall("api/v1/vault/report", header)
+    if(response?.code === 0){
+       return response?.data
+    }else{
+        return false
+    }
+}
+
+export async function GetImage(data) {
+    const auth = Storage.getLocalStorageData('loginData')
+    const header = { 'Authorization': auth?.accessToken}
+    
+    const response = await GETCall("api/v1/vault/images", header, data)
+    if(response?.code === 0){
+        return response?.data
+     }else{
+         return false
+     }
 }

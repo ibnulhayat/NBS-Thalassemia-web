@@ -16,6 +16,9 @@ import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import LastPageIcon from '@mui/icons-material/LastPage';
 import TableHead from '@mui/material/TableHead';
+import { Button } from 'react-bootstrap';
+import EditIcon from '@mui/icons-material/Edit';
+import Image from '@mui/icons-material/Image';
 
 function TablePaginationActions(props) {
   const theme = useTheme();
@@ -79,9 +82,9 @@ TablePaginationActions.propTypes = {
 };
 
 
-export default function BabyInfoTable({rows}) {
+export default function BabyInfoTable({rows, callBack}) {
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
@@ -101,7 +104,8 @@ export default function BabyInfoTable({rows}) {
       <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
         <TableHead>
           <TableRow key={'0'}>
-              <TableCell component="th" scope="row" style={{fontWeight: 600}}>ID</TableCell>
+              <TableCell component="th" scope="row" style={{fontWeight: 600}}>#</TableCell>
+              <TableCell style={{fontWeight: 600}}>ID</TableCell>
               <TableCell style={{fontWeight: 600}}>Baby Name</TableCell>
               <TableCell style={{fontWeight: 600}}>Mobile Number</TableCell>
               <TableCell style={{fontWeight: 600}}>Test Result</TableCell>
@@ -116,13 +120,18 @@ export default function BabyInfoTable({rows}) {
             : rows
           ).map((row) => (
             <TableRow key={row?.id}>
-              <TableCell component="th" scope="row"> {row.id} </TableCell>
+              <TableCell component="th" scope="row"> {
+                <EditIcon onClick={()=>callBack('edit',row.id)} style={{cursor: 'pointer', color: '#0e9aee'}}/>}
+                {<Image onClick={()=>callBack('image',row.id)} style={{cursor: 'pointer', color: '#0e9aee', marginLeft: 5}}/>}
+              </TableCell>
+              <TableCell > {row.CustomId} </TableCell>
               <TableCell > {row.babyName} </TableCell>
               <TableCell > {row.mobileNumber} </TableCell>
-              <TableCell > {row?.testResult === 0? 'Unknown':row?.testResult === 1? 'Positive': 'Negative'} </TableCell>
-              <TableCell > {row?.testResult === 0? 'Normal': 'Surgical'} </TableCell>
-              <TableCell > {row?.babyType === 0? 'Boy': 'Girl'} </TableCell>
-              <TableCell > {row?.bloodCollectAge} </TableCell>
+              <TableCell > {setValue(row?.testResult) === 0? 'Unknown':row?.testResult === 1? 'Positive': 'Negative'}
+              </TableCell>
+              <TableCell > {setValue(row?.deliveryProcess) === ''? "":row?.deliveryProcess === 0?'Normal': 'Surgical'} </TableCell>
+              <TableCell > {setValue(row?.babyType) === ''? "":row?.babyType === 0? 'Boy': 'Girl'} </TableCell>
+              <TableCell > {setValue(row?.bloodCollectAge)} </TableCell>
             </TableRow>
           ))}
           {emptyRows > 0 && (
@@ -134,7 +143,7 @@ export default function BabyInfoTable({rows}) {
         <TableFooter>
           <TableRow>
             <TablePagination
-              rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
+              rowsPerPageOptions={[10, 25, 50, { label: 'All', value: -1 }]}
               count={rows.length}
               rowsPerPage={rowsPerPage}
               page={page}
@@ -153,4 +162,14 @@ export default function BabyInfoTable({rows}) {
       </Table>
     </TableContainer>
   )
+}
+
+function setValue(value){
+  try {
+      const val = parseInt(value)
+      if(isNaN(val) || val < 0) return ''
+      else return value
+  } catch (error) {
+      return ''
+  }
 }

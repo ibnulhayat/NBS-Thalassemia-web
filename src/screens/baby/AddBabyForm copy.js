@@ -1,11 +1,14 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState } from 'react';
 import { Button } from 'react-bootstrap';
-import * as Store from './../Storage'
-import * as Service from './../AllService'
+import * as Store from '../../Storage'
+import * as Service from '../../AllService'
+import InnerLayer from '../../global/InnerLayer';
+import { useParams } from 'react-router-dom';
 
-export default function AddBabyForm(){
-
+export default function AddBabyFormCopy(){
+    const params = useParams();
+    console.log("params ",params)
     const model = {
         babyMotherName: '',
         mobileNumber: '',
@@ -45,46 +48,6 @@ export default function AddBabyForm(){
         parentsRelativeType: '',
         beforeMarriageBloodTest: -1 // int
     }
-    // const model = {
-    //     babyMotherName: 'Abc',
-    //     mobileNumber: '01512321423',
-    //     deliveryProcess: -1, // int
-    //     bloodCollectAge: -1, // int
-    //     babyType: 1, // int
-    //     address: 'Mirpur',
-    //     hospitalId: '', // int
-    //     sampleCollectDate: '',
-    //     bloodCollectDate: '',
-    //     nameOfInterviewer: -1, // int
-    //     testResult: 'TRT_UNKNOWN', // int
-    //     babyDob: '',
-    //     babyDOB: '',
-    //     babyMotherAge: 24,
-    //     babyName: 'hkhkk',
-    //     motherAgeOfMarriage: 23, // int
-    //     babyFatherName: 'lfhjhdfj',
-    //     babyFatherAge: 26, // int
-    //     relationWithBaby: 'mother',
-    //     babyMotherEduQualification: 2, // int
-    //     babyFatherEduQualification: 4, // int
-    //     babyMotherOccupation: 4, // int
-    //     babyFatherOccupation: 5, // int
-    //     familyMonthlyExpenses: 4, // int
-    //     totalFamilyMember: 3, // int
-    //     previousAnyChildren: -1, // int
-    //     previousChildrenAnemia: -1, // int
-    //     ageDifference: -1, // int
-    //     antenatalHealthcare: -1, // int
-    //     ttVaccine: 1, // int
-    //     knowAboutThalassemia: 1, // int
-    //     babyMotherAnemia: -1, // int
-    //     babyFatherAnemia: -1, // int
-    //     whichPerson: '',
-    //     parentsAreRelative: -1, // int
-    //     parentsRelativeType: '',
-    //     beforeMarriageBloodTest: -1 // int
-    // }
-
     const [dataForm, setDataForm] = useState(model)
     const [disable, setDisable] = useState(false)
 
@@ -109,6 +72,7 @@ export default function AddBabyForm(){
     }
     console.log("dataForm ", dataForm)
     return(
+        <InnerLayer>
         <div className="col m-3">
             <form id="addbabyform" onSubmit={formSubmit} >
                 {/* First Row Start*/}
@@ -694,5 +658,6 @@ export default function AddBabyForm(){
                 </div>
             </form>
         </div>
+        </InnerLayer>
     )
 }
