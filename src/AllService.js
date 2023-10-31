@@ -146,7 +146,7 @@ export async function getDashBoardData(){
     }
 }
 
-export async function PostRequestBabyInfo(data, uploadStatus, imageFile){
+export async function PostRequestBabyInfo(data, uploadStatus, imageFile, message){
     const auth = Storage.getLocalStorageData('loginData')
     const header = { 'Authorization': auth?.accessToken}
 
@@ -156,10 +156,19 @@ export async function PostRequestBabyInfo(data, uploadStatus, imageFile){
 
     if(response?.code === 0){
         console.log("PostRequest ", response)
-        const babyId = data?.id? data?.id : response?.data?.id
+        const babyId = response?.data?.id
         dataForm.id = babyId
         dataForm.testResult = data?.testResult == "TRT_UNKNOWN"? 0 :data?.testResult == "TRT_POSITIVE"? 1 : 2
         updateLocalData('babysList', dataForm)
+        if(dataForm?.IsSmsSend){
+            const variables = {
+                phoneNumber: dataForm?.mobileNumber2? `${dataForm?.mobileNumber},${dataForm?.mobileNumber2}`: dataForm?.mobileNumber,
+                body: message
+            }
+            console.log("sendSMS variables", variables)
+            const response = await POSTCall('api/v1/vault/sms/send', variables, header)
+            console.log("sendSMS response", response)
+        }
         if(imageFile){
             const image64 = await getBase64(imageFile)
             const imageExt = imageFile?.type?.split('/')[1]
@@ -173,7 +182,7 @@ export async function PostRequestBabyInfo(data, uploadStatus, imageFile){
             const imageRes = await POSTCall('api/v1/vault/image', variables, header)
             console.log("imageres", imageRes)
         }
-       return true
+        return true
     }else{
         return false
     }
@@ -283,7 +292,7 @@ function updateLocalData(storeName, data){
     if(data?.id){
         const index = list.findIndex(ele => ele?.id == data?.id)
         console.log("updateLocalData ",index, data)
-        if(index > 0){
+        if(index > -1){
             newList[index] = data
         }else{
             newList.unshift(data)

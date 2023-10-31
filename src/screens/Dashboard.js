@@ -10,16 +10,17 @@ import { redirect, useNavigate } from 'react-router-dom';
 
 export default function Dashboard() {
   const navigate = useNavigate()
-  const[sumarryList, setSumarryList] = useState([])
-  const[hospitalList, setHospitalList] = useState([])
+  const [sumarryList, setSumarryList] = useState([])
+  const [hospitalList, setHospitalList] = useState([])
   const [totalCase, setTotalCasse] = useState(0)
   const [disable, setDisable] = useState(false)
-
+  const create = Store.storeSendMessage()
   useEffect(()=>{
     getCall()
   },[])
   
   const getCall = async() =>{
+
     const resData =  await Service.getDashBoardData()
     console.log("getDashBoardData ", resData)
     if(resData?.message === "access token not found"){

@@ -106,12 +106,23 @@ export default function BabyInfoTable({rows, callBack}) {
           <TableRow key={'0'}>
               <TableCell component="th" scope="row" style={{fontWeight: 600}}>#</TableCell>
               <TableCell style={{fontWeight: 600}}>ID</TableCell>
-              <TableCell style={{fontWeight: 600}}>Baby Name</TableCell>
-              <TableCell style={{fontWeight: 600}}>Mobile Number</TableCell>
-              <TableCell style={{fontWeight: 600}}>Test Result</TableCell>
+              <TableCell style={{fontWeight: 600}}>PhoneNumber</TableCell>
+              <TableCell style={{fontWeight: 600}}>BabyName</TableCell>
+              <TableCell style={{fontWeight: 600}}>DOB</TableCell>
+              <TableCell style={{fontWeight: 600}}>BCD</TableCell>
+              <TableCell style={{fontWeight: 600}}>TestResult</TableCell>
               <TableCell style={{fontWeight: 600}}>Delivery</TableCell>
-              <TableCell style={{fontWeight: 600}}>Baby Type</TableCell>
+              <TableCell style={{fontWeight: 600}}>BabyType</TableCell>
               <TableCell style={{fontWeight: 600}}>Age(Days)</TableCell>
+              <TableCell style={{fontWeight: 600}}>M.Name</TableCell>
+              <TableCell style={{fontWeight: 600}}>F.Name</TableCell>
+              <TableCell style={{fontWeight: 600}}>M.M.Age</TableCell>
+              <TableCell style={{fontWeight: 600}}>M.Age</TableCell>
+              <TableCell style={{fontWeight: 600}}>F.Age</TableCell>
+              <TableCell style={{fontWeight: 600}}>P.Child</TableCell>
+              <TableCell style={{fontWeight: 600}}>PCAD</TableCell>
+              <TableCell style={{fontWeight: 600}}>SMS Send</TableCell>
+              <TableCell style={{fontWeight: 600}}>Status</TableCell>
             </TableRow>
         </TableHead>
         <TableBody>
@@ -124,14 +135,24 @@ export default function BabyInfoTable({rows, callBack}) {
                 <EditIcon onClick={()=>callBack('edit',row.id)} style={{cursor: 'pointer', color: '#0e9aee'}}/>}
                 {<Image onClick={()=>callBack('image',row.id)} style={{cursor: 'pointer', color: '#0e9aee', marginLeft: 5}}/>}
               </TableCell>
-              <TableCell > {row.CustomId} </TableCell>
-              <TableCell > {row.babyName} </TableCell>
-              <TableCell > {row.mobileNumber} </TableCell>
-              <TableCell > {setValue(row?.testResult) === 0? 'Unknown':row?.testResult === 1? 'Positive': 'Negative'}
-              </TableCell>
+              <TableCell > {row?.CustomId} </TableCell>
+              <TableCell > {`${row?.mobileNumber} \n ${row?.mobileNumber2}`} </TableCell>
+              <TableCell > {row?.babyName} </TableCell>
+              <TableCell > {setValue(row?.babyDob)?formatDate(row?.babyDob):''} </TableCell>
+              <TableCell > {setValue(row?.sampleCollectDate)?formatDate(row?.sampleCollectDate):''} </TableCell>
+              <TableCell > {setValue(row?.testResult) === 0? 'Unknown':row?.testResult === 1? 'Positive': 'Negative'}</TableCell>
               <TableCell > {setValue(row?.deliveryProcess) === ''? "":row?.deliveryProcess === 0?'Normal': 'Surgical'} </TableCell>
               <TableCell > {setValue(row?.babyType) === ''? "":row?.babyType === 0? 'Boy': 'Girl'} </TableCell>
               <TableCell > {setValue(row?.bloodCollectAge)} </TableCell>
+              <TableCell > {row?.babyMotherName} </TableCell>
+              <TableCell > {row?.babyFatherName} </TableCell>
+              <TableCell > {setValue(row?.motherAgeOfMarriage)} </TableCell>
+              <TableCell > {setValue(row?.babyMotherAge)} </TableCell>
+              <TableCell > {setValue(row?.babyFatherAge)} </TableCell>
+              <TableCell > {setValue(row?.previousAnyChildren)} </TableCell>
+              <TableCell > {setValue(row?.ageDifference)} </TableCell>
+              <TableCell > {row?.IsSmsSend? "Yes": 'No'} </TableCell>
+              <TableCell > {setStatus(row?.UploadStatus)} </TableCell>
             </TableRow>
           ))}
           {emptyRows > 0 && (
@@ -172,4 +193,22 @@ function setValue(value){
   } catch (error) {
       return ''
   }
+}
+
+function formatDate(timestamp) {
+  const  date = new Date(parseInt(timestamp)* 1000)
+  return [
+    padTo2Digits(date.getDate()),
+    padTo2Digits(date.getMonth() + 1),
+    date.getFullYear(),
+  ].join('/');
+}
+function padTo2Digits(num) {
+  return num.toString().padStart(2, '0');
+}
+
+function setStatus(data){
+  if(data == 1 || data == 'US_PENDING') return 'PENDING'
+  else if( data == 2 || data == 'US_COMPLETED') return "COMPLETED"
+  else return 'UNKNOWN'
 }

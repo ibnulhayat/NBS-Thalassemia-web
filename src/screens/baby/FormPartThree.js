@@ -1,15 +1,23 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useEffect } from 'react';
 import { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import * as Service from '../../AllService'
+import * as Storage from '../../Storage'
 
 export default function FormPartThree({dataId, dataForm, UpdateForm, callBack}){
     const navigate = useNavigate()  
     const [selectedImage, setSelectedImage] = useState(null)  
     const [disable, setDisable] = useState(false)
+    const [message, setMessage] = useState('')
+    const storeMessage = Storage.getLocalStorageData('editsms')
 
-
+    useEffect(()=>{
+        if(dataForm?.IsSmsSend){
+            handleCheckClick(true)
+        }
+    },[])
 
     const formThreeSubmit = async(e) => {
         e.preventDefault();
@@ -21,18 +29,23 @@ export default function FormPartThree({dataId, dataForm, UpdateForm, callBack}){
             if(dataId){
                 dataForm.id = dataId
             }
-            const response = await Service.PostRequestBabyInfo(dataForm, 'US_COMPLETED',selectedImage)
+            const response = await Service.PostRequestBabyInfo(dataForm, 'US_COMPLETED',selectedImage, message)
             if(response){
-                // if(dataForm?.testResult !== "TRT_UNKNOWN"){
-                //     await Service.sendSMS(dataForm)
-                // }
-                // setDataForm(model)
                 navigate(-1)
             }
             setDisable(false)
         }else{
             callBack('partTwo')
         }
+    }
+
+    const handleCheckClick = (value) =>{
+        UpdateForm({IsSmsSend: value})
+        if(value){
+            const mess = dataForm?.testResult === "TRT_POSITIVE"? `${dataForm?.babyMotherName} ${storeMessage?.positiveMessage}`
+            : `${dataForm?.babyMotherName} ${storeMessage?.negativeMessage}`
+            setMessage(mess)
+        }else setMessage('')
     }
 
     return(
@@ -248,7 +261,10 @@ export default function FormPartThree({dataId, dataForm, UpdateForm, callBack}){
                             <select 
                                 className="form-control"
                                 value={dataForm?.testResult}
-                                onChange={(event) => UpdateForm({testResult: event.target.value})}
+                                onChange={(event) => {
+                                    UpdateForm({testResult: event.target.value, IsSmsSend: false})
+                                    setMessage('')
+                                }}
                             >
                                 <option value='TRT_UNKNOWN'>নির্বাচন করুন</option>
                                 <option value='TRT_POSITIVE'>পজেটিভ</option>
@@ -258,17 +274,32 @@ export default function FormPartThree({dataId, dataForm, UpdateForm, callBack}){
                         </div>
                         {
                             dataForm?.testResult !== 'TRT_UNKNOWN'?
-                                <div className="form-group mt-3">
-                                    <label className="addform-label">নমুনা/রক্ত পরীক্ষার ফলাফল রিপোর্ট আপলোড করুন</label>
-                                    <input
-                                        type="file"
-                                        accept="image/*" 
-                                        onChange={async(event) => {
-                                            // console.log(event.target.files[0],await getBase64(event.target.files[0]))
-                                            setSelectedImage(event.target.files[0])
-                                        }}
-                                    />
-                                </div>
+                                <>
+                                    <div className="form-group mt-3">
+                                        <label className="addform-label">নমুনা/রক্ত পরীক্ষার ফলাফল রিপোর্ট আপলোড করুন</label>
+                                        <input
+                                            type="file"
+                                            accept="image/*" 
+                                            onChange={async(event) => {
+                                                // console.log(event.target.files[0],await getBase64(event.target.files[0]))
+                                                setSelectedImage(event.target.files[0])
+                                            }}
+                                        />
+                                    </div>
+                                    <div className="form-group mt-4 d-flex">
+                                        <label className="addform-label">আপনি কি SMS পাঠাতে চান?</label>
+                                        <div className='ms-3'>
+                                            <div className="form-check form-check-inline">
+                                                <input className="form-check-input" type="radio" name="inlineRadioOptions" checked={dataForm?.IsSmsSend} onChange={()=>handleCheckClick(true)}/>
+                                                <label className="form-check-label" htmlFor="inlineRadio1">Yes</label>
+                                            </div>
+                                            <div className="form-check form-check-inline">
+                                                <input className="form-check-input" type="radio" name="inlineRadioOptions" checked={!dataForm?.IsSmsSend} onChange={()=>handleCheckClick(false)}/>
+                                                <label className="form-check-label" htmlFor="inlineRadio2">No</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </>
                             : null
                         }
                     </div>
@@ -287,6 +318,23 @@ export default function FormPartThree({dataId, dataForm, UpdateForm, callBack}){
                         </div>
                     </div>
                 </div>
+                {
+                    dataForm?.IsSmsSend && dataForm?.testResult !== 'TRT_UNKNOWN'?
+                        <div className="row mt-3">
+                            <div className="form-group">
+                                {/* <label className="addform-label"></label> */}
+                                <textarea 
+                                    className="form-control" 
+                                    type='text'
+                                    placeholder='Write something....'
+                                    value={message}
+                                    rows="4"
+                                    onChange={(event) => setMessage(event.target.value)}
+                                />
+                            </div>
+                        </div>
+                    : null
+                }
 
                 <div className='d-flex justify-content-center mt-5 mb-5'>
                     <Button 
