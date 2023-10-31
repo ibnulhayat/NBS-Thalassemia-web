@@ -367,11 +367,12 @@ a:hover {
 /* modal and image style*/
 .modal-main{
   border-radius: 5px;
-  height: fit-content;
+  height: 100vh;
   width: auto;
   background-color: #1e213a;
   display: flex;
   justify-content: center;
+  overflow: hidden;
 }
 .image-style{
   border-radius: 5px;
@@ -380,4 +381,23 @@ a:hover {
   margin-left: auto;
   margin-right: auto;
   width: auto;
+}
+.transform-component-module_wrapper__SPB86{
+  overflow: visible !important;
+}
+.modal-close{
+  cursor: pointer;
+  color: '#FFF';
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+  margin-top: 10px;
+  margin-right: 10px;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 5%;
+}
+.loader{
+  height: 10%;
+  align-self: center;
 }

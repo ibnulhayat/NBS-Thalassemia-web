@@ -8,12 +8,15 @@ import { useEffect } from 'react';
 import BabyInfoTable from './BabyInfoTable';
 import { useNavigate } from 'react-router-dom';
 import { TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch';
+import Close from '@mui/icons-material/Close';
+import loader from './../../image/loading.gif'
 
 export default function BabyInfo(){
     const navigate = useNavigate()
     const[babysList, setBabysList] = useState([])
     const [show, setShow] = useState(false)
     const [imageUrl, setImageUrl] = useState(false)
+    const [loading, setLoading] = useState(false)
 
     useEffect(()=>{
         const list = Store.getLocalStorageData('babysList')
@@ -46,14 +49,19 @@ export default function BabyInfo(){
 
     const onClick = async(type, id) =>{
         if(type == 'image'){
-            // setShow(true)
+            setLoading(true)
+            setShow(true)
             const response = await Service.GetImage({uploadType: "UT_PATIENT", uploaderId: id})
             console.log("res ", response)
             if(response?.urls?.length > 0){
                 setImageUrl(response?.urls[0])
-                setShow(true)
+                // setShow(true)
+                setLoading(false)
             }else{
-                alert('No image found.')
+                // setShow(false)
+                setLoading(false)
+                setImageUrl('')
+                // alert('No image found.')
             }
         }else{
             navigate('/edit-baby-info/'+id)
@@ -63,7 +71,6 @@ export default function BabyInfo(){
     }
 
     const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
 
     return(
         <InnerLayer>
@@ -100,13 +107,21 @@ export default function BabyInfo(){
                 
                 <BabyInfoTable rows={babysList == null?[]: babysList } callBack={onClick}/>
             </div>
-            <Modal show={show} onHide={handleClose} size="lg">
+            <Modal show={show} onHide={handleClose} size="xl">
                 <div className='modal-main'>
-                    <TransformWrapper>
-                        <TransformComponent>
-                            <img src={imageUrl} alt="test" className='image-style'/>
-                        </TransformComponent>
-                    </TransformWrapper>
+                    <Close onClick={handleClose} className='modal-close'/>
+                    {
+                        loading?
+                            <img src={loader} alt="test" className='loader'/>
+                        :!imageUrl?
+                            <h3 style={{alignSelf: 'center'}}>Image not found.</h3>
+                        : 
+                        <TransformWrapper wrapperProps={{overflow: 'visible'}}>
+                            <TransformComponent>
+                                <img src={imageUrl} alt="test" className='image-style'/>
+                            </TransformComponent>
+                        </TransformWrapper>
+                    }
                 </div>
             </Modal>
         </InnerLayer>
