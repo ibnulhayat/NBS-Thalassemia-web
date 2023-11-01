@@ -458,7 +458,7 @@ export default function BabyDataPreview({show, callBack, dataForm}){
                     <div className='row border rounded-bottom border-top-0 me-2 ms-2 p-1'>
                         <div className="col-sm-6">
                             <div className="form-group">
-                                <label className="addform-label">৩৬. ডক্টর নোট</label>
+                                <label className="addform-label">৩৮. ডক্টর নোট</label>
                             </div>
                         </div>
                         <div className="col-sm-6">

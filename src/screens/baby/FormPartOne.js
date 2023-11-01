@@ -51,6 +51,7 @@ export default function FormPartOne({dataId, dataForm, UpdateForm, callBack}){
                                 className="form-control" 
                                 required
                                 type='text'
+                                autoComplete='on'
                                 placeholder='A45'
                                 value={dataForm?.CustomId}
                                 onChange={(event) => UpdateForm({CustomId: event.target.value})}
@@ -64,6 +65,7 @@ export default function FormPartOne({dataId, dataForm, UpdateForm, callBack}){
                                 className="form-control" 
                                 required
                                 type='number'
+                                autoComplete='on'
                                 placeholder='019xx-xxxxxx'
                                 value={dataForm?.mobileNumber}
                                 onChange={(event) => {
@@ -83,6 +85,7 @@ export default function FormPartOne({dataId, dataForm, UpdateForm, callBack}){
                             <input 
                                 className="form-control"  
                                 type='number'
+                                autoComplete='on'
                                 placeholder='019xx-xxxxxx'
                                 value={dataForm?.mobileNumber2}
                                 onChange={(event) => {
@@ -100,6 +103,7 @@ export default function FormPartOne({dataId, dataForm, UpdateForm, callBack}){
                                 className="form-control" 
                                 required 
                                 type='text'
+                                autoComplete='on'
                                 placeholder='শিশুর নাম'
                                 value={dataForm?.babyName}
                                 onChange={(event) => UpdateForm({babyName: event.target.value})}
@@ -130,6 +134,7 @@ export default function FormPartOne({dataId, dataForm, UpdateForm, callBack}){
                                 className="form-control" 
                                 type='text'
                                 required
+                                autoComplete='on'
                                 placeholder='শিশুর মায়ের নাম'
                                 value={dataForm?.babyMotherName}
                                 onChange={(event) => UpdateForm({babyMotherName: event.target.value})}
@@ -202,6 +207,7 @@ export default function FormPartOne({dataId, dataForm, UpdateForm, callBack}){
                                 className="form-control" 
                                 type='number'
                                 min="0"
+                                autoComplete='on'
                                 placeholder='only number (Ex: 10)'
                                 value={dataForm?.bloodCollectAge}
                                 onChange={(event) => UpdateForm({bloodCollectAge: setValue(event.target.value)}) }

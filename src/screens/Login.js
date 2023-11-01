@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import * as AllService from './../AllService'
 import { useNavigate } from 'react-router-dom';
 import * as Store from './../Storage'
+import loader from './../image/loading.gif'
 
 
 
@@ -12,11 +13,13 @@ export default function Login() {
     const [password, setPassword] = useState(""); //104403
     const [error, setError] = useState("");
     const [disable, setDisable] = useState(false)
-
-    useEffect(()=> {
-        const loginData = Store.getLocalStorageData('loginData')
+    const loginData = Store.getLocalStorageData('loginData')
+    
+    useEffect(()=>{
         if(loginData?.accessToken) navigate('/dashboard')
-    },[])
+    })
+
+    console.log("logdata", loginData)
 
     const handleValidation = (event) => {
         let formIsValid = true;
@@ -57,38 +60,47 @@ export default function Login() {
 
 
     return (
-        <div className="container">
-            <h1 className="login_title">LOGIN PANAL</h1>
-            <div className="login_card">
-                <form id="loginform" onSubmit={loginSubmit} className="login_form">
-                    <input
-                        className='login_input'
-                        type="email"
-                        placeholder="Username"
-                        aria-describedby="emailHelp"
-                        value={email}
-                        onChange={(event) => setEmail(event.target.value)}
-                    />
-                    <input
-                        className='login_input'
-                        type="password" 
-                        placeholder="Password"
-                        value={password}
-                        onChange={(event) => setPassword(event.target.value)}
-                    />
-                    {
-                        error?
-                            <small className="text-danger form-text"> {error} </small>
-                        : null
-                    }
-                    <button 
-                        type="submit" 
-                        // className="login-button"
-                        className={disable? 'login-button-dis': 'login-button'}
-                        disabled={disable}
-                        >Submit</button>
-                </form>
+        <>{
+            !loginData?.accessToken?
+                <div className="container">
+                    <h1 className="login_title">LOGIN PANAL</h1>
+                    <div className="login_card">
+                        <form id="loginform" onSubmit={loginSubmit} className="login_form">
+                            <input
+                                className='login_input'
+                                type="email"
+                                placeholder="Username"
+                                aria-describedby="emailHelp"
+                                value={email}
+                                autoComplete='on'
+                                onChange={(event) => setEmail(event.target.value)}
+                            />
+                            <input
+                                className='login_input'
+                                type="password" 
+                                placeholder="Password"
+                                autoComplete='on'
+                                value={password}
+                                onChange={(event) => setPassword(event.target.value)}
+                            />
+                            {
+                                error?
+                                    <small className="text-danger form-text"> {error} </small>
+                                : null
+                            }
+                            <button 
+                                type="submit" 
+                                // className="login-button"
+                                className={disable? 'login-button-dis': 'login-button'}
+                                disabled={disable}
+                                >Submit</button>
+                        </form>
+                    </div>
+                </div>
+            : 
+            <div className='modal-main'>
+                <img src={loader} alt="test" className='loader'/>
             </div>
-        </div>
+        }</>
     );
 }

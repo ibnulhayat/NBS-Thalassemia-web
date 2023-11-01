@@ -50,6 +50,8 @@ export default function AddNewNurs(){
                                 className="form-control" 
                                 required 
                                 type='text'
+                                autoComplete='on'
+                                
                                 value={dataForm.designation}
                                 onChange={(event) => UpdateForm({designation: event.target.value})}
                             />

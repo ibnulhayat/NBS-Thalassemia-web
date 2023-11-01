@@ -78,6 +78,7 @@ export default function FormPartTwo({dataId, dataForm, UpdateForm, callBack}){
                                 className="form-control" 
                                 required 
                                 type='text'
+                                autoComplete='on'
                                 value={dataForm?.address}
                                 placeholder='গ্রামঃ- ,থানা/উপজেলাঃ- , জেলাঃ- , বিভাগঃ- '
                                 onChange={(event) => UpdateForm({address: event.target.value})}
@@ -91,6 +92,7 @@ export default function FormPartTwo({dataId, dataForm, UpdateForm, callBack}){
                                 className="form-control" 
                                 required 
                                 min={'0'}
+                                autoComplete='on'
                                 type='number'
                                 placeholder='উদাহরণঃ ২০/২১'
                                 value={dataForm?.babyMotherAge}
@@ -107,6 +109,7 @@ export default function FormPartTwo({dataId, dataForm, UpdateForm, callBack}){
                             <input 
                                 className="form-control" 
                                 required 
+                                autoComplete='on'
                                 type='number'
                                 placeholder='উদাহরণঃ ২০/২১'
                                 value={dataForm?.motherAgeOfMarriage}
@@ -121,6 +124,7 @@ export default function FormPartTwo({dataId, dataForm, UpdateForm, callBack}){
                                 className="form-control" 
                                 required 
                                 type='text'
+                                autoComplete='on'
                                 placeholder='শিশুর বাবা/অভিভাবকের নাম'
                                 value={dataForm.babyFatherName}
                                 onChange={(event) => UpdateForm({babyFatherName: event.target.value})}
@@ -138,6 +142,7 @@ export default function FormPartTwo({dataId, dataForm, UpdateForm, callBack}){
                                 className="form-control" 
                                 required 
                                 type='number'
+                                autoComplete='on'
                                 placeholder='উদাহরণঃ ২০/২১'
                                 value={dataForm?.babyFatherAge}
                                 onChange={(event) => UpdateForm({babyFatherAge: setValue(event.target.value)})}
@@ -150,6 +155,7 @@ export default function FormPartTwo({dataId, dataForm, UpdateForm, callBack}){
                             <input 
                                 className="form-control" 
                                 required 
+                                autoComplete='on'
                                 type='text'
                                 placeholder='শিশুর সহিত সম্পর্ক'
                                 value={dataForm?.relationWithBaby}
@@ -256,6 +262,7 @@ export default function FormPartTwo({dataId, dataForm, UpdateForm, callBack}){
                                 required 
                                 type='number'
                                 min='0'
+                                autoComplete='on'
                                 placeholder='উদাহরনঃ- ২৫০০০'
                                 value={dataForm?.familyMonthlyExpenses}
                                 onChange={(event) => UpdateForm({familyMonthlyExpenses: setValue(event.target.value)})}
@@ -269,6 +276,7 @@ export default function FormPartTwo({dataId, dataForm, UpdateForm, callBack}){
                                 className="form-control" 
                                 required 
                                 type='number'
+                                autoComplete='on'
                                 placeholder='উদাহরনঃ- ২/৪/৫'
                                 value={dataForm?.totalFamilyMember}
                                 onChange={(event) => UpdateForm({totalFamilyMember: setValue(event.target.value)})}

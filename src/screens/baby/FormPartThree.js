@@ -93,6 +93,7 @@ export default function FormPartThree({dataId, dataForm, UpdateForm, callBack}){
                                     disabled={!(dataForm.previousAnyChildren === '0')}
                                     type='number'
                                     min='0'
+                                    autoComplete='on'
                                     placeholder='উদাহরনঃ- ০.৫/২/৫'
                                     value={dataForm?.ageDifference}
                                     onChange={(event) => UpdateForm({ageDifference: setValue(event.target.value)})}
@@ -208,6 +209,7 @@ export default function FormPartThree({dataId, dataForm, UpdateForm, callBack}){
                                     required={(dataForm.babyMotherAnemia === '0' || dataForm.babyFatherAnemia === '0')}
                                     disabled={!(dataForm.babyMotherAnemia === '0' || dataForm.babyFatherAnemia === '0')}
                                     type='text'
+                                    autoComplete='on'
                                     placeholder='কার আত্মীয়র সমস্যা ছিল'
                                     value={dataForm?.whichPerson}
                                     onChange={(event) => UpdateForm({whichPerson: event.target.value})}
@@ -243,6 +245,7 @@ export default function FormPartThree({dataId, dataForm, UpdateForm, callBack}){
                                 required={dataForm.parentsAreRelative === '1'}
                                 disabled={dataForm.parentsAreRelative !== '1'} 
                                 type='text'
+                                autoComplete='on'
                                 placeholder='কেমন আত্মীয় ছিল'
                                 value={dataForm?.parentsRelativeType}
                                 onChange={(event) => UpdateForm({parentsRelativeType: event.target.value})}
@@ -317,10 +320,11 @@ export default function FormPartThree({dataId, dataForm, UpdateForm, callBack}){
 
                     <div className="col-sm-6">
                         <div className="form-group">
-                            <label className="addform-label">৩৬. ডক্টর নোট </label>
+                            <label className="addform-label">৩৮. ডক্টর নোট </label>
                             <textarea 
                                 className="form-control" 
                                 type='text'
+                                autoComplete='on'
                                 placeholder='Write something....'
                                 value={dataForm?.Note}
                                 rows="5"

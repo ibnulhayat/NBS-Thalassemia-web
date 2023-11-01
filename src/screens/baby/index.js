@@ -35,9 +35,7 @@ export default function BabyInfo(){
     const inputSearch = (input) => {
         const list = Store.getLocalStorageData('babysList')
         if(input && list){
-          let newList = list.filter((item) => {
-            if(item?.id == input || item?.mobileNumber.indexOf(input) > -1) return item
-          })
+          let newList = list.filter(item => item?.CustomId.toLowerCase().indexOf(input.toLowerCase()) > -1 || item?.mobileNumber.indexOf(input) > -1)
           setBabysList(newList)
         }else{
           setBabysList(list ? list: [] )
