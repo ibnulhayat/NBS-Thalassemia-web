@@ -95,7 +95,7 @@ export default function Dashboard() {
                 className="button float-end"
                 disabled={disable}
                 onClick={DownloadReport} 
-              >Download Report</Button>
+              >View Excel File</Button>
             </div>
           </div>
             
