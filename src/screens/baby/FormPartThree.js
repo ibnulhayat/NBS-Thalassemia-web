@@ -33,7 +33,7 @@ export default function FormPartThree({dataId, dataForm, UpdateForm, callBack}){
     const formThreeSubmit = async(e) => {
         e.preventDefault();
         const buttonText = e?.nativeEvent?.submitter?.innerText
-        console.log("formSubmit ", )
+
         if(buttonText == "Submit"){
             setShow(true)
         }else{

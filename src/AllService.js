@@ -12,10 +12,10 @@ async function POSTCall(urlPart, formData, header = {}){
         headers: header
         
     }
-    console.log('variables', variables)
+    // console.log('variables', variables)
     try {
         const response = await axios(variables)
-        console.log("PostRequest response", response)
+        // console.log("PostRequest response", response)
         if(response?.status === 200){
             return response.data
         }
@@ -33,10 +33,10 @@ async function GETCall(urlPart, header = {}, params = {}){
         headers: header,
         params: params
     }
-    console.log('variables', variables)
+    // console.log('variables', variables)
     try {
         const response = await axios(variables)
-        console.log("GETRequest response", response)
+        // console.log("GETRequest response", response)
         if(response?.status === 200){
             return response.data
         }
@@ -56,7 +56,7 @@ export async function checkLogin(email, password){
     const response = await POSTCall("api/v1/auth/signin", variables)
     if(response?.code === 0){
         Storage.setInLocalStorage("loginData", response?.data)
-        console.log("checkLogin ", response?.data)
+        // console.log("checkLogin ", response?.data)
        return true
     }else{
         return false
@@ -71,7 +71,7 @@ export async function PostRequest(data){
     const response = await POSTCall(apiName, data, header)
 
     if(response?.code === 0){
-        console.log("PostRequest ", response)
+        // console.log("PostRequest ", response)
        return true
     }else{
         return false
@@ -85,7 +85,7 @@ export async function getHospitalList(){
     const response = await GETCall("api/v1/vault/hospitals", header)
 
     if(response?.code === 0){
-        console.log("getHospitalList ", response?.data?.hospitals)
+        // console.log("getHospitalList ", response?.data?.hospitals)
         Storage.setInLocalStorage('hospitalList', response?.data?.hospitals)
        return response?.data?.hospitals
     }else{
@@ -100,7 +100,7 @@ export async function getNursList(){
     const response = await GETCall("api/v1/vault/nurses", header)
 
     if(response?.code === 0){
-        console.log("getNursList ", response?.data?.nurses)
+        // console.log("getNursList ", response?.data?.nurses)
         Storage.setInLocalStorage('nursesList', response?.data?.nurses)
        return response?.data?.nurses
     }else{
@@ -115,7 +115,7 @@ export async function getBabyList(){
     const response = await GETCall("api/v1/vault/baby-infos", header)
 
     if(response?.code === 0){
-        console.log("babysList ", response?.data?.infos)
+        // console.log("babysList ", response?.data?.infos)
         Storage.setInLocalStorage('babysList', response?.data?.infos)
 
        return response?.data?.infos
@@ -132,7 +132,7 @@ export async function getDashBoardData(){
     const response = await GETCall("api/v1/vault/sms/send", header)
 
     if(response?.code === 0){
-        console.log("summaries ", response?.data?.summaries)
+        // console.log("summaries ", response?.data?.summaries)
         const newList = response?.data?.summaries?.length > 0 ?
             groupByHospitalId(response?.data?.summaries) : []
         Storage.setInLocalStorage('summaries', newList)
@@ -179,7 +179,7 @@ export async function PostRequestBabyInfo(data, uploadStatus, imageFile, message
     const response = await POSTCall('api/v1/vault/baby-info', dataForm, header)
 
     if(response?.code === 0){
-        console.log("PostRequest ", response)
+        // console.log("PostRequest ", response)
         const babyId = response?.data?.id
         dataForm.id = babyId
         dataForm.testResult = data?.testResult == "TRT_UNKNOWN"? 0 :data?.testResult == "TRT_POSITIVE"? 1 : 2
@@ -189,14 +189,14 @@ export async function PostRequestBabyInfo(data, uploadStatus, imageFile, message
                 phoneNumber: dataForm?.mobileNumber2? `${dataForm?.mobileNumber},${dataForm?.mobileNumber2}`: dataForm?.mobileNumber,
                 body: message
             }
-            console.log("sendSMS variables", variables)
+            // console.log("sendSMS variables", variables)
             const response = await POSTCall('api/v1/vault/sms/send', variables, header)
-            console.log("sendSMS response", response)
+            // console.log("sendSMS response", response)
         }
         if(imageFile){
             const image64 = await getBase64(imageFile)
             const imageExt = imageFile?.type?.split('/')[1]
-            console.log("img ext ", imageExt, ' ===> ',image64)
+
             const variables = {
                 uploadType: "UT_PATIENT",
                 base64: image64,
@@ -204,7 +204,7 @@ export async function PostRequestBabyInfo(data, uploadStatus, imageFile, message
                 uploaderId: babyId
             }
             const imageRes = await POSTCall('api/v1/vault/image', variables, header)
-            console.log("imageres", imageRes)
+            // console.log("imageres", imageRes)
         }
         return true
     }else{
@@ -242,7 +242,7 @@ export async function sendSMS(dataForm){
     }
     try {
         const response = await axios(variables)
-        console.log("sendSMS response", response)
+        // console.log("sendSMS response", response)
         if(response?.status === 200){
             return response
         }else{
@@ -294,7 +294,6 @@ export function DataFormConvert(dataForm, uploadStatus){
     newData.parentsAreRelative = checkValue(dataForm?.parentsAreRelative)
     newData.beforeMarriageBloodTest = checkValue(dataForm?.beforeMarriageBloodTest)
     newData.UploadStatus = uploadStatus
-    console.log("DataFormConvert ", newData)
 
     return newData
 }
@@ -315,7 +314,7 @@ function updateLocalData(storeName, data){
     let newList = JSON.parse(JSON.stringify(list))
     if(data?.id){
         const index = list.findIndex(ele => ele?.id == data?.id)
-        console.log("updateLocalData ",index, data)
+
         if(index > -1){
             newList[index] = data
         }else{
@@ -345,7 +344,7 @@ export async function GetImage(data) {
     const response = await GETCall("api/v1/vault/images", header, data)
     if(response?.code === 0){
         return response?.data
-     }else{
-         return false
-     }
+    }else{
+        return false
+    }
 }

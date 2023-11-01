@@ -23,9 +23,6 @@ export default function BabyInfo(){
         if(list){
             setBabysList(list)
         }
-        // if(babysList?.length == 0){
-        //     getList()
-        // }
         
     },[])
 
@@ -34,7 +31,7 @@ export default function BabyInfo(){
         setBabysList(response)
     }
 
-    console.log("babysList ", babysList)
+    // console.log("babysList ", babysList)
     const inputSearch = (input) => {
         const list = Store.getLocalStorageData('babysList')
         if(input && list){

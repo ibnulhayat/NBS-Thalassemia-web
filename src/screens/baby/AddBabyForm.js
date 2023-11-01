@@ -16,7 +16,7 @@ export default function AddBabyForm(){
 
     useEffect(() => {
         const data = SearchById(params?.id)
-        console.log("useEffect ",data)
+
         setDataForm({
             CustomId: data?.CustomId || '',
             mobileNumber: data?.mobileNumber || '',
@@ -69,7 +69,7 @@ export default function AddBabyForm(){
     }
 
 
-    console.log("dataForm ", dataForm)
+    // console.log("dataForm ", dataForm)
 
     const callBack = (data) =>{
         setActiveFormPart(data)

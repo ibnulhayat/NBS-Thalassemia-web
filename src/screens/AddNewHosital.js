@@ -20,7 +20,6 @@ export default function AddNewHospital(){
         if(response){
             UpdateForm({name: "", address: ""})
         }
-        console.log(dataForm)
     }
   
     return(

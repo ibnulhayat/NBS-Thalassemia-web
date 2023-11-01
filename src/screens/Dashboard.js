@@ -22,7 +22,7 @@ export default function Dashboard() {
   const getCall = async() =>{
 
     const resData =  await Service.getDashBoardData()
-    console.log("getDashBoardData ", resData)
+    // console.log("getDashBoardData ", resData)
     if(resData?.message === "access token not found"){
       Service.logOut()
       navigate('/')
@@ -57,14 +57,12 @@ export default function Dashboard() {
   const DownloadReport = async() => {
     setDisable(true)
     const response = await Service.Report()
-    console.log("DownloadReport ", response)
     if(response){
       setDisable( false)
       window.open(response?.url, '_blank')
     }
   }
 
-  console.log("sumarryList ", sumarryList, hospitalList)
 
   return (
     <InnerLayer>
