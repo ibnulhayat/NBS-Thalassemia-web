@@ -103,7 +103,9 @@ export default function SummaryTable({rows}) {
           <TableRow key={'0'}>
               <TableCell component="th" scope="row" style={{fontWeight: 600}}>#</TableCell>
               <TableCell style={{fontWeight: 600}}>Hospital Name</TableCell>
-              <TableCell style={{fontWeight: 600}}>Type</TableCell>
+              <TableCell style={{fontWeight: 600}}>Unknown</TableCell>
+              <TableCell style={{fontWeight: 600}}>Positive</TableCell>
+              <TableCell style={{fontWeight: 600}}>Negative</TableCell>
               <TableCell style={{fontWeight: 600}}>Total</TableCell>
             </TableRow>
         </TableHead>
@@ -115,11 +117,10 @@ export default function SummaryTable({rows}) {
             <TableRow key={index}>
               <TableCell component="th" scope="row"> {index+1} </TableCell>
               <TableCell > {row.hospitalName} </TableCell>
-              <TableCell > {row?.type === 0? 'Unknown':row?.type === 1? 'Positive': 'Negative'} </TableCell>
-              <TableCell > {row?.count} </TableCell>
-              {/* <TableCell > {row?.testResult === 0? 'Normal': 'Surgical'} </TableCell>
-              <TableCell > {row?.babyType === 0? 'Boy': 'Girl'} </TableCell>
-              <TableCell > {row?.bloodCollectAge} </TableCell> */}
+              <TableCell > {row?.unknown} </TableCell>
+              <TableCell > {row?.positive} </TableCell>
+              <TableCell > {row?.negative} </TableCell>
+              <TableCell > {(row?.unknown + row?.positive + row?.negative)} </TableCell>
             </TableRow>
           ))}
           {emptyRows > 0 && (

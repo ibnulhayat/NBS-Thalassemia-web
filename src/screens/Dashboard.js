@@ -27,7 +27,7 @@ export default function Dashboard() {
       Service.logOut()
       navigate('/')
     }else{
-      const resb =  await Service.getBabyList()
+      await Service.getBabyList()
       const resh = await Service.getHospitalList()
       Service.getNursList()
       setSumarryList(resData)
@@ -40,16 +40,8 @@ export default function Dashboard() {
   const selectSearch = (itemId) =>{
     const list = Store.getLocalStorageData('summaries')
     if( itemId ){
-      let count = 0
-      let newList = list.filter((ele) => {
-        console.log("item ", ele)
-        if(ele?.hospitalId == itemId){
-          count += parseInt(ele?.count)
-          return ele
-        }
-      })
+      const newList = list.filter(ele => ele?.hospitalId === itemId)
       setSumarryList(newList)
-      setTotalCasse(count)
     }else{
       setSumarryList(list ? list: [] )
       totalCount()
@@ -58,7 +50,7 @@ export default function Dashboard() {
 
   const totalCount = () =>{
     let count = 0
-    Store.getLocalStorageData('summaries').map(ele => count += parseInt(ele?.count))
+    Store.getLocalStorageData('summaries').map(ele => count += (ele?.unknown + ele?.positive + ele?.negative))
     setTotalCasse(count)
   }
 

@@ -18,8 +18,6 @@ async function POSTCall(urlPart, formData, header = {}){
         console.log("PostRequest response", response)
         if(response?.status === 200){
             return response.data
-        }else{
-            console.log("PostRequest error", response?.status)
         }
         
     } catch (error) {
@@ -41,9 +39,6 @@ async function GETCall(urlPart, header = {}, params = {}){
         console.log("GETRequest response", response)
         if(response?.status === 200){
             return response.data
-        }else{
-            console.log("GETRequest error", response?.status)
-            return false
         }
         
     } catch (error) {
@@ -72,7 +67,7 @@ export async function checkLogin(email, password){
 export async function PostRequest(data){
     const auth = Storage.getLocalStorageData('loginData')
     const header = { 'Authorization': auth?.accessToken}
-    const apiName = data?.mobileNumber?  'api/v1/vault/baby-info': data?.hospitalId? "api/v1/vault/nurse": "api/v1/vault/hospital"
+    const apiName = data?.hospitalId? "api/v1/vault/nurse": "api/v1/vault/hospital"
     const response = await POSTCall(apiName, data, header)
 
     if(response?.code === 0){
@@ -138,13 +133,42 @@ export async function getDashBoardData(){
 
     if(response?.code === 0){
         console.log("summaries ", response?.data?.summaries)
-        Storage.setInLocalStorage('summaries', response?.data?.summaries)
+        const newList = response?.data?.summaries?.length > 0 ?
+            groupByHospitalId(response?.data?.summaries) : []
+        Storage.setInLocalStorage('summaries', newList)
 
-       return response?.data?.summaries
+       return newList
     }else{
         return response
     }
 }
+
+function groupByHospitalId(list){
+    let groundData = []
+    for (let index = 0; index < list.length; index++) {
+        const existIndex = groundData.findIndex(ele => ele.hospitalId === list[index].hospitalId)
+
+        if(existIndex === -1){
+        groundData.push({
+            hospitalId: list[index].hospitalId,
+            hospitalName: list[index].hospitalName,
+            negative: CallTot(list.filter(ele => ele.type === 2 && ele.hospitalId === list[index].hospitalId)),
+            positive: CallTot(list.filter(ele => ele.type === 1 && ele.hospitalId === list[index].hospitalId)),
+            unknown: CallTot(list.filter(ele => ele.type === 0 && ele.hospitalId === list[index].hospitalId))
+        })
+        }
+    }
+    return groundData
+}
+
+function CallTot(list){
+    let total = 0
+    
+    list.map(ele => total += parseInt(ele?.count))
+  
+    return total
+}
+  
 
 export async function PostRequestBabyInfo(data, uploadStatus, imageFile, message){
     const auth = Storage.getLocalStorageData('loginData')

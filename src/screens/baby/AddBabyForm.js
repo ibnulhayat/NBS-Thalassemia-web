@@ -1,8 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState } from 'react';
-import { Button } from 'react-bootstrap';
 import * as Store from '../../Storage'
-import * as Service from '../../AllService'
 import InnerLayer from '../../global/InnerLayer';
 import { useParams } from 'react-router-dom';
 import FormPartOne from './FormPartOne';
@@ -105,7 +103,7 @@ export default function AddBabyForm(){
                     />
                 : null
             }
-        
+            
         </InnerLayer>
     )
 }

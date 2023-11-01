@@ -5,6 +5,7 @@ import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import * as Service from '../../AllService'
 import * as Storage from '../../Storage'
+import BabyDataPreview from './BabyDataPreview';
 
 export default function FormPartThree({dataId, dataForm, UpdateForm, callBack}){
     const navigate = useNavigate()  
@@ -12,32 +13,13 @@ export default function FormPartThree({dataId, dataForm, UpdateForm, callBack}){
     const [disable, setDisable] = useState(false)
     const [message, setMessage] = useState('')
     const storeMessage = Storage.getLocalStorageData('editsms')
+    const [show, setShow] = useState(false)
 
     useEffect(()=>{
         if(dataForm?.IsSmsSend){
             handleCheckClick(true)
         }
     },[])
-
-    const formThreeSubmit = async(e) => {
-        e.preventDefault();
-        const buttonText = e?.nativeEvent?.submitter?.innerText
-        console.log("formSubmit ", )
-        if(buttonText == "Submit"){
-            setDisable(true)
-            
-            if(dataId){
-                dataForm.id = dataId
-            }
-            const response = await Service.PostRequestBabyInfo(dataForm, 'US_COMPLETED',selectedImage, message)
-            if(response){
-                navigate(-1)
-            }
-            setDisable(false)
-        }else{
-            callBack('partTwo')
-        }
-    }
 
     const handleCheckClick = (value) =>{
         UpdateForm({IsSmsSend: value})
@@ -47,6 +29,35 @@ export default function FormPartThree({dataId, dataForm, UpdateForm, callBack}){
             setMessage(mess)
         }else setMessage('')
     }
+
+    const formThreeSubmit = async(e) => {
+        e.preventDefault();
+        const buttonText = e?.nativeEvent?.submitter?.innerText
+        console.log("formSubmit ", )
+        if(buttonText == "Submit"){
+            setShow(true)
+        }else{
+            callBack('partTwo')
+        }
+    }
+
+    const ServerCall = async(data) =>{
+        setShow(false)
+        if(data === 'ok'){
+            setDisable(true)
+
+            if(dataId){
+                dataForm.id = dataId
+            }
+            const response = await Service.PostRequestBabyInfo(dataForm, 'US_COMPLETED',selectedImage, message)
+            if(response){
+                navigate(-1)
+            }
+            setDisable(false)
+        }
+    }
+
+
 
     return(
         <div className="col m-3">
@@ -351,10 +362,14 @@ export default function FormPartThree({dataId, dataForm, UpdateForm, callBack}){
                         disabled={disable}
                         type="submit" 
                     >Submit </Button>
-                        
-                    
                 </div>
             </form>
+
+            <BabyDataPreview
+                show={show}
+                callBack={ServerCall}
+                dataForm={dataForm}
+            />
         </div>
     )
 }

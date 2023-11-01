@@ -3,19 +3,30 @@ import { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import * as Service from '../../AllService'
+import BabyDataPreview from './BabyDataPreview';
 
 export default function FormPartOne({dataId, dataForm, UpdateForm, callBack}){
     const navigate = useNavigate()
     const [disable, setDisable] = useState(false)
- 
+    const [show, setShow] = useState(false)
 
     const formSubmit = async(e) => {
         e.preventDefault();
         const buttonText = e?.nativeEvent?.submitter?.innerText
         if(buttonText == "Next"){
-            console.log("formSubmit ", buttonText)
+            if(dataForm?.mobileNumber?.length <= 10){
+                alert("Please input 11 digit mobile number")
+                return false
+            }
             callBack('partTwo')
         }else{
+            setShow(true)
+        }
+    }
+
+    const ServerCall = async(data) =>{
+        setShow(false)
+        if(data === 'ok'){
             setDisable(true)
             if(dataId){
                 dataForm.id = dataId
@@ -24,7 +35,6 @@ export default function FormPartOne({dataId, dataForm, UpdateForm, callBack}){
             if(response){
                 navigate(-1)
             }
-            console.log("formSubmit el ", buttonText)
             setDisable(false)
         }
     }
@@ -39,7 +49,7 @@ export default function FormPartOne({dataId, dataForm, UpdateForm, callBack}){
                             <label className="addform-label">১. আইডি নং</label>
                             <input
                                 className="form-control" 
-                                required 
+                                required
                                 type='text'
                                 placeholder='A45'
                                 value={dataForm?.CustomId}
@@ -52,11 +62,15 @@ export default function FormPartOne({dataId, dataForm, UpdateForm, callBack}){
                             <label className="addform-label">২.প্রথম মোবাইল নাম্বারঃ</label>
                             <input 
                                 className="form-control" 
-                                required 
+                                required
                                 type='number'
                                 placeholder='019xx-xxxxxx'
                                 value={dataForm?.mobileNumber}
-                                onChange={(event) => UpdateForm({mobileNumber: event.target.value})}
+                                onChange={(event) => {
+                                    if(event.target.value.length <= 11){
+                                        UpdateForm({mobileNumber: event.target.value})
+                                    }
+                                }}
                             />
                         </div>
                     </div>
@@ -71,7 +85,11 @@ export default function FormPartOne({dataId, dataForm, UpdateForm, callBack}){
                                 type='number'
                                 placeholder='019xx-xxxxxx'
                                 value={dataForm?.mobileNumber2}
-                                onChange={(event) => UpdateForm({mobileNumber2: event.target.value})}
+                                onChange={(event) => {
+                                    if(event.target.value.length <= 11){
+                                        UpdateForm({mobileNumber2: event.target.value})
+                                    }
+                                }}
                             />
                         </div>
                     </div>
@@ -211,6 +229,11 @@ export default function FormPartOne({dataId, dataForm, UpdateForm, callBack}){
                     >Next </Button>
                 </div>
             </form>
+            <BabyDataPreview 
+                show={show}
+                callBack={ServerCall}
+                dataForm={dataForm}
+            />
         </div>
     )
 }
