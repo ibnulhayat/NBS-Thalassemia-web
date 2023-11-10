@@ -20,8 +20,8 @@ export default function ImageDownload(){
         const response = await Service.DownloadPatientReport(id, image)
         console.log("response", response)
         if(response?.code == 0){
-            window.open(response?.data?.urls?.[0],'_blank')
             navigate(-1)
+            window.open(response?.data?.urls?.[0],'_blank')
         }
        
     }
