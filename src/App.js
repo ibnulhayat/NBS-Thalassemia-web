@@ -9,6 +9,7 @@ import AddNewHospital from './screens/AddNewHosital';
 import AddNewNurs from './screens/AddNewNurs';
 import EditSMS from './screens/EditSMS';
 import BabyInfo from './screens/baby';
+import ImageDownload from './screens/ImageDownload';
 
 
 const router = createBrowserRouter([
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
   {
     path: "/editsms",
     element: <EditSMS />,
+  },
+  {
+    path: "/view",
+    element: <ImageDownload />,
   }
 ]);
 

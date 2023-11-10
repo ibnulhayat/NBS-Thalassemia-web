@@ -184,15 +184,7 @@ export async function PostRequestBabyInfo(data, uploadStatus, imageFile, message
         dataForm.id = babyId
         dataForm.testResult = data?.testResult == "TRT_UNKNOWN"? 0 :data?.testResult == "TRT_POSITIVE"? 1 : 2
         updateLocalData('babysList', dataForm)
-        if(dataForm?.IsSmsSend){
-            const variables = {
-                phoneNumber: dataForm?.mobileNumber2? `${dataForm?.mobileNumber},${dataForm?.mobileNumber2}`: dataForm?.mobileNumber,
-                body: message
-            }
-            // console.log("sendSMS variables", variables)
-            const response = await POSTCall('api/v1/vault/sms/send', variables, header)
-            // console.log("sendSMS response", response)
-        }
+        
         if(imageFile){
             const image64 = await getBase64(imageFile)
             const imageExt = imageFile?.type?.split('/')[1]
@@ -204,6 +196,17 @@ export async function PostRequestBabyInfo(data, uploadStatus, imageFile, message
                 uploaderId: babyId
             }
             const imageRes = await POSTCall('api/v1/vault/image', variables, header)
+            if(imageRes?.code == 0){
+                if(dataForm?.IsSmsSend){
+                    const variables = {
+                        phoneNumber: dataForm?.mobileNumber2? `${dataForm?.mobileNumber},${dataForm?.mobileNumber2}`: dataForm?.mobileNumber,
+                        body: `${message} \nDownload Report: http://nbs-thalassemia.exhortbd.com/view?id=${babyId}&im=${imageRes?.data?.name}`
+                    }
+                    // console.log("sendSMS variables", variables)
+                    const response = await POSTCall('api/v1/vault/sms/send', variables, header)
+                    // console.log("sendSMS response", response)
+                }
+            }
             // console.log("imageres", imageRes)
         }
         return true
@@ -347,4 +350,13 @@ export async function GetImage(data) {
     }else{
         return false
     }
+}
+
+export async function DownloadPatientReport(id, imageKey){
+    const data = {
+        patientId: id,
+        images: imageKey
+    }
+    const response = await GETCall("api/v1/vault/patient/report", null, data)
+    return response
 }
