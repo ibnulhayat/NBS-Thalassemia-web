@@ -84,16 +84,23 @@ input:focus {
 
 
 @media (max-width: 480px) {
+  .login_card {
+    width: 100%;
+    max-width: 350px;
+  }
+}
+/* @media (max-width: 480px) {
   .card {
     width: 100%;
     max-width: 300px;
   }
-}
+} */
 
 .button {
   background-color: transparent;
   color: #19d4ca;
 }
+
 /*DASHBOARD CSS START*/
 
 #logo {
@@ -130,27 +137,6 @@ input:focus {
   z-index: 3;
 }
 
-/* #header .header-left {
-  padding-left: 300px;
-  -webkit-transition: all 0.3s ease-in-out;
-  -o-transition: all 0.3s ease-in-out;
-  transition: all 0.3s ease-in-out;
-}
-
-#header .header-right {
-  text-align: center;
-  justify-content: center;
-  padding-right: 40px;
-}
-
-#header .header-right i,
-#header .header-left i {
-  font-size: 30px;
-  line-height: 2em;
-  padding: 0 5px;
-  cursor: pointer;
-} */
-
 #main-content {
   min-height: calc(100vh - 60px);
   clear: both;
@@ -165,20 +151,32 @@ input:focus {
   transition: all 0.3s ease-in-out;
 }
 
-#page-container.small-left-menu,
-#header .header-left.small-left-menu {
-  padding-left: 80px;
+
+
+.toggol-icon {
+  padding-left: 10px;
+  padding-right: 10px;
+  height: 60px;
+  justify-content: center;
+  align-items: center;
 }
 
+.logout {
+  padding-left: 10px;
+  padding-right: 10px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
 
-
-
-#left-menu {
+.left-menu {
   position: fixed;
   top: 0;
   left: 0;
   width: 280px;
-  background-color: #313644;
+  background-color: #464e62;
   overflow-y: auto;
   height: 100vh;
   /* border-right: 1px solid #e6ecf5; */
@@ -210,92 +208,6 @@ input:focus {
   color: white;
 }
 
-#left-menu.small-left-menu,
-#logo.small-left-menu {
-    width: 60px;
-}
-
-#left-menu ul {
-    padding: 0;
-    margin: 0;
-}
-
-#left-menu ul li {
-    padding: 0 10px;
-    display: block;
-    position: relative;
-}
-
-#left-menu > ul > li {
-    margin: 15px 0;
-}
-
-#left-menu ul li a {
-    color: #99abb4;
-    width: 100%;
-    display: inline-block;
-    width: 260px;
-    height: 37px;
-    position: relative;
-}
-
-
-#left-menu ul li a i {
-    font-size: 22px;
-    text-align: center;
-    width: 35px;
-    height: 35px;
-    display: inline-block;
-    -webkit-transition: all 0.3s ease;
-    -o-transition: all 0.3s ease;
-    transition: all 0.3s ease;
-}
-#left-menu ul li:hover a span{
-    color: #0e9aee;
-}
-#left-menu ul li:hover a i{
-    color: #0e9aee;
-}
-
-#left-menu ul li a span {
-    width: 100%;
-    height: 35px;
-    padding-left: 10px;
-    color: #99abb4;
-    font-weight: 300;
-    -webkit-transition: all 0.3s ease;
-    -o-transition: all 0.3s ease;
-    transition: all 0.3s ease;
-}
-
-#left-menu ul li.active a {
-    border-bottom: 2px solid #0e9aee;
-}
-
-#left-menu ul li.active a span {
-    color: #fff;
-}
-
-#left-menu ul li.active a i {
-    background-color: #0e9aee;
-    color: #fff;
-}
-
-
-#left-menu li.has-sub ul {
-    background-color: #454e62;
-    margin: 0 -10px;
-    padding-left: 45px;
-    height: 0;
-    overflow: hidden;
-    -webkit-transition: all 0.3s ease;
-    -o-transition: all 0.3s ease;
-    transition: all 0.3s ease;
-}
-
-#left-menu li.has-sub ul > li {
-    padding-top: 10px;
-}
 
 a:hover {
   text-decoration: none;
@@ -317,24 +229,43 @@ a:hover {
 }
 
 
-@media only screen and (max-width: 992px) {
-  #left-menu,
-  #logo {
-      width: 60px;
+@media only screen and (max-width: 480px) and (max-width: 600px){
+  .toggol-icon{
+    display: flex;
+  }
+  #page-container,
+  #header .header-left {
+      padding-left: 30px;
+  }
+  
+  #logo, .left-menu,.big-logo{
+    display: none;
+  }
+  .drawerOpen{
+    display: block;
+  }
+}
+
+@media only screen and (min-width: 481px) and (max-width: 1024px) and (orientation:landscape) {
+  .toggol-icon{
+    display: flex;
   }
   
   #page-container,
   #header .header-left {
-      padding-left: 80px;
+      padding-left: 30px;
   }
   
-  #toggle-left-menu,.big-logo{
-      display: none;
+  #logo, .left-menu,.big-logo{
+    display: none;
+  }
+  .drawerOpen{
+    display: block;
   }
 }
 
 @media only screen and (min-width: 992px) {
-  #left-menu li.has-sub::after {
+  /* #left-menu li.has-sub::after {
       font-family: "Ionicons";
       content: "\f3d3";
       position: absolute;
@@ -351,8 +282,12 @@ a:hover {
       -ms-transform: rotate(90deg);
       -o-transform: rotate(90deg);
       transform: rotate(90deg);
+  } */
+  
+  #logo,.left-menu,.big-logo{
+    display: block;
   }
-  .small-logo{
+  .toggol-icon{
       display: none;
   }
   
