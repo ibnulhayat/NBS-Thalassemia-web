@@ -44,7 +44,7 @@ export default function FormPartTwo({dataId, dataForm, UpdateForm, callBack}){
                                 <option value=''>নির্বাচন করুন</option>
                             {
                                 hospitalList?.map( (item) => 
-                                    <option value={item?.id}>{item?.name}</option>
+                                    <option value={item?.id} key={item?.id} >{item?.name}</option>
                                 )
                             }
                             </select>
@@ -62,7 +62,7 @@ export default function FormPartTwo({dataId, dataForm, UpdateForm, callBack}){
                                 <option value=''>নির্বাচন করুন</option>
                             {
                                 sortList?.map( (item) => 
-                                    <option value={item?.id}>{item?.name}</option>
+                                    <option value={item?.id} key={item?.id} >{item?.name}</option>
                                 )
                             }
                             </select>

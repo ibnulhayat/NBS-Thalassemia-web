@@ -22,7 +22,7 @@ export default function Dashboard() {
   const getCall = async() =>{
 
     const resData =  await Service.getDashBoardData()
-    // console.log("getDashBoardData ", resData)
+    console.log("getDashBoardData ", resData)
     if(resData?.message === "access token not found"){
       Service.logOut()
       navigate('/')
@@ -81,7 +81,7 @@ export default function Dashboard() {
                 <option value=''>Select Hospital Name</option>
             {
                 hospitalList?.map( (item) => 
-                    <option value={item?.id}>{item?.name}</option>
+                    <option value={item?.id} key={item?.id}>{item?.name}</option>
                 )
             }
             </select>
