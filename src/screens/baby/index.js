@@ -78,7 +78,7 @@ export default function BabyInfo(){
                         <Button 
                             variant='primary' 
                             className="button float-end"
-                            onClick={() => navigate("/addbaby")}
+                            onClick={() => navigate("/new-baby-info")}
                         >Add New Baby
                         </Button>
                     </div>

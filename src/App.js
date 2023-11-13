@@ -26,7 +26,7 @@ const router = createBrowserRouter([
     element: <BabyInfo />,
   },
   {
-    path: "/addbaby",
+    path: "/new-baby-info",
     element: <AddBabyForm />,
   },
   {
