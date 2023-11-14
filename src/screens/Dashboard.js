@@ -6,7 +6,7 @@ import * as Service from './../AllService'
 import SummaryTable from './SummaryTable';
 import InnerLayer from '../global/InnerLayer';
 import { Button } from 'react-bootstrap';
-import { redirect, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export default function Dashboard() {
   const navigate = useNavigate()
@@ -14,7 +14,7 @@ export default function Dashboard() {
   const [hospitalList, setHospitalList] = useState([])
   const [totalCase, setTotalCasse] = useState(0)
   const [disable, setDisable] = useState(false)
-  const create = Store.storeSendMessage()
+  
   useEffect(()=>{
     getCall()
   },[])

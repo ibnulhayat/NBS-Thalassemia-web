@@ -13,7 +13,7 @@ export default function InnerLayer({children}) {
   const [selectTab, setSelectTab] = useState("")
   const [drawerOpen, setDrawerOpen] = useState(false)
  
-  console.log("location ",location.pathname)
+  // console.log("location ",location.pathname)
 
   useEffect(()=>{
     setSelectTab(location.pathname)
