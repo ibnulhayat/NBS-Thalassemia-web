@@ -353,10 +353,14 @@ export async function GetImage(data) {
 }
 
 export async function DownloadPatientReport(id, imageKey){
-    const data = {
-        patientId: id,
-        images: imageKey
+    try {
+        const data = {
+            patientId: id,
+            images: imageKey
+        }
+        const response = await GETCall("api/v1/vault/patient/report", null, data)
+        return response
+    } catch (error) {
+        
     }
-    const response = await GETCall("api/v1/vault/patient/report", null, data)
-    return response
 }

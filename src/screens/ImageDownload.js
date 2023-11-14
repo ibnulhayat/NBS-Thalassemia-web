@@ -1,9 +1,10 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './../App.css';
 import { useState } from 'react';
 import { useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import * as Service from './../AllService'
-import loader from './../image/loading.gif'
+import loaderImage from './../image/loading.gif'
 
 export default function ImageDownload(){
     const params = useSearchParams()
@@ -24,9 +25,8 @@ export default function ImageDownload(){
         // console.log("response", response)
         if(response?.code == 0){
             setUrl(response?.data?.urls?.[0])
+            await delay(1500)
             setLoading(false)
-            // navigate(-1)
-            // window.open(response?.data?.urls?.[0],'_blank')
         }
        } catch (error) {
         console.log(error)
@@ -36,9 +36,13 @@ export default function ImageDownload(){
     return (
         <div className='modal-main'>
             {   
-                loading?<img src={loader} alt="test" className='loader'/>
-                : <img src={url} alt="test" />
+                !loading? <img src={url} alt="test" />
+                : <img src={loaderImage} alt="test" className='loader'/>
             }
         </div>
     )
 }
+
+const delay = ms => new Promise(
+    resolve => setTimeout(resolve, ms)
+);
