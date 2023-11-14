@@ -50,7 +50,7 @@ export default function FormPartTwo({dataId, dataForm, UpdateForm, callBack}){
                             </select>
                         </div>
                     </div>
-                    <div className="col-sm-6">
+                    <div className="col-sm-6 mar-top">
                         <div className="form-group">
                             <label className="addform-label">১২. সাক্ষাৎকার গ্রহণকারীর নাম কি?</label>
                             <select 
@@ -85,7 +85,7 @@ export default function FormPartTwo({dataId, dataForm, UpdateForm, callBack}){
                             />
                         </div>
                     </div>
-                    <div className="col-sm-6">
+                    <div className="col-sm-6 mar-top">
                         <div className="form-group">
                             <label className="addform-label">১৪. শিশুর মায়ের বয়স?</label>
                             <input 
@@ -117,7 +117,7 @@ export default function FormPartTwo({dataId, dataForm, UpdateForm, callBack}){
                             />
                         </div>
                     </div>
-                    <div className="col-sm-6">
+                    <div className="col-sm-6 mar-top">
                         <div className="form-group">
                             <label className="addform-label">১৬. শিশুর বাবা/অভিভাবকের নাম কি?</label>
                             <input 
@@ -149,7 +149,7 @@ export default function FormPartTwo({dataId, dataForm, UpdateForm, callBack}){
                             />
                         </div>
                     </div>
-                    <div className="col-sm-6">
+                    <div className="col-sm-6 mar-top">
                         <div className="form-group">
                             <label className="addform-label">১৮. সাক্ষাৎকার প্রদানকারী সহিত শিশুর সম্পর্ক কি?</label>
                             <input 
@@ -187,7 +187,7 @@ export default function FormPartTwo({dataId, dataForm, UpdateForm, callBack}){
                             </select>
                         </div>
                     </div>
-                    <div className="col-sm-6">
+                    <div className="col-sm-6 mar-top">
                         <div className="form-group">
                             <label className="addform-label">২০. শিশুর বাবার শিক্ষাগত যোগ্যতা কি?</label>
                             <select className="form-control" required 
@@ -230,7 +230,7 @@ export default function FormPartTwo({dataId, dataForm, UpdateForm, callBack}){
                             </select>
                         </div>
                     </div>
-                    <div className="col-sm-6">
+                    <div className="col-sm-6 mar-top">
                         <div className="form-group">
                             <label className="addform-label"> ২২. শিশুর বাবার পেশা কি?</label>
                             <select className="form-control" required 
@@ -269,7 +269,7 @@ export default function FormPartTwo({dataId, dataForm, UpdateForm, callBack}){
                             />
                         </div>
                     </div>
-                    <div className="col-sm-6">
+                    <div className="col-sm-6 mar-top">
                         <div className="form-group">
                             <label className="addform-label">২৪. পরিবারের সদস্য সংখ্যা কতজন?</label>
                             <input 

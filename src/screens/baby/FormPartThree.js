@@ -84,7 +84,7 @@ export default function FormPartThree({dataId, dataForm, UpdateForm, callBack}){
                             </select>
                         </div>
                     </div>
-                    <div className="col-sm-6">
+                    <div className="col-sm-6 mar-top">
                             <div className="form-group">
                                 <label className="addform-label">২৬. আপনার এই শিশুর বড় ভাই/বোনের সাথে বয়সের পার্থক্য কত বছর?</label>
                                 <input 
@@ -121,7 +121,7 @@ export default function FormPartThree({dataId, dataForm, UpdateForm, callBack}){
                         </div>
                     </div>
 
-                    <div className="col-sm-6">
+                    <div className="col-sm-6 mar-top">
                         <div className="form-group">
                             <label className="addform-label">২৮. শিশুর বাবা ও মা এর কি বিবাহের পূর্বে কোন ধরনের রক্তের পরীক্ষা করা হয়েছিল?</label>
                             <select className="form-control" required 
@@ -151,7 +151,7 @@ export default function FormPartThree({dataId, dataForm, UpdateForm, callBack}){
                             </select>
                         </div>
                     </div>
-                    <div className="col-sm-6">
+                    <div className="col-sm-6 mar-top">
                         <div className="form-group">
                             <label className="addform-label">৩০. শিশুর মা কি টিটি টিকা নিয়েছিলেন?</label>
                             <select className="form-control" required 
@@ -181,7 +181,7 @@ export default function FormPartThree({dataId, dataForm, UpdateForm, callBack}){
                             </select>
                         </div>
                     </div>
-                    <div className="col-sm-6">
+                    <div className="col-sm-6 mar-top">
                         <div className="form-group">
                             <label className="addform-label">৩২. শিশুর বাবা অথবা বাবার দিকে আত্মীয়র মধ্যে কারো রক্তশূন্যতা জনিত সমস্যা অথবা বারবার রক্ত নিতে হয় এ ধরনের সমস্যা আছে কি?</label>
                             <select className="form-control" required 
@@ -200,26 +200,22 @@ export default function FormPartThree({dataId, dataForm, UpdateForm, callBack}){
                 
                 <div className="row mt-5">
                     <div className="col-sm-6">
-                        {/* {
-                            (dataForm.babyMotherAnemia === '0' || dataForm.babyFatherAnemia === '0')? */}
-                            <div className="form-group">
-                                <label className="addform-label">৩৩. কার ছিল?</label>
-                                <input 
-                                    className="form-control" 
-                                    required={(dataForm.babyMotherAnemia === '0' || dataForm.babyFatherAnemia === '0')}
-                                    disabled={!(dataForm.babyMotherAnemia === '0' || dataForm.babyFatherAnemia === '0')}
-                                    type='text'
-                                    autoComplete='on'
-                                    placeholder='কার আত্মীয়র সমস্যা ছিল'
-                                    value={dataForm?.whichPerson}
-                                    onChange={(event) => UpdateForm({whichPerson: event.target.value})}
-                                />
-                            </div>
-                            {/* :null
-                        } */}
+                        <div className="form-group">
+                            <label className="addform-label">৩৩. কার ছিল?</label>
+                            <input 
+                                className="form-control" 
+                                required={(dataForm.babyMotherAnemia === '0' || dataForm.babyFatherAnemia === '0')}
+                                disabled={!(dataForm.babyMotherAnemia === '0' || dataForm.babyFatherAnemia === '0')}
+                                type='text'
+                                autoComplete='on'
+                                placeholder='কার আত্মীয়র সমস্যা ছিল'
+                                value={dataForm?.whichPerson}
+                                onChange={(event) => UpdateForm({whichPerson: event.target.value})}
+                            />
+                        </div>
                     </div>
                     
-                    <div className="col-sm-6">
+                    <div className="col-sm-6 mar-top">
                         <div className="form-group">
                             <label className="addform-label">৩৪. শিশুর বাবা ও মা এর কি বিবাহের পূর্বে আত্মীয়তা ছিল?</label>
                             <select className="form-control" required 
@@ -252,7 +248,7 @@ export default function FormPartThree({dataId, dataForm, UpdateForm, callBack}){
                             />
                         </div>
                     </div>
-                    <div className="col-sm-6">
+                    <div className="col-sm-6 mar-top">
                         <div className="form-group">
                             <label className="addform-label">৩৬. আপনি কি কখনো থালাসেমিয়া রোগের নাম শুনেছন?</label>
                             <select className="form-control" required 
@@ -318,7 +314,7 @@ export default function FormPartThree({dataId, dataForm, UpdateForm, callBack}){
                         }
                     </div>
 
-                    <div className="col-sm-6">
+                    <div className="col-sm-6 mar-top">
                         <div className="form-group">
                             <label className="addform-label">৩৮. ডক্টর নোট </label>
                             <textarea 

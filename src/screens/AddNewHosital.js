@@ -39,7 +39,7 @@ export default function AddNewHospital(){
                                 />
                             </div>
                         </div>
-                        <div className='col-sm-6'>
+                        <div className='col-sm-6 mar-top'>
                             <div className="form-group">
                                 <label className="addform-label">ঠিকানাঃ</label>
                                 <textarea 

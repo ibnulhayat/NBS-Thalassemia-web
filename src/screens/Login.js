@@ -19,7 +19,7 @@ export default function Login() {
         if(loginData?.accessToken) navigate('/dashboard')
     })
 
-    console.log("logdata", loginData)
+    // console.log("logdata", loginData)
 
     const handleValidation = (event) => {
         let formIsValid = true;

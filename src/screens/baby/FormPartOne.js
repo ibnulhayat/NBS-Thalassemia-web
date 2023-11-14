@@ -58,7 +58,7 @@ export default function FormPartOne({dataId, dataForm, UpdateForm, callBack}){
                             />
                         </div>
                     </div>
-                    <div className="col-sm-6">
+                    <div className="col-sm-6 mar-top">
                         <div className="form-group">
                             <label className="addform-label">২.প্রথম মোবাইল নাম্বারঃ</label>
                             <input 
@@ -96,7 +96,7 @@ export default function FormPartOne({dataId, dataForm, UpdateForm, callBack}){
                             />
                         </div>
                     </div>
-                    <div className="col-sm-6">
+                    <div className="col-sm-6 mar-top">
                         <div className="form-group">
                             <label className="addform-label">৪. শিশুর নাম?</label>
                             <input
@@ -127,7 +127,7 @@ export default function FormPartOne({dataId, dataForm, UpdateForm, callBack}){
                             </select>
                         </div>
                     </div>
-                    <div className="col-sm-6">
+                    <div className="col-sm-6 mar-top">
                         <div className="form-group">
                             <label className="addform-label">৬. শিশুর মায়ের নাম কি?</label>
                             <input 
@@ -164,7 +164,7 @@ export default function FormPartOne({dataId, dataForm, UpdateForm, callBack}){
                             />
                         </div>
                     </div>
-                    <div className="col-sm-6">
+                    <div className="col-sm-6 mar-top">
                         <div className="form-group">
                             <label className="addform-label">৮. শিশুর কি ধরনের প্রসব হয়েছে?</label>
                             <select className="form-control" 
@@ -200,7 +200,7 @@ export default function FormPartOne({dataId, dataForm, UpdateForm, callBack}){
                             />
                         </div>
                     </div>
-                    <div className="col-sm-6">
+                    <div className="col-sm-6 mar-top">
                         <div className="form-group">
                         <label className="addform-label">১০. শিশুর বয়স?</label>
                             <input 

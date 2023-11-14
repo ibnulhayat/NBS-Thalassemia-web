@@ -43,7 +43,7 @@ export default function AddNewNurs(){
                             />
                         </div>
                     </div>
-                    <div className='col-sm-6'>
+                    <div className='col-sm-6 mar-top'>
                         <div className="form-group">
                             <label className="addform-label">পদবীঃ</label>
                             <input 
@@ -59,7 +59,7 @@ export default function AddNewNurs(){
                     </div>
                 </div>
                 <div className="row mt-3">
-                    <div className='col-sm-6'>
+                    <div className='col-md-6 col-sm-6 mar-top'>
                         <div className="form-group">
                             <label className="addform-label">হাসপাতালের নামঃ</label>
                             <select 
