@@ -43,7 +43,11 @@ async function GETCall(urlPart, header = {}, params = {}){
         
     } catch (error) {
         console.log("GETRequest tryError",error)
-        return error?.response?.data
+        if(error?.message == 'Network Error'){
+            return 'Network Error'
+        }else{
+            return error?.response?.data
+        }
     }
 }
 
