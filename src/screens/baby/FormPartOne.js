@@ -100,8 +100,7 @@ export default function FormPartOne({dataId, dataForm, UpdateForm, callBack}){
                         <div className="form-group">
                             <label className="addform-label">৪. শিশুর নাম?</label>
                             <input
-                                className="form-control" 
-                                required 
+                                className="form-control"  
                                 type='text'
                                 autoComplete='on'
                                 placeholder='শিশুর নাম'
@@ -133,7 +132,6 @@ export default function FormPartOne({dataId, dataForm, UpdateForm, callBack}){
                             <input 
                                 className="form-control" 
                                 type='text'
-                                required
                                 autoComplete='on'
                                 placeholder='শিশুর মায়ের নাম'
                                 value={dataForm?.babyMotherName}
