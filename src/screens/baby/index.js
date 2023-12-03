@@ -26,10 +26,6 @@ export default function BabyInfo(){
         
     },[])
 
-    const getList = async() =>{
-        const response =  await Service.getBabyList()
-        setBabysList(response)
-    }
 
     // console.log("babysList ", babysList)
     const inputSearch = (input) => {

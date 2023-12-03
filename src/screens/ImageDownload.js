@@ -16,7 +16,7 @@ export default function ImageDownload(){
     const params = useSearchParams()
     const id = params[0].get('id')
     const image = params[0].get('im')    
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(true)
     const [details, setDetails] = useState('')
 
     // console.log("params", id, image)
@@ -72,90 +72,95 @@ export default function ImageDownload(){
 		// });
     }
     return (
-        <div className='col bg-white'>
-            {   
-                // !loading? <img src={url} alt="test" />
-                // :
-                loading ?<img src={loaderImage} alt="test" className='loader'/>
-                :
-                <div className='d-flex align-items-center justify-content-center border'>
-                    <div className='m-3 ' style={{ width: 800}} ref={pdfRef}>
-                        <div className='row m-5 mb-0 justify-content-between' >
-                            <img src={govt} alt="test" className='pdf-logo'/>
-                            <img src={nilmrc} alt="test" className='pdf-logo'/>
-                        </div>
-                        <div className='m-3'>
-                            <p className="addform-label text-success pdf-text" >Government of the People's Republic of Bangladesh</p>
-                            <p className="addform-label text-danger pdf-text" >NATIONAL INSTITUTE OF LABORATORY MEDICINE & REFERRAL CENTRE</p>
-                            <p className="addform-label text-danger pdf-text" >“Newborn Thalassemia Screening Project”</p>
-                        </div>
-                        <div className='row m-5' >
-                            <table className='table table-borderless'>
-                                
-                                <tbody>
-                                    <tr>
-                                        <th>Patient Name: </th>
-                                        <td>baby of {details?.motherName}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Mobile number: </th>
-                                        <td>{details?.mobileNumber2? `${details?.mobileNumber},${details?.mobileNumber2}`: details?.mobileNumber}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Age: </th>
-                                        <td>{details?.bloodCollectAge} days</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Collection date: </th>
-                                        <td>{formatDate(details?.sampleCollectDate)}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Sample: </th>
-                                        <td>DBS(Dry Blood Sample) from heel pad capillary blood.</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Method: </th>
-                                        <td>Isoelectric focusing (IEF) electrophoresis.</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Result: </th>
-                                        <td>{details?.testResult}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            {
-                                details?.testResult == 'Positive'?
-                                    <table className='table table-borderless'>
-                                        
-                                        <tbody>
-                                            <tr>
-                                                <th>Advice: </th>
-                                                <td>1. Capillary Hb Electrophoresis after 1 year of age.<br/>2. Family screening.
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>Note: </th>
-                                                <td>
-                                                    Capillary electrophoresis of baby at the age of 1 year will be done for free from this project.<br/>Father’s and mother’s thalassemia screening will be done for free from this project.
-                                                </td>
-                                            </tr>
+        <>{
+             
+            loading ?
+            <div className='modal-main'>
+            {/* <img src={loader} alt="test" className='loader'/> */}
+                <img src={loaderImage} alt="test" className='loader'/>
+            </div>
+            :
+                <div className='col bg-white'>
+                    
+                    <div className='d-flex align-items-center justify-content-center border'>
+                        <div className='m-3 ' style={{ width: 800}} ref={pdfRef}>
+                            <div className='row m-5 mb-0 justify-content-between' >
+                                <img src={govt} alt="test" className='pdf-logo'/>
+                                <img src={nilmrc} alt="test" className='pdf-logo'/>
+                            </div>
+                            <div className='m-3'>
+                                <p className="addform-label text-success pdf-text" >Government of the People's Republic of Bangladesh</p>
+                                <p className="addform-label text-danger pdf-text" >NATIONAL INSTITUTE OF LABORATORY MEDICINE & REFERRAL CENTRE</p>
+                                <p className="addform-label text-danger pdf-text" >“Newborn Thalassemia Screening Project”</p>
+                            </div>
+                            <div className='row m-5' >
+                                <table className='table table-borderless'>
+                                    
+                                    <tbody>
+                                        <tr>
+                                            <th>Patient Name: </th>
+                                            <td>baby of {details?.motherName}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Mobile number: </th>
+                                            <td>{details?.mobileNumber2? `${details?.mobileNumber},${details?.mobileNumber2}`: details?.mobileNumber}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Age: </th>
+                                            <td>{details?.bloodCollectAge} days</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Collection date: </th>
+                                            <td>{formatDate(details?.sampleCollectDate)}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Sample: </th>
+                                            <td>DBS(Dry Blood Sample) from heel pad capillary blood.</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Method: </th>
+                                            <td>Isoelectric focusing (IEF) electrophoresis.</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Result: </th>
+                                            <td>{details?.testResult}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                {
+                                    details?.testResult == 'Positive'?
+                                        <table className='table table-borderless'>
                                             
-                                        </tbody>
-                                    </table>
-                                : null
-                            }
+                                            <tbody>
+                                                <tr>
+                                                    <th>Advice: </th>
+                                                    <td>1. Capillary Hb Electrophoresis after 1 year of age.<br/>2. Family screening.
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Note: </th>
+                                                    <td>
+                                                        Capillary electrophoresis of baby at the age of 1 year will be done for free from this project.<br/>Father’s and mother’s thalassemia screening will be done for free from this project.
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    : null
+                                }
+                            </div>
                         </div>
                     </div>
+                
+                    <div className='d-flex p-5 justify-content-center'>
+                        <Button 
+                            variant='primary'
+                            className="button me-5 float-end"
+                            onClick={() => downloadPdf()}
+                        >Download</Button>
+                    </div>
                 </div>
-            }
-            <div className='d-flex p-5 justify-content-center'>
-                <Button 
-                    variant='primary'
-                    className="button me-5 float-end"
-                    onClick={() => downloadPdf()}
-                >Download</Button>
-            </div>
-        </div>
+        }</>
     )
 }
 function formatDate(timestamp) {
@@ -167,7 +172,7 @@ function formatDate(timestamp) {
     ].join('/');
 }
 function padTo2Digits(num) {
-return num.toString().padStart(2, '0');
+    return num.toString().padStart(2, '0');
 }
 const delay = ms => new Promise(
     resolve => setTimeout(resolve, ms)

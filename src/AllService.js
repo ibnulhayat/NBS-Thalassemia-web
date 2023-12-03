@@ -12,7 +12,7 @@ async function POSTCall(urlPart, formData, header = {}){
         headers: header
         
     }
-    // console.log('variables', variables)
+    console.log('variables', variables)
     try {
         const response = await axios(variables)
         // console.log("PostRequest response", response)
@@ -384,7 +384,7 @@ export async function DownloadPatientReport(id, imageKey){
             images: imageKey
         }
         const response = await GETCall("api/v1/vault/patient/report", null, data)
-        // return response
+        return response
         return {
             "code": 0,
             "data": {
