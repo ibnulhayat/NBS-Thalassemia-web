@@ -23,10 +23,13 @@ export default function Dashboard() {
 
     const resData =  await Service.getDashBoardData()
     console.log("getDashBoardData ", resData)
-    if(resData?.message === "access token not found"){
+    if(resData == 'Network Error'){
+      alert('Please check your internet connection.')
+      return null
+    }else if(resData?.message === "access token not found"){
       Service.logOut()
       navigate('/')
-    }else{
+    }else if(resData){
       await Service.getBabyList()
       const resh = await Service.getHospitalList()
       Service.getNursList()
