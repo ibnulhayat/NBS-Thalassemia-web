@@ -29,7 +29,7 @@ export default function Dashboard() {
     }else if(resData?.message === "access token not found"){
       Service.logOut()
       navigate('/')
-    }else if(resData){
+    }else if(resData?.length > 0){
       await Service.getBabyList()
       const resh = await Service.getHospitalList()
       Service.getNursList()

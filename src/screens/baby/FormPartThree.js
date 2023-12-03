@@ -70,7 +70,6 @@ export default function FormPartThree({dataId, dataForm, UpdateForm, callBack}){
                             <label className="addform-label">২৫. শিশুর পূর্ববর্তী কোন সন্তান আছে কি?</label>
                             <select 
                                 className="form-control" 
-                                required 
                                 value={dataForm?.previousAnyChildren}
                                 onChange={(event) => UpdateForm({
                                     previousAnyChildren: event.target.value,
@@ -124,7 +123,7 @@ export default function FormPartThree({dataId, dataForm, UpdateForm, callBack}){
                     <div className="col-sm-6 mar-top">
                         <div className="form-group">
                             <label className="addform-label">২৮. শিশুর বাবা ও মা এর কি বিবাহের পূর্বে কোন ধরনের রক্তের পরীক্ষা করা হয়েছিল?</label>
-                            <select className="form-control" required 
+                            <select className="form-control" 
                                 onChange={(event) => UpdateForm({beforeMarriageBloodTest: event.target.value})}
                                 value={dataForm?.beforeMarriageBloodTest}
                             >
@@ -141,7 +140,7 @@ export default function FormPartThree({dataId, dataForm, UpdateForm, callBack}){
                     <div className="col-sm-6">
                         <div className="form-group">
                             <label className="addform-label">২৯. শিশুর মা শিশু গর্ভ অবস্থায় থাকাকালে কি গর্ভকালীন স্বাস্থ্য সেবা নিয়েছিলেন?</label>
-                            <select className="form-control" required 
+                            <select className="form-control" 
                                 onChange={(event) => UpdateForm({antenatalHealthcare: event.target.value})}
                                 value={dataForm?.antenatalHealthcare}
                             >
@@ -154,7 +153,7 @@ export default function FormPartThree({dataId, dataForm, UpdateForm, callBack}){
                     <div className="col-sm-6 mar-top">
                         <div className="form-group">
                             <label className="addform-label">৩০. শিশুর মা কি টিটি টিকা নিয়েছিলেন?</label>
-                            <select className="form-control" required 
+                            <select className="form-control" 
                                 onChange={(event) => UpdateForm({ttVaccine: event.target.value})}
                                 value={dataForm?.ttVaccine}
                             >
@@ -170,7 +169,7 @@ export default function FormPartThree({dataId, dataForm, UpdateForm, callBack}){
                     <div className="col-sm-6">
                         <div className="form-group">
                             <label className="addform-label">৩১. শিশুর মায়ের দিকের আত্মীয়দের মধ্যে কারো রক্তশূন্যতা জনিত সমস্যা অথবা বারবার রক্ত নিতে হয় এই ধরনের সমস্যা আছে কি?</label>
-                            <select className="form-control" required 
+                            <select className="form-control" 
                                 onChange={(event) => UpdateForm({babyMotherAnemia: event.target.value})}
                                 value={dataForm?.babyMotherAnemia}
                             >
@@ -184,7 +183,7 @@ export default function FormPartThree({dataId, dataForm, UpdateForm, callBack}){
                     <div className="col-sm-6 mar-top">
                         <div className="form-group">
                             <label className="addform-label">৩২. শিশুর বাবা অথবা বাবার দিকে আত্মীয়র মধ্যে কারো রক্তশূন্যতা জনিত সমস্যা অথবা বারবার রক্ত নিতে হয় এ ধরনের সমস্যা আছে কি?</label>
-                            <select className="form-control" required 
+                            <select className="form-control" 
                                 onChange={(event) => UpdateForm({babyFatherAnemia: event.target.value})}
                                 value={dataForm?.babyFatherAnemia}
                             >
@@ -218,7 +217,7 @@ export default function FormPartThree({dataId, dataForm, UpdateForm, callBack}){
                     <div className="col-sm-6 mar-top">
                         <div className="form-group">
                             <label className="addform-label">৩৪. শিশুর বাবা ও মা এর কি বিবাহের পূর্বে আত্মীয়তা ছিল?</label>
-                            <select className="form-control" required 
+                            <select className="form-control" 
                                 onChange={(event) => UpdateForm({parentsAreRelative: event.target.value})}
                                 value={ dataForm?.parentsAreRelative}
                             >
@@ -251,7 +250,7 @@ export default function FormPartThree({dataId, dataForm, UpdateForm, callBack}){
                     <div className="col-sm-6 mar-top">
                         <div className="form-group">
                             <label className="addform-label">৩৬. আপনি কি কখনো থালাসেমিয়া রোগের নাম শুনেছন?</label>
-                            <select className="form-control" required 
+                            <select className="form-control" 
                                 onChange={(event) => UpdateForm({knowAboutThalassemia: event.target.value})}
                                 value={dataForm?.knowAboutThalassemia}
                             >

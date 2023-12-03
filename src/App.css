@@ -365,3 +365,13 @@ a:hover {
   height: 10%;
   align-self: center;
 }
+
+.pdf-logo {
+  height: 80px;
+  width: 100px;
+}
+.pdf-text {
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}

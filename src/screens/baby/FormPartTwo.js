@@ -33,7 +33,7 @@ export default function FormPartTwo({dataId, dataForm, UpdateForm, callBack}){
                         <div className="form-group">
                             <label className="addform-label">১১. হাসপাতালের নাম কি?</label>
                             <select 
-                                required
+                                
                                 className="form-control"
                                 value={dataForm?.hospitalId}
                                 onChange={(event) => {
@@ -55,7 +55,7 @@ export default function FormPartTwo({dataId, dataForm, UpdateForm, callBack}){
                             <label className="addform-label">১২. সাক্ষাৎকার গ্রহণকারীর নাম কি?</label>
                             <select 
                                 className="form-control"
-                                required
+                                
                                 value={dataForm?.nameOfInterviewer}
                                 onChange={(event) => UpdateForm({nameOfInterviewer: event.target.value})}
                             >
@@ -76,7 +76,7 @@ export default function FormPartTwo({dataId, dataForm, UpdateForm, callBack}){
                             <label className="addform-label">১৩. ঠিকানা কি?</label>
                             <input 
                                 className="form-control" 
-                                required 
+                                 
                                 type='text'
                                 autoComplete='on'
                                 value={dataForm?.address}
@@ -90,7 +90,7 @@ export default function FormPartTwo({dataId, dataForm, UpdateForm, callBack}){
                             <label className="addform-label">১৪. শিশুর মায়ের বয়স?</label>
                             <input 
                                 className="form-control" 
-                                required 
+                                 
                                 min={'0'}
                                 autoComplete='on'
                                 type='number'
@@ -108,7 +108,7 @@ export default function FormPartTwo({dataId, dataForm, UpdateForm, callBack}){
                             <label className="addform-label">১৫. বিবাহের সময় শিশুর মায়ের বয়স ছিল?</label>
                             <input 
                                 className="form-control" 
-                                required 
+                                 
                                 autoComplete='on'
                                 type='number'
                                 placeholder='উদাহরণঃ ২০/২১'
@@ -122,7 +122,7 @@ export default function FormPartTwo({dataId, dataForm, UpdateForm, callBack}){
                             <label className="addform-label">১৬. শিশুর বাবা/অভিভাবকের নাম কি?</label>
                             <input 
                                 className="form-control" 
-                                required 
+                                 
                                 type='text'
                                 autoComplete='on'
                                 placeholder='শিশুর বাবা/অভিভাবকের নাম'
@@ -140,7 +140,7 @@ export default function FormPartTwo({dataId, dataForm, UpdateForm, callBack}){
                             <label className="addform-label">১৭. শিশুর বাবার বয়স?</label>
                             <input 
                                 className="form-control" 
-                                required 
+                                 
                                 type='number'
                                 autoComplete='on'
                                 placeholder='উদাহরণঃ ২০/২১'
@@ -154,7 +154,7 @@ export default function FormPartTwo({dataId, dataForm, UpdateForm, callBack}){
                             <label className="addform-label">১৮. সাক্ষাৎকার প্রদানকারী সহিত শিশুর সম্পর্ক কি?</label>
                             <input 
                                 className="form-control" 
-                                required 
+                                 
                                 autoComplete='on'
                                 type='text'
                                 placeholder='শিশুর সহিত সম্পর্ক'
@@ -171,7 +171,7 @@ export default function FormPartTwo({dataId, dataForm, UpdateForm, callBack}){
                     <div className="col-sm-6">
                         <div className="form-group">
                             <label className="addform-label">১৯. শিশুর মায়ের শিক্ষাগত যোগ্যতা কি?</label>
-                            <select className="form-control" required 
+                            <select className="form-control"  
                                 onChange={(event) => UpdateForm({babyMotherEduQualification: event.target.value})}
                                 value={dataForm?.babyMotherEduQualification}
                             >
@@ -190,7 +190,7 @@ export default function FormPartTwo({dataId, dataForm, UpdateForm, callBack}){
                     <div className="col-sm-6 mar-top">
                         <div className="form-group">
                             <label className="addform-label">২০. শিশুর বাবার শিক্ষাগত যোগ্যতা কি?</label>
-                            <select className="form-control" required 
+                            <select className="form-control"  
                                 onChange={(event) => UpdateForm({babyFatherEduQualification: event.target.value})}
                                 value={dataForm?.babyFatherEduQualification}
                             >
@@ -214,7 +214,7 @@ export default function FormPartTwo({dataId, dataForm, UpdateForm, callBack}){
                     <div className="col-sm-6">
                         <div className="form-group">
                             <label className="addform-label">২১. শিশুর মায়ের পেশা কি?</label>
-                            <select className="form-control" required 
+                            <select className="form-control"  
                                 onChange={(event) => UpdateForm({babyMotherOccupation: event.target.value})}
                                 value={dataForm?.babyMotherOccupation}
                             >
@@ -233,7 +233,7 @@ export default function FormPartTwo({dataId, dataForm, UpdateForm, callBack}){
                     <div className="col-sm-6 mar-top">
                         <div className="form-group">
                             <label className="addform-label"> ২২. শিশুর বাবার পেশা কি?</label>
-                            <select className="form-control" required 
+                            <select className="form-control"  
                                 onChange={(event) => UpdateForm({babyFatherOccupation: event.target.value})}
                                 value={dataForm?.babyFatherOccupation}
                             >
@@ -259,7 +259,7 @@ export default function FormPartTwo({dataId, dataForm, UpdateForm, callBack}){
                             <label className="addform-label">২৩. পরিবারের সম্ভাব্য মাসিক খরচ কত টাকা?</label>
                             <input 
                                 className="form-control" 
-                                required 
+                                 
                                 type='number'
                                 min='0'
                                 autoComplete='on'
@@ -273,8 +273,7 @@ export default function FormPartTwo({dataId, dataForm, UpdateForm, callBack}){
                         <div className="form-group">
                             <label className="addform-label">২৪. পরিবারের সদস্য সংখ্যা কতজন?</label>
                             <input 
-                                className="form-control" 
-                                required 
+                                className="form-control"  
                                 type='number'
                                 autoComplete='on'
                                 placeholder='উদাহরনঃ- ২/৪/৫'

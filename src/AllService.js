@@ -68,6 +68,22 @@ export async function checkLogin(email, password){
     
 }
 
+async function RefreshToken(){
+    const auth = Storage.getLocalStorageData('loginData')
+    const header = { 'Authorization': auth?.accessToken}
+    const apiName = 'api/v1/auth/refresh-access-token'
+    const response = await POSTCall(apiName, {"refresh": auth?.refreshToken}, header)
+
+    if(response?.code === 1){
+        auth.accessToken = response?.data?.access
+        console.log("RefreshToken ", auth,response?.data)
+        Storage.setInLocalStorage("loginData", auth)
+       return true
+    }else{
+        return false
+    }
+} 
+
 export async function PostRequest(data){
     const auth = Storage.getLocalStorageData('loginData')
     const header = { 'Authorization': auth?.accessToken}
@@ -142,6 +158,11 @@ export async function getDashBoardData(){
         Storage.setInLocalStorage('summaries', newList)
 
        return newList
+    }else if(response?.message == "access token expired"){
+       const response = await RefreshToken()
+       if(response){
+        return await getDashBoardData()
+       }
     }else{
         return response
     }
@@ -363,8 +384,25 @@ export async function DownloadPatientReport(id, imageKey){
             images: imageKey
         }
         const response = await GETCall("api/v1/vault/patient/report", null, data)
-        return response
+        // return response
+        return {
+            "code": 0,
+            "data": {
+              "urls": [
+                "string"
+              ],
+              "name": "string",
+              "type": 0,
+              "motherName": "string",
+              "dob": "string",
+              "bloodCollectAge": 0,
+              "sampleCollectDate": "string",
+              "testResult": "nagative",
+              "mobileNumber": "string",
+              "mobileNumber2": "string"
+            }
+        }
     } catch (error) {
-        
+        return false
     }
 }
