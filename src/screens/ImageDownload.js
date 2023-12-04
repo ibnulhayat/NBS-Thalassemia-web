@@ -52,24 +52,10 @@ export default function ImageDownload(){
             const ratio = Math.min(pdfWidth/imgWidth, pdfHeight/imgHeight)
             const imageX = (pdfWidth - imgWidth * ratio) / 2
             
-            pdf.addImage(imageData, 'JPEG', imageX, 30, imgWidth * ratio, imgHeight * ratio)
+            pdf.addImage(imageData, 'JPEG', imageX, 10, imgWidth * ratio, imgHeight * ratio)
             pdf.save("download.pdf");
         })
 
-
-        // const doc = new jsPDF({
-		// 	format: 'a4',
-		// 	unit: 'px',
-		// });
-
-		// // Adding the fonts.
-		// doc.setFont('Inter-Regular', 'normal')
-
-		// doc.html(pdfRef.current, {
-		// 	async callback(doc) {
-		// 		await doc.save('document')
-		// 	},
-		// });
     }
     return (
         <>{
@@ -85,7 +71,7 @@ export default function ImageDownload(){
                     <div className='d-flex align-items-center justify-content-center border'>
                         <div className='m-3 ' style={{ width: 800}} ref={pdfRef}>
                             <div className='row m-5 mb-0 justify-content-between' >
-                                <img src={govt} alt="test" className='pdf-logo'/>
+                                <img src={govt} alt="test" className='pdf-logo' style={{width: 105}}/>
                                 <img src={nilmrc} alt="test" className='pdf-logo'/>
                             </div>
                             <div className='m-3'>
@@ -98,47 +84,56 @@ export default function ImageDownload(){
                                     
                                     <tbody>
                                         <tr>
-                                            <th>Patient Name: </th>
-                                            <td>baby of {details?.motherName}</td>
+                                            <th>Patient Name</th>
+                                            <th>:</th>
+                                            <td>Baby of {details?.motherName}</td>
                                         </tr>
                                         <tr>
-                                            <th>Mobile number: </th>
-                                            <td>{details?.mobileNumber2? `${details?.mobileNumber},${details?.mobileNumber2}`: details?.mobileNumber}</td>
+                                            <th>Mobile number</th>
+                                            <th>:</th>
+                                            <td>{details?.mobileNumber2? `${details?.mobileNumber}, ${details?.mobileNumber2}`: details?.mobileNumber}</td>
                                         </tr>
                                         <tr>
-                                            <th>Age: </th>
+                                            <th>Age</th>
+                                            <th>:</th>
                                             <td>{details?.bloodCollectAge} days</td>
                                         </tr>
                                         <tr>
-                                            <th>Collection date: </th>
+                                            <th>Collection date</th>
+                                            <th>:</th>
                                             <td>{formatDate(details?.sampleCollectDate)}</td>
                                         </tr>
                                         <tr>
-                                            <th>Sample: </th>
+                                            <th>Sample</th>
+                                            <th>:</th>
                                             <td>DBS(Dry Blood Sample) from heel pad capillary blood.</td>
                                         </tr>
                                         <tr>
-                                            <th>Method: </th>
+                                            <th>Method</th>
+                                            <th>:</th>
                                             <td>Isoelectric focusing (IEF) electrophoresis.</td>
                                         </tr>
                                         <tr>
-                                            <th>Result: </th>
-                                            <td>{details?.testResult}</td>
+                                            <th>Result</th>
+                                            <th>:</th>
+                                            <td className={`fw-bold ${details?.testResult=='TRT_POSITIVE'?'text-danger':'text-success'}`}>{details?.testResult=='TRT_NEGATIVE'?'Negative': details?.testResult=='TRT_POSITIVE'?'Positive':''}</td>
                                         </tr>
                                     </tbody>
                                 </table>
                                 {
-                                    details?.testResult == 'Positive'?
+                                    details?.testResult == 'TRT_POSITIVE'?
                                         <table className='table table-borderless'>
                                             
                                             <tbody>
                                                 <tr>
-                                                    <th>Advice: </th>
+                                                    <th>Advice</th>
+                                                    <th>:</th>
                                                     <td>1. Capillary Hb Electrophoresis after 1 year of age.<br/>2. Family screening.
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <th>Note: </th>
+                                                    <th>Note</th>
+                                                    <th>:</th>
                                                     <td>
                                                         Capillary electrophoresis of baby at the age of 1 year will be done for free from this project.<br/>Father’s and mother’s thalassemia screening will be done for free from this project.
                                                     </td>
