@@ -2,7 +2,7 @@ import axios from "axios"
 import { Navigate } from "react-router-dom"
 import * as Storage from './Storage.js'
 
-const BASE_URL = "http://api-nbs-thalassemia.exhortbd.com/"
+const BASE_URL = "https://api-nbs-thalassemia.exhortbd.com/"
 
 async function POSTCall(urlPart, formData, header = {}){
     const variables = {
@@ -225,16 +225,26 @@ export async function PostRequestBabyInfo(data, uploadStatus, imageFile, message
                 if(dataForm?.IsSmsSend){
                     const variables = {
                         phoneNumber: dataForm?.mobileNumber2? `${dataForm?.mobileNumber},${dataForm?.mobileNumber2}`: dataForm?.mobileNumber,
-                        body: `${message} \nDownload Report: http://nbs-thalassemia.exhortbd.com/view?id=${babyId}&im=${imageRes?.data?.name}`
+                        body: `${message} \nDownload Report: https://nbs-thalassemia.exhortbd.com/view?id=${babyId}&im=${imageRes?.data?.name}`
                     }
                     // console.log("sendSMS variables", variables)
                     const response = await POSTCall('api/v1/vault/sms/send', variables, header)
                     // console.log("sendSMS response", response)
+                    return true
                 }
             }
             // console.log("imageres", imageRes)
+        }else if(dataForm?.IsSmsSend){
+            const variables = {
+                phoneNumber: dataForm?.mobileNumber2? `${dataForm?.mobileNumber},${dataForm?.mobileNumber2}`: dataForm?.mobileNumber,
+                body: `${message} \nDownload Report: https://nbs-thalassemia.exhortbd.com/view?id=${babyId}`
+            }
+            // console.log("sendSMS variables", variables)
+            const response = await POSTCall('api/v1/vault/sms/send', variables, header)
+            // console.log("sendSMS response", response)
+            return true
         }
-        return true
+        
     }else{
         return false
     }
