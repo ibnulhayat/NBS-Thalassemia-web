@@ -1,14 +1,26 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 import InnerLayer from '../global/InnerLayer';
 import * as Service from './../AllService'
+import * as Store from './../Storage'
+
 
 export default function AddNewHospital(){
+    const navigate = useNavigate()
+    const hospitalList = Store.getLocalStorageData('hospitalList')
+
     const [dataForm, setDataForm] = useState({
         name: '',
         address: ''
     })
+
+    useEffect(()=>{
+        if(!hospitalList){
+            navigate('/dashboard')
+        }
+    },[])
 
     const UpdateForm = (data) =>{
         setDataForm({...dataForm, ...data})

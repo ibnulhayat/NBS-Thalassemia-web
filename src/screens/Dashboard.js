@@ -21,14 +21,11 @@ export default function Dashboard() {
   
   const getCall = async() =>{
 
-    const resData =  await Service.getDashBoardData()
-    console.log("getDashBoardData ", resData)
+    const resData =  await Service.getDashBoardData(navigate)
+
     if(resData == 'Network Error'){
       alert('Please check your internet connection.')
       return null
-    }else if(resData?.message === "access token not found"){
-      Service.logOut()
-      navigate('/')
     }else if(resData?.length > 0){
       await Service.getBabyList()
       const resh = await Service.getHospitalList()
@@ -43,7 +40,7 @@ export default function Dashboard() {
   const selectSearch = (itemId) =>{
     const list = Store.getLocalStorageData('summaries')
     if( itemId ){
-      const newList = list.filter(ele => ele?.hospitalId === itemId)
+      const newList = list?.filter(ele => ele?.hospitalId === itemId)
       setSumarryList(newList)
     }else{
       setSumarryList(list ? list: [] )
@@ -53,7 +50,7 @@ export default function Dashboard() {
 
   const totalCount = () =>{
     let count = 0
-    Store.getLocalStorageData('summaries').map(ele => count += (ele?.unknown + ele?.positive + ele?.negative))
+    Store.getLocalStorageData('summaries')?.map(ele => count += (ele?.unknown + ele?.positive + ele?.negative))
     setTotalCasse(count)
   }
 

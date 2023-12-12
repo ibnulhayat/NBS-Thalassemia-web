@@ -145,13 +145,14 @@ export async function getBabyList(){
 }
 
 
-export async function getDashBoardData(){
+export async function getDashBoardData(navigate){
     const auth = Storage.getLocalStorageData('loginData')
     const header = { 'Authorization': auth?.accessToken}
 
     const response = await GETCall("api/v1/vault/sms/send", header)
-
+    
     if(response?.code === 0){
+        GetSMSFromServer()
         // console.log("summaries ", response?.data?.summaries)
         const newList = response?.data?.summaries?.length > 0 ?
             groupByHospitalId(response?.data?.summaries) : []
@@ -163,7 +164,11 @@ export async function getDashBoardData(){
        if(response){
         return await getDashBoardData()
        }
-    }else{
+    }else if(response?.message === "access token not found" || response?.message === "authorization header is not present"){
+        logOut()
+        navigate('/')
+    }
+    else{
         return response
     }
 }
@@ -174,13 +179,13 @@ function groupByHospitalId(list){
         const existIndex = groundData.findIndex(ele => ele.hospitalId === list[index].hospitalId)
 
         if(existIndex === -1){
-        groundData.push({
-            hospitalId: list[index].hospitalId,
-            hospitalName: list[index].hospitalName,
-            negative: CallTot(list.filter(ele => ele.type === 2 && ele.hospitalId === list[index].hospitalId)),
-            positive: CallTot(list.filter(ele => ele.type === 1 && ele.hospitalId === list[index].hospitalId)),
-            unknown: CallTot(list.filter(ele => ele.type === 0 && ele.hospitalId === list[index].hospitalId))
-        })
+            groundData.push({
+                hospitalId: list[index].hospitalId,
+                hospitalName: list[index].hospitalName,
+                negative: CallTot(list.filter(ele => ele.type === 2 && ele.hospitalId === list[index].hospitalId)),
+                positive: CallTot(list.filter(ele => ele.type === 1 && ele.hospitalId === list[index].hospitalId)),
+                unknown: CallTot(list.filter(ele => ele.type === 0 && ele.hospitalId === list[index].hospitalId))
+            })
         }
     }
     return groundData
@@ -413,6 +418,36 @@ export async function DownloadPatientReport(id, imageKey){
             }
         }
     } catch (error) {
+        return false
+    }
+}
+
+export async function UpdateSMS(data){
+    const auth = Storage.getLocalStorageData('loginData')
+    const header = { 'Authorization': auth?.accessToken}
+    
+    const response = await POSTCall("api/v1/sms_pusher/template", data, header)
+    if(response?.code === 0){
+        GetSMSFromServer()
+        return true
+    }else{
+        return false
+    }
+}
+
+async function GetSMSFromServer(){
+    const auth = Storage.getLocalStorageData('loginData')
+    const header = { 'Authorization': auth?.accessToken}
+    
+    const response = await GETCall("api/v1/sms_pusher/templates", header)
+    if(response?.code === 0){
+        const templates = response?.data?.templates
+
+        if(templates?.length > 0){
+            Storage.setInLocalStorage('editsms', templates)
+        }
+        return true
+    }else{
         return false
     }
 }

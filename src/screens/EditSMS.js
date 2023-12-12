@@ -2,31 +2,35 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { Button } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 import * as Service from '../AllService'
 import InnerLayer from '../global/InnerLayer';
 import * as Store from '../Storage'
 
 export default function EditSMS(){
-    
+    const navigate = useNavigate()    
     
     const smsObject = Store.getLocalStorageData('editsms')
-    
-    const [dataForm, setDataForm] = useState(smsObject)
+        
+    useEffect(()=>{
+        if(!smsObject){
+            navigate('/dashboard')
+        }
+    },[])
+    const [posiData, setPosiData] = useState(smsObject?.filter(ele => ele?.type == 1)?.[0] || {})
+    const [negaData, setNwgaData] = useState(smsObject?.filter(ele => ele?.type == 2)?.[0] || {})
     const [showPos, setShowPos] = useState(true)
     const [showNeg, setShowNeg] = useState(true)
 
-    const UpdateForm = (data) =>{
-        setDataForm({...dataForm, ...data})
-    }
-    
+
     const savePositive = async(e) => {
         e.preventDefault();
-        Store.setInLocalStorage('editsms', dataForm)
+        await Service.UpdateSMS(posiData)
         setShowPos(!showPos)
     }
     const saveNagative = async(e) => {
         e.preventDefault();
-        Store.setInLocalStorage('editsms', dataForm)
+        await Service.UpdateSMS(negaData)
         setShowNeg(!showNeg)
     }
   
@@ -43,8 +47,8 @@ export default function EditSMS(){
                                 type='text'
                                 disabled={showPos}
                                 rows="6"
-                                value={dataForm.positiveMessage}
-                                onChange={(event) => UpdateForm({positiveMessage: event.target.value})}
+                                value={posiData?.body}
+                                onChange={(event) => setPosiData({...posiData, ...{body: event.target.value}})}
                             />
                         </div>
                         <div className='d-flex justify-content-center'>{
@@ -70,8 +74,8 @@ export default function EditSMS(){
                                 type='text'
                                 rows="6"
                                 disabled={showNeg}
-                                value={dataForm.negativeMessage}
-                                onChange={(event) => UpdateForm({negativeMessage: event.target.value})}
+                                value={negaData?.body}
+                                onChange={(event) => setNwgaData({...negaData, ...{body: event.target.value}})}
                             />
                         </div>
                         <div className='d-flex justify-content-center'>{

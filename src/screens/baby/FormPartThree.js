@@ -24,9 +24,9 @@ export default function FormPartThree({dataId, dataForm, UpdateForm, callBack}){
     const handleCheckClick = (value) =>{
         UpdateForm({IsSmsSend: value})
         if(value){
-            const mess = dataForm?.testResult === "TRT_POSITIVE"? `${dataForm?.babyMotherName} ${storeMessage?.positiveMessage}`
-            : `${dataForm?.babyMotherName} ${storeMessage?.negativeMessage}`
-            setMessage(mess)
+            const mess = dataForm?.testResult === "TRT_POSITIVE"? storeMessage?.filter(ele => ele?.type == 1)?.[0]
+            : storeMessage?.filter(ele => ele?.type == 2)?.[0] 
+            setMessage(`${dataForm?.babyMotherName} ${mess?.body}`)
         }else setMessage('')
     }
 
@@ -336,7 +336,7 @@ export default function FormPartThree({dataId, dataForm, UpdateForm, callBack}){
                                 <textarea 
                                     className="form-control" 
                                     type='text'
-                                    placeholder='Write something....'
+                                    placeholder='Write your message....'
                                     value={message}
                                     rows="4"
                                     onChange={(event) => setMessage(event.target.value)}

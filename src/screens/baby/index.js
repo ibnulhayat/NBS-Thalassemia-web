@@ -13,15 +13,17 @@ import loader from './../../image/loading.gif'
 
 export default function BabyInfo(){
     const navigate = useNavigate()
+    const localBabyList = Store.getLocalStorageData('babysList')
     const[babysList, setBabysList] = useState([])
     const [show, setShow] = useState(false)
     const [imageUrl, setImageUrl] = useState(false)
     const [loading, setLoading] = useState(false)
 
     useEffect(()=>{
-        const list = Store.getLocalStorageData('babysList')
-        if(list){
-            setBabysList(list)
+        if(localBabyList){
+            setBabysList(localBabyList)
+        }else{
+            navigate('/dashboard')
         }
         
     },[])
@@ -31,7 +33,7 @@ export default function BabyInfo(){
     const inputSearch = (input) => {
         const list = Store.getLocalStorageData('babysList')
         if(input && list){
-          let newList = list.filter(item => item?.CustomId.toLowerCase().indexOf(input.toLowerCase()) > -1 || item?.mobileNumber.indexOf(input) > -1)
+          let newList = list?.filter(item => item?.CustomId.toLowerCase().indexOf(input.toLowerCase()) > -1 || item?.mobileNumber.indexOf(input) > -1)
           setBabysList(newList)
         }else{
           setBabysList(list ? list: [] )
