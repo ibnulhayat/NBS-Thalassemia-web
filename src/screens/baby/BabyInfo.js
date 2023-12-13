@@ -13,18 +13,20 @@ import loader from './../../image/loading.gif'
 
 export default function BabyInfo(){
     const navigate = useNavigate()
-    const localBabyList = Store.getLocalStorageData('babysList')
-    const[babysList, setBabysList] = useState([])
+    const [babysList, setBabysList] = useState([])
     const [show, setShow] = useState(false)
     const [imageUrl, setImageUrl] = useState(false)
     const [loading, setLoading] = useState(false)
+     
 
     useEffect(()=>{
+        const localBabyList = Store.getLocalStorageData('babysList')
         if(localBabyList){
             setBabysList(localBabyList)
-        }else{
-            navigate('/dashboard')
         }
+        // else{
+        //     navigate('/dashboard')
+        // }
         
     },[])
 

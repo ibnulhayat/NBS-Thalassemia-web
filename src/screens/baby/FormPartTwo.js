@@ -14,7 +14,7 @@ export default function FormPartTwo({dataId, dataForm, UpdateForm, callBack}){
         if(dataId){
             setList(nurseList?.filter((item) => item?.hospitalId === dataForm?.hospitalId))
         }
-    },[])
+    },[dataId, dataForm, nurseList])
 
     const formTwoSubmit = async(e) => {
         e.preventDefault();

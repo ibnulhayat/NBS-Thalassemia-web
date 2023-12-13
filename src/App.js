@@ -8,7 +8,7 @@ import AddBabyForm from './screens/baby/AddBabyForm';
 import AddNewHospital from './screens/AddNewHosital';
 import AddNewNurs from './screens/AddNewNurs';
 import EditSMS from './screens/EditSMS';
-import BabyInfo from './screens/baby';
+import BabyInfo from './screens/baby/BabyInfo';
 import ImageDownload from './screens/ImageDownload';
 
 
