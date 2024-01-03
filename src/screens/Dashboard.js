@@ -23,14 +23,14 @@ export default function Dashboard() {
 
     const resData =  await Service.getDashBoardData(navigate)
 
-    if(resData == 'Network Error'){
+    if(resData === 'Network Error'){
       alert('Please check your internet connection.')
       return null
-    }else if(resData?.length > 0){
+    }else if(resData?.length > 0 || resData?.code === 0){
       await Service.getBabyList()
       const resh = await Service.getHospitalList()
       Service.getNursList()
-      setSumarryList(resData)
+      setSumarryList(resData?.data?.summaries || resData)
       setHospitalList(resh)
       totalCount()
     }

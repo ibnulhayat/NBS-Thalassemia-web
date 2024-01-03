@@ -1,5 +1,4 @@
 import axios from "axios"
-import { Navigate } from "react-router-dom"
 import * as Storage from './Storage.js'
 
 const BASE_URL = "https://api-nbs-thalassemia.exhortbd.com/"
@@ -12,7 +11,7 @@ async function POSTCall(urlPart, formData, header = {}){
         headers: header
         
     }
-    console.log('variables', variables)
+    // console.log('variables', variables)
     try {
         const response = await axios(variables)
         // console.log("PostRequest response", response)
@@ -43,7 +42,7 @@ async function GETCall(urlPart, header = {}, params = {}){
         
     } catch (error) {
         console.log("GETRequest tryError",error)
-        if(error?.message == 'Network Error'){
+        if(error?.message === 'Network Error'){
             return 'Network Error'
         }else{
             return error?.response?.data
@@ -150,16 +149,18 @@ export async function getDashBoardData(navigate){
     const header = { 'Authorization': auth?.accessToken}
 
     const response = await GETCall("api/v1/vault/sms/send", header)
-    
+
     if(response?.code === 0){
         GetSMSFromServer()
         // console.log("summaries ", response?.data?.summaries)
-        const newList = response?.data?.summaries?.length > 0 ?
-            groupByHospitalId(response?.data?.summaries) : []
-        Storage.setInLocalStorage('summaries', newList)
-
-       return newList
-    }else if(response?.message == "access token expired"){
+        if(response?.data?.summaries?.length > 0){
+            const newList = groupByHospitalId(response?.data?.summaries) 
+            Storage.setInLocalStorage('summaries', newList)
+            return newList
+        }else{
+            return response
+        }
+    }else if(response?.message === "access token expired"){
        const response = await RefreshToken()
        if(response){
         return await getDashBoardData()
@@ -212,7 +213,7 @@ export async function PostRequestBabyInfo(data, uploadStatus, imageFile, message
         // console.log("PostRequest ", response)
         const babyId = response?.data?.id
         dataForm.id = babyId
-        dataForm.testResult = data?.testResult == "TRT_UNKNOWN"? 0 :data?.testResult == "TRT_POSITIVE"? 1 : 2
+        dataForm.testResult = data?.testResult === "TRT_UNKNOWN"? 0 :data?.testResult === "TRT_POSITIVE"? 1 : 2
         updateLocalData('babysList', dataForm)
         
         if(imageFile){
@@ -226,14 +227,14 @@ export async function PostRequestBabyInfo(data, uploadStatus, imageFile, message
                 uploaderId: babyId
             }
             const imageRes = await POSTCall('api/v1/vault/image', variables, header)
-            if(imageRes?.code == 0){
+            if(imageRes?.code === 0){
                 if(dataForm?.IsSmsSend){
                     const variables = {
                         phoneNumber: dataForm?.mobileNumber2? `${dataForm?.mobileNumber},${dataForm?.mobileNumber2}`: dataForm?.mobileNumber,
                         body: `${message} \nDownload Report: https://nbs-thalassemia.exhortbd.com/view?id=${babyId}&im=${imageRes?.data?.name}`
                     }
                     // console.log("sendSMS variables", variables)
-                    const response = await POSTCall('api/v1/vault/sms/send', variables, header)
+                    await POSTCall('api/v1/vault/sms/send', variables, header)
                     // console.log("sendSMS response", response)
                     return true
                 }
@@ -245,8 +246,10 @@ export async function PostRequestBabyInfo(data, uploadStatus, imageFile, message
                 body: `${message} \nDownload Report: https://nbs-thalassemia.exhortbd.com/view?id=${babyId}`
             }
             // console.log("sendSMS variables", variables)
-            const response = await POSTCall('api/v1/vault/sms/send', variables, header)
+            await POSTCall('api/v1/vault/sms/send', variables, header)
             // console.log("sendSMS response", response)
+            return true
+        }else{
             return true
         }
         
@@ -354,9 +357,9 @@ function checkValue(value){
 
 function updateLocalData(storeName, data){
     const list = Storage.getLocalStorageData(storeName)
-    let newList = JSON.parse(JSON.stringify(list))
+    let newList = list? JSON.parse(JSON.stringify(list)): []
     if(data?.id){
-        const index = list.findIndex(ele => ele?.id == data?.id)
+        const index = list?.findIndex(ele => ele?.id === data?.id)
 
         if(index > -1){
             newList[index] = data
