@@ -86,7 +86,7 @@ export default function ImageDownload(){
                                         <tr>
                                             <th>Patient Name</th>
                                             <th>:</th>
-                                            <td>Baby of {details?.motherName}</td>
+                                            <td>Baby of {details?.babyMotherName}</td>
                                         </tr>
                                         <tr>
                                             <th>Mobile number</th>
@@ -116,12 +116,12 @@ export default function ImageDownload(){
                                         <tr>
                                             <th>Result</th>
                                             <th>:</th>
-                                            <td className={`fw-bold ${details?.testResult=='TRT_POSITIVE'?'text-danger':'text-success'}`}>{details?.testResult=='TRT_NEGATIVE'?'Negative': details?.testResult=='TRT_POSITIVE'?'Positive':''}</td>
+                                            <td className={`fw-bold ${details?.testResult==1?'text-danger':'text-success'}`}>{details?.testResult==2?'Negative': details?.testResult==1?'Positive':''}</td>
                                         </tr>
                                     </tbody>
                                 </table>
                                 {
-                                    details?.testResult == 'TRT_POSITIVE'?
+                                    details?.testResult == 1?
                                         <table className='table table-borderless'>
                                             
                                             <tbody>
